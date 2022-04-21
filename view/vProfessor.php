@@ -9,19 +9,16 @@ $col = new ColProfessor();
 
 //route
 $action = $_POST['action'];
-//var_dump($_GET);
+//var_dump($_POST);
 
 if (!isset($action)) {
-    die('NÃ£o foi passado Function');
+    die('Não foi passado Function');
 } else {
-    $obj = (object) $_POST['obj'];
+    $obj = (object) $_POST;
     $action($obj);
 }
 
 function vCadastro($obj) {
-    // $obj = (object) $_REQUEST['obj'];
-    var_dump($obj);
-    die('teste');
 
     global $col;
 
@@ -107,7 +104,8 @@ function vListaAll($obj) {
 
 function vLocalizar($obj) {
     //$obj = (object) $_REQUEST['obj'];
-
+    //var_dump($obj);
+    //die('f');
     global $col;
     $col->set("prof_id", $obj->id);
     $col->set("sqlCampos", $obj->where);

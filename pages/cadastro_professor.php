@@ -29,9 +29,13 @@
             .table-fixed thead {
                 width: calc( 100% - 1em )
             }
-
-
-
+            
+            .profile--panel .img{
+                height: 150px;
+            }
+            #thumbnail {
+               height: 100%
+            } 
         </style>
 
         <!-- Wrapper Start -->
@@ -160,12 +164,12 @@
                                 <label>Nome </label>
                                 <input class="form-control px-2" id="prof_nome" placeholder="">
                             </div>
-                            <div class="form-group px-2 col-lg-3">
+                            <div class="form-group px-2 col-lg-4">
                                 <label>Sobrenome</label>
                                 <input class="form-control px-2" id="prof_sobrenome" placeholder="">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Anivers√°rio</label>
+                                <label>Aniversario</label>
                                 <input type='date' class="form-control px-2" id="prof_nascimento" placeholder="">
                             </div>
                             <div class="form-group px-2 col-lg-3">
@@ -179,43 +183,42 @@
                                 <label>WhatsApp</label>
                                 <input class="form-control px-2" id="prof_telefone" placeholder="">
                             </div>
-                            <div class="form-group px-2 col-lg-3">
-                                <div class="profile--panel">
-                                    <div class="img online">
-                                        <img id="thumbnail" src="../assets/img/avatars/01_150x150.png" alt="" class="rounded-circle">
-                                    </div>
-                                    <div class="name">
-                                        <h3 class="h3">Foto</h3>
-                                    </div>    
-                                </div>
-
-                                <label class="custom-file mt-0">
-                                    <input type="file" class="custom-file-input" id="prof_foto">
-                                    <span class="custom-file-label"></span>
-                                </label>
-                            </div>
-                            <div class="form-group px-2 col-lg-4">
-                                <label>Endere√ßo</label>
+                            <div class="form-group px-2 col-lg-6">
+                                <label>EndereÁo</label>
                                 <input class="form-control px-2" id="prof_endereco" placeholder="">
                             </div>
-                            <div class="form-group px-2 col-lg-4">
+                            <div class="form-group px-2 col-lg-6">
                                 <label>E-mail</label>
                                 <input class="form-control px-2" id="prof_email" placeholder="">
                             </div>
-                            <div class="form-group px-2 col-lg-2">
-                                <label>Comiss√£o</label>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Comiss„o</label>
                                 <input class="form-control px-2" id="prof_comissao" placeholder="">
                             </div>
-                            <div class="form-group px-2 col-lg-2">
+                            <div class="form-group px-2 col-lg-3">
                                 <label>Status</label>
                                 <select class="form-control px-2" id="prof_ativado">
                                     <option value="ATIVO">Ativo</option>
                                     <option value="INATIVO">Inativo</option>
                                 </select>
                             </div>
-                            <div class="form-group px-2 col-lg-12">
+                            
+                            <div class="form-group px-2 col-lg-9">
                                 <label>Obs</label>
                                 <textarea class="form-control px-2" id="prof_obs" rows="3"></textarea>
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Obs</label>
+                                <div class="profile--panel">
+                                    <div class="img online">
+                                        <img id="thumbnail" src="../Fotos/semfoto.jpg" alt="" class="rounded-circle">
+                                        <input type="file" id="prof_foto" accept="image/*" style="display: none">
+                                    </div>
+                                    <div class="name">
+                                        <h3 class="h3"></h3>
+                                        
+                                    </div>    
+                                </div>
                             </div>
                         </div>
 
@@ -232,7 +235,7 @@
         <!-- Scripts -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="../assets/js/jquery-ui.min.js"></script>
-        <script src="../assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/bootstrap-table.min.js"></script>
         <script src="../assets/js/perfect-scrollbar.min.js"></script>
         <script src="../assets/js/jquery.sparkline.min.js"></script>

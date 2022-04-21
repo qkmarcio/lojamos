@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en" class="no-outlines">
+<html lang="pt-BR">
 
 <?php
 include './includes/header.php';
@@ -31,7 +31,7 @@ include './includes/header.php';
     <!-- Scripts -->
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/jquery-ui.min.js"></script>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrap-table.min.js"></script>
     <script src="../assets/js/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/jquery.sparkline.min.js"></script>
