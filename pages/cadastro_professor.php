@@ -208,16 +208,16 @@
                                 <textarea class="form-control px-2" id="prof_obs" rows="3"></textarea>
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Obs</label>
+                                <label style="text-align: center;" >Foto</label>
                                 <div class="profile--panel">
                                     <div class="img online">
                                         <img id="thumbnail" src="../Fotos/semfoto.jpg" alt="" class="rounded-circle">
                                         <input type="file" id="prof_foto" accept="image/*" style="display: none">
                                     </div>
-                                    <div class="name">
+<!--                                    <div class="name">
                                         <h3 class="h3"></h3>
                                         
-                                    </div>    
+                                    </div>    -->
                                 </div>
                             </div>
                         </div>
