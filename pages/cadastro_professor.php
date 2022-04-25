@@ -271,59 +271,9 @@
                 });
             }
 
-
-            //loadjscssfile('../js/custom_jquery.js?nocache=' + Math.random(), 'js');
             loadjscssfile('../js/jProfessor.js?nocache=' + Math.random(), 'js');
-
-            // var usuario = $("#usuarioID").val();
-            if ($("#usuarioID").val() == 5) { // verifica se o usuario tem permissao
-                //javascript:loadContent('#conteudo', 'Utilitario/Expedicao.php');
-                $("#page-wrapper").attr("style", "margin-left:0px;padding-top: 30px;");
-
-            } else {
-                //javascript:loadContent('#conteudo', 'Financeiro/dashboard.php');
-                //setTimeout(function() { console.log("setTimeout: Ja passou 1 segundo!"); }, 1000);
-            }
         </script>
         <!-- Page Level Scripts -->
-        <script>
-
-
-    //            var $pagination = $('#pagination'),
-    //                    totalRecords = 0,
-    //                    records = [],
-    //                    displayRecords = [],
-    //                    recPerPage = 10,
-    //                    page = 1,
-    //                    totalPages = 0;
-    //
-    //            $.ajax({
-    //                url: "https://www.js-tutorials.com/source_code/api_data/employee_all.php",
-    //                async: true,
-    //                dataType: 'json',
-    //                success: function (data) {
-    //                    records = data;
-    //                    console.log(records);
-    //                    totalRecords = records.length;
-    //                    totalPages = Math.ceil(totalRecords / recPerPage);
-    //                    apply_pagination();
-    //                }
-    //            });
-    //
-    //            function apply_pagination() {
-    //                $pagination.twbsPagination({
-    //                    totalPages: totalPages,
-    //                    visiblePages: 6,
-    //                    onPageClick: function (event, page) {
-    //                        displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
-    //                        endRec = (displayRecordsIndex) + recPerPage;
-    //                        console.log(displayRecordsIndex + 'ssssssssss' + endRec);
-    //                        displayRecords = records.slice(displayRecordsIndex, endRec);
-    //                        generate_table();
-    //                    }
-    //                });
-    //            }
-        </script>
 
     </body>
 

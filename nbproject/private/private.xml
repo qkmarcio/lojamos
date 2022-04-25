@@ -4,16 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp64/www/lojamos/pages/cadastro_professor.php</file>
-            <file>file:/C:/wamp64/www/lojamos/view/vProfessor.php</file>
-            <file>file:/C:/wamp64/www/lojamos/pages/Includes/header.php</file>
-            <file>file:/C:/wamp64/www/lojamos/js/jProfessor.js</file>
-            <file>file:/C:/wamp64/www/lojamos/lib/Formatador.php</file>
-            <file>file:/C:/wamp64/www/lojamos/controller/cProfessor.php</file>
-            <file>file:/C:/wamp64/www/lojamos/up.php</file>
-            <file>file:/C:/wamp64/www/lojamos/assets/js/main.js</file>
-            <file>file:/C:/wamp64/www/lojamos/assets/js/sweetalert-init.js</file>
-            <file>file:/C:/wamp64/www/lojamos/assets/js/popper.min.js</file>
-            <file>file:/C:/wamp64/www/lojamos/pages/principal.php</file>
+            <file>file:/C:/wamp64/www/lojamos/pages/cadastro_aula.php</file>
+            <file>file:/C:/wamp64/www/lojamos/js/jAula.js</file>
+            <file>file:/C:/wamp64/www/lojamos/assets/js/meiomask.js</file>
         </group>
     </open-files>
 </project-private>
