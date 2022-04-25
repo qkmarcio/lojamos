@@ -1,71 +1,70 @@
 var jsProfessor = {};
-jsProfessor.FData = new FormData();
+
+var formCadastro;
 
 jsProfessor.mask = function () {
-    $("#gru_hot_saida").mask('00/00/0000');
-    $("#gru_hot_entrada").mask('00/00/0000');
-    $("#mov_dataIn").mask('00/00/0000 - 00:00');
-    $("#mov_dataOut").mask('00/00/0000 - 00:00');
-    $("#prof_telefone").mask('(45) 99972-1883');
+    //$('input:text').setMask();
+    //$("#prof_telefone").masks('(00) 00000-0000');
 };
-//carrega a foto antes de gravar
-jsProfessor.showThumbnail = function (files) {
-    if (files && files[0]) {
-        var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#thumbnail').attr('src', e.target.result);
-        }
+$('#image-file').on('change', function () {
+    console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
+});
 
-        reader.readAsDataURL(files[0]);
+$('#inpBuscar').on('change', function (evet) {
+    
+    let FData = new FormData();
+    FData.set("action", "vBuscaAll");//nome da funcao no PHP
+    FData.set("where", evet.target.value );//passo os campos PHP
+
+    var json = jsProfessor.ajax(FData);
+
+    try {
+        jsProfessor.tableList(json);
+
+    } catch (erro) {
+        $('#ListView').empty();
+        $('#ListView').append("<tr>PROFESSORES N√O LOCALIZADO !</tr>");
     }
-}
-jsProfessor.eventos = function () {
+    
+    console.log(evet.target.value);
+});
 
+jsProfessor.eventos = function () {
+    //$('input:text').setMask();
+    $("#prof_telefone").mask('(99) 99999-9999');
+    $("#prof_comissao").mask('99.999');
+    
     jsProfessor.getlista();
-    //jsProfessor.mask();
-    $('#buscar').focus();
+
+    $('#inpBuscar').focus();
 
     //Faz a Chamada para Editar
-//
-//    $('.rounded-circle').on('click', function (e) {
-//        //debugger;
-//        $(".custom-file-input").click();
-//
-//    });
     $('#thumbnail').on('click', function (e) {
         $("#prof_foto").click();
     });
 
     $('#prof_foto').change(function (e) {
-        //showThumbnail(this.files);
-        var img = $('#prof_foto')[0];
-        debugger;
-        console.log(img[0]);
-        if (img.files.length <= 0) {
+        var img = e.target.files
+        if (img.length <= 0) {
             return;
+        } else {
+            if (img[0].size >= 2306867) {
+                swal('Oops...', 'Imagem muito grande!! Max: 2MB', 'info');
+                e.target.value = '';
+            } else {
+                let reader = new FileReader();
+                reader.onload = function (evt) {
+                    $('#thumbnail').attr('src', evt.target.result);
+                }
+                reader.readAsDataURL(img[0]);
+            }
         }
-        let reader = new FileReader();
-        reader.onload = function (e) {
-            
-            $('#thumbnail').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(img.files[0]);
 
-//        if (files && files[0]) {
-//        var reader = new FileReader();
-//
-//        reader.onload = function (e) {
-//            $('#thumbnail').attr('src', e.target.result);
-//        }
-//
-//        reader.readAsDataURL(files[0]);
-//    }
     });
 
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
-
         var id = $(this).closest('tr').children('td:first').text();
         jsProfessor.editar(id);
     });
@@ -73,23 +72,34 @@ jsProfessor.eventos = function () {
     //Quando o Form esta show modal
     $('#formCadastro').on('shown.bs.modal', function () {
         $("#prof_nome").focus();
+        jsProfessor.ValidaForm();
     });
 
     //Quando o Form esta hide modal
-    $('#formCadastro').on('hidden.bs.modal', function () {
-        $("#buscar").focus();
+    $('#formCadastro').on('hide.bs.modal', function () {
+        $("#inpBuscar").focus();
         $('#formCadastro input,textarea').each(function () {
             $(this).val('');
         });
-        //Deixa o Form padr√£o para fazer o insert
+            
+        if (formCadastro.valid() == false) {
+            formCadastro.destroy();
+        }
+
+        //Deixa o Form padr„o para fazer o insert
         $("#insert").val('insert');
-        $('#thumbnail').attr('src',"../Fotos/semfoto.jpg");
+        $('#thumbnail').attr('src', "../Fotos/semfoto.jpg");
     });
 
     //Grava um novo Registro ou Altera if $("#insert").val() esta com update
-    $('#Gravar').click(function () {
-        jsProfessor.salvar();
-    });
+//    $('#Gravar').click(function () {
+//    //vai para o js
+//    });
+
+//    $('#formCadastro').on("submit", function (event) {
+//        $form = $(this); //wrap this in jQuery
+//        console.log(formCadastro.validate().form());
+//    });
 };
 
 jsProfessor.listarPassageiros = function () {
@@ -100,67 +110,77 @@ jsProfessor.listarPassageiros = function () {
         $('#integrantes').val(v + obj.pas_nome + '\n');
     }
 };
+// O submit do form que chama esta funcao
+jsProfessor.ValidaForm = function () {
 
-/*jsProfessor.getNovaLinha=function(){
- var linha = $('.linha:first').clone();  // PEGA O PRIMEIRO ELEMENTO COM CLASS=LINHA E CLONA
- linha.find('.nome').val('');            // LIMPA O NOME
- linha.find('.id').val('');              // LIMPA O ID
- return linha;                           // DEVOLVE NOVO ELEMENTO
- };*/
-
-
-
-jsProfessor.informe = function (msg) {
-    $("#msg").text(msg);
-    $("#dialog").dialog({
-        with : 300, height: 150,
-        modal: true, buttons: {
-            Ok: function () {
-                $("#dialog").dialog("close");
-                $("#btVoltar").click();
+    formCadastro = $('#formCadastro').validate({
+        debug: true,
+        ignore: '*:not([name])',
+        rules: {
+            prof_nome: {
+                required: true,
+                minlength: 3
+            },
+            prof_sobrenome: {
+                required: true,
+                minlength: 3
+            },
+            prof_email: {
+                required: true,
+                email: true
             }
+        },
+        messages: {
+            prof_nome: {
+                required: "Coloque um nome",
+                minlength: "Seu nome deve consistir em pelo menos 3 caracteres"
+            },
+            prof_sobrenome: {
+                required: "Por favor coloque um Sobrenome",
+                minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
+            },
+            prof_email: "Coloque um email valido"
+        },
+        submitHandler: function (form) {
+            //alert('inside');
+
+            let Form = jsProfessor.getForm();
+
+            Form.set("action", "vCadastro"); //nome da funcao no PHP
+
+            if (jsProfessor.ajax(Form, 'vCadastro')) {
+                $("#formCadastro").modal('hide');
+
+                jsProfessor.getlista();
+
+                swal('Registo...', jsProfessor.msg, 'success');
+            }
+
         }
     });
-};
+}
 
 jsProfessor.getForm = function () {
-    //var FormData = new FormData();
-    jsProfessor.FData.set('insert', $("#insert").val());
-    jsProfessor.FData.set('id', $("#prof_id").val());
-    jsProfessor.FData.set('nome', $("#prof_nome").val());
-    jsProfessor.FData.set('sobrenome', $("#prof_sobrenome").val());
-    jsProfessor.FData.set('nascimento', $("#prof_nascimento").val());
-    jsProfessor.FData.set('telefone', $("#prof_telefone").val());
-    jsProfessor.FData.set('sexo', $("#prof_sexo").val());
-    jsProfessor.FData.set('email', $("#prof_email").val());
-    jsProfessor.FData.set('endereco', $("#prof_endereco").val());
-    jsProfessor.FData.set('obs', $("#prof_obs").val());
-    jsProfessor.FData.set('senha', $("#prof_senha").val());
-    jsProfessor.FData.set('ativado', $("#prof_ativado").val());
-    jsProfessor.FData.set('comissao', $("#prof_comissao").val());
-    jsProfessor.FData.set('foto', $("#prof_foto")[0].files[0]);
 
+    let FData = new FormData();
+    FData.set('insert', $("#insert").val());
+    FData.set('id', $("#prof_id").val());
+    FData.set('nome', $("#prof_nome").val());
+    FData.set('sobrenome', $("#prof_sobrenome").val());
+    FData.set('nascimento', $("#prof_nascimento").val());
+    FData.set('telefone', $("#prof_telefone").val());
+    FData.set('sexo', $("#prof_sexo").val());
+    FData.set('email', $("#prof_email").val());
+    FData.set('endereco', $("#prof_endereco").val());
+    FData.set('obs', $("#prof_obs").val());
+    FData.set('senha', $("#prof_senha").val());
+    FData.set('ativado', $("#prof_ativado").val());
+    FData.set('comissao', $("#prof_comissao").val());
+    FData.set('foto', $("#prof_foto")[0].files[0]);
+    FData.set('foto2', $("#thumbnail").attr('src'));
 
-//
-//
-//
-//    var obj = new Object();
-//    obj.insert = $("#insert").val();
-//    obj.id = $("#prof_id").val();
-//    obj.nome = $("#prof_nome").val();
-//    obj.sobrenome = $("#prof_sobrenome").val();
-//    obj.nascimento = $("#prof_nascimento").val();
-//    obj.telefone = $("#prof_telefone").val();
-//    obj.sexo = $("#prof_sexo").val();
-//    obj.email = $("#prof_email").val();
-//    obj.endereco = $("#prof_endereco").val();
-//    obj.obs = $("#prof_obs").val();
-//    obj.senha = $("#prof_senha").val();
-//    obj.ativado = $("#prof_ativado").val();
-//    obj.comissao = $("#prof_comissao").val();
+    return FData;
 
-
-    return jsProfessor.FData;
 };
 
 jsProfessor.setForm = function (obj) {
@@ -176,7 +196,8 @@ jsProfessor.setForm = function (obj) {
     $("#prof_senha").val(obj.senha);
     $("#prof_ativado").val(obj.ativado);
     $("#prof_comissao").val(obj.comissao);
-    $("#prof_foto").val(obj.foto);
+    $('#thumbnail').attr('src', obj.foto);
+    //$("#prof_foto").val(obj.foto);
 };
 
 jsProfessor.tableList = function (json) {
@@ -206,14 +227,11 @@ jsProfessor.tableList = function (json) {
 };
 
 jsProfessor.getlista = function () {
-//    var obj = new Object();
-//    obj.nome = 'prof_nome';
 
-    //var FData = new FormData();
-    //nome da funcao no PHP
-    jsProfessor.FData.set("action", "vListaAll");
+    let FData = new FormData();
+    FData.set("action", "vListaAll");//nome da funcao no PHP
 
-    var json = jsProfessor.ajax(jsProfessor.FData);
+    var json = jsProfessor.ajax(FData);
 
     try {
         jsProfessor.tableList(json);
@@ -226,14 +244,17 @@ jsProfessor.getlista = function () {
 
     } catch (erro) {
         $('#ListView').empty();
-        $('#ListView').append("<tr>PROFESSORES N√ÉO LOCALIZADO !</tr>");
+        $('#ListView').append("<tr>PROFESSORES N√O LOCALIZADO !</tr>");
     }
 };
 
 jsProfessor.salvar = function () {
-    //var Form = jsProfessor.getForm();
 
-    if (jsProfessor.ajax(jsProfessor.getForm(), 'vCadastro')) {
+    let Form = jsProfessor.getForm();
+
+    Form.set("action", "vCadastro"); //nome da funcao no PHP
+
+    if (jsProfessor.ajax(Form, 'vCadastro')) {
         $("#formCadastro").modal('hide');
 
         jsProfessor.getlista();
@@ -243,22 +264,18 @@ jsProfessor.salvar = function () {
 };
 
 jsProfessor.editar = function (id) {
-//    var obj = new Object();
-//    obj.where = " where prof_id=" + id;
 
-    //nome da funcao no PHP
-    jsProfessor.FData.set("action", "vLocalizar");
-    //passo os campos PHP
-    jsProfessor.FData.set("where", "where prof_id=" + id);
+    let FData = new FormData();
+    FData.set("action", "vListaAll"); //nome da funcao no PHP
+    FData.set("where", "where prof_id=" + id);//passo os campos PHP
 
-    var json = jsProfessor.ajax(jsProfessor.FData, 'vLocalizar');
+    var json = jsProfessor.ajax(FData, 'vLocalizar');
 
     jsProfessor.setForm(json.dados[0]);
 
     $(".modal-title").text('Editar Cadastro');
     $("#insert").val('update')
     $("#formCadastro").modal("show");
-    //jsProfessor.mask();
 };
 //
 //jsProfessor.eventosDaTable = function () {
@@ -316,7 +333,7 @@ jsProfessor.editar = function (id) {
 
 //jsProfessor.arrayIntegrantes = new Array();
 
-//Define a pagina√ß√£o da tabela
+//Define a paginaÁ„o da tabela
 //jsProfessor.pagination = $('#pagination'),
 //        totalRecords = 0, records = [],
 //        displayRecords = [],
@@ -326,17 +343,15 @@ jsProfessor.editar = function (id) {
 
 jsProfessor.ajax = function (FormData, action, v) {
     var view = v == null ? '../view/vProfessor.php' : v;
-    //var data = {'obj': obj, 'action': action};
     var retorno;
     $.ajax({
         url: view, type: "POST", data: FormData, dataType: "json", async: false, processData: false, contentType: false,
         success: function (php) {
-            /*var responseText = JSON.parse(php.responseText);
-             jsProfessor.msg = responseText;*/
             jsProfessor.msg = php.messages;
             retorno = php;
         },
         error: function (php) {
+            debugger;
             var responseText = JSON.parse(php.responseText);
             jsProfessor.msg = responseText.messages;
             swal('Oops...', jsProfessor.msg, 'error');
@@ -349,7 +364,9 @@ jsProfessor.ajax = function (FormData, action, v) {
 };
 jsProfessor.start = function () {
     jsProfessor.eventos();
+
 };
+
 jsProfessor.start();
 
 

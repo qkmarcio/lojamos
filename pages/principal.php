@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 
 <?php
 include './includes/header.php';
@@ -31,6 +29,7 @@ include './includes/header.php';
     <!-- Scripts -->
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/jquery-ui.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/bootstrap-table.min.js"></script>
     <script src="../assets/js/perfect-scrollbar.min.js"></script>
@@ -92,5 +91,5 @@ include './includes/header.php';
     </script>
     <!-- Page Level Scripts -->
 </body>
-
+<p>Endeeço</p>
 </html>

@@ -29,13 +29,13 @@
             .table-fixed thead {
                 width: calc( 100% - 1em )
             }
-            
+
             .profile--panel .img{
                 height: 150px;
             }
             #thumbnail {
-               height: 100%
-            } 
+                height: 100%
+            }
         </style>
 
         <!-- Wrapper Start -->
@@ -68,51 +68,31 @@
                 <!-- Main Content Start -->
                 <section class="main--content">
                     <div class="panel">
-                        <!-- Records Header Start -->
-                        <div class="records--header">
-                            <div class="title fa-users">
-                                <h3 class="h3">Total de Professores </h3>
-                                <p>Total 1,330 Professores</p>
-                            </div>
-
-                            <div class="actions">
-                                <form action="#" class="search flex-wrap flex-md-nowrap">
-                                    <input type="text" id="buscar" class="form-control px-2" placeholder="Professor ..." required>
-                                    <button type="submit" class="btn btn-rounded"><i class="fa fa-search"></i></button>
-                                </form>
-                                <button href="#formCadastro" id="btnNovoCadastro" class="btn btn-lg btn-rounded btn-warning" data-toggle="modal">NOVO</i></button>
-                            </div>
-                        </div>
-                        <!-- Records Header End -->
-                    </div>
-                    <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">
-                                Lista de Professores
-                            </h3>
-
                             <div class="dropdown">
                                 <button type="button" class="btn-link dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
-
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><i class="fa fa-sync"></i>Atualizar Data</a></li>
-                                    <li><a href="#"><i class="fa fa-cogs"></i>Novo</a></li>
+                                    <li><a href="#formCadastro" id="btnNovoCadastro" data-toggle="modal"><i class="fa fa-cogs" ></i>Novo</a></li>
                                 </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4" style="margin-bottom: 20px;">
+                                    <h3 class="panel-title">Lista de Professores</h3>
+                                </div>
+                                <div class="col-lg-8 app_searchBar" style="max-width: 500px;">
+                                    <input id="inpBuscar" type="search" name="tasks" placeholder="Buscar Professor..." class="form-control">
+                                    <button id="btnBuscar" type="submit" class="btn btn-rounded">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="col-lg-12 table-fixed table style--3 table-hover" style="min-width: 900px;">
-<!--                                    <colgroup>
-                                        <col class="col-1">
-                                        <col class="col-4" width="35%">
-                                        <col class="col-3" width="10%">
-                                        <col class="col-2" width="35%">
-                                        <col class="col-1" width="10%">
-                                        <col class="col-1" width="5%">
-                                    </colgroup>-->
                                     <thead>
                                         <tr>
                                             <th class="col-1 text-center">ID</th>
@@ -146,7 +126,7 @@
         </div>
         <!-- Wrapper End -->
         <!-- Large Modal Start -->
-        <div id="formCadastro" class="modal fade">
+        <form id="formCadastro" class="modal fade" >
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -161,16 +141,16 @@
                                 <input class="form-control px-2" id="prof_id" disabled="">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Nome </label>
-                                <input class="form-control px-2" id="prof_nome" placeholder="">
+                                <label for="prof_nome">Nome </label>
+                                <input class="form-control px-2" id="prof_nome" name="prof_nome" >
                             </div>
                             <div class="form-group px-2 col-lg-4">
-                                <label>Sobrenome</label>
-                                <input class="form-control px-2" id="prof_sobrenome" placeholder="">
+                                <label name="prof_sobrenome">Sobrenome</label>
+                                <input class="form-control px-2" id="prof_sobrenome" name="prof_sobrenome">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Aniversario</label>
-                                <input type='date' class="form-control px-2" id="prof_nascimento" placeholder="">
+                                <label>Aniversário</label>
+                                <input type='date' class="form-control px-2" id="prof_nascimento">
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>Sexo</label>
@@ -181,19 +161,19 @@
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>WhatsApp</label>
-                                <input class="form-control px-2" id="prof_telefone" placeholder="">
+                                <input type="text" class="form-control px-2" id="prof_telefone" alt="phone">
                             </div>
                             <div class="form-group px-2 col-lg-6">
                                 <label>Endereço</label>
-                                <input class="form-control px-2" id="prof_endereco" placeholder="">
+                                <input class="form-control px-2" id="prof_endereco">
                             </div>
                             <div class="form-group px-2 col-lg-6">
-                                <label>E-mail</label>
-                                <input class="form-control px-2" id="prof_email" placeholder="">
+                                <label name="prof_email">E-mail</label>
+                                <input type="email" class="form-control px-2" id="prof_email" name="prof_email">
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>Comissão</label>
-                                <input class="form-control px-2" id="prof_comissao" placeholder="">
+                                <input class="form-control px-2" id="prof_comissao" >
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>Status</label>
@@ -202,7 +182,7 @@
                                     <option value="INATIVO">Inativo</option>
                                 </select>
                             </div>
-                            
+
                             <div class="form-group px-2 col-lg-9">
                                 <label>Obs</label>
                                 <textarea class="form-control px-2" id="prof_obs" rows="3"></textarea>
@@ -214,10 +194,6 @@
                                         <img id="thumbnail" src="../Fotos/semfoto.jpg" alt="" class="rounded-circle">
                                         <input type="file" id="prof_foto" accept="image/*" style="display: none">
                                     </div>
-<!--                                    <div class="name">
-                                        <h3 class="h3"></h3>
-                                        
-                                    </div>    -->
                                 </div>
                             </div>
                         </div>
@@ -229,12 +205,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>>
 
         <!-- Large Modal End -->
         <!-- Scripts -->
         <script src="../assets/js/jquery.min.js"></script>
         <script src="../assets/js/jquery-ui.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/bootstrap-table.min.js"></script>
         <script src="../assets/js/perfect-scrollbar.min.js"></script>
@@ -246,6 +223,7 @@
         <script src="../assets/js/jquery-jvectormap-world-mill.min.js"></script>
         <script src="../assets/js/horizontal-timeline.min.js"></script>
         <script src="../assets/js/jquery.validate.min.js"></script>
+        <script src="../assets/js/jquery.mask.js"></script>
         <script src="../assets/js/jquery.steps.min.js"></script>
         <script src="../assets/js/dropzone.min.js"></script>
         <script src="../assets/js/ion.rangeSlider.min.js"></script>
@@ -263,7 +241,7 @@
              $('#formCadProfessor').on('shown.bs.modal', function () {
              $("#prof_nome").focus();
              });
-             
+         
              });*/
 
             function loadjscssfile(filename, filetype) {
@@ -309,42 +287,42 @@
         </script>
         <!-- Page Level Scripts -->
         <script>
-            
-            
-//            var $pagination = $('#pagination'),
-//                    totalRecords = 0,
-//                    records = [],
-//                    displayRecords = [],
-//                    recPerPage = 10,
-//                    page = 1,
-//                    totalPages = 0;
-//
-//            $.ajax({
-//                url: "https://www.js-tutorials.com/source_code/api_data/employee_all.php",
-//                async: true,
-//                dataType: 'json',
-//                success: function (data) {
-//                    records = data;
-//                    console.log(records);
-//                    totalRecords = records.length;
-//                    totalPages = Math.ceil(totalRecords / recPerPage);
-//                    apply_pagination();
-//                }
-//            });
-//
-//            function apply_pagination() {
-//                $pagination.twbsPagination({
-//                    totalPages: totalPages,
-//                    visiblePages: 6,
-//                    onPageClick: function (event, page) {
-//                        displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
-//                        endRec = (displayRecordsIndex) + recPerPage;
-//                        console.log(displayRecordsIndex + 'ssssssssss' + endRec);
-//                        displayRecords = records.slice(displayRecordsIndex, endRec);
-//                        generate_table();
-//                    }
-//                });
-//            }
+
+
+    //            var $pagination = $('#pagination'),
+    //                    totalRecords = 0,
+    //                    records = [],
+    //                    displayRecords = [],
+    //                    recPerPage = 10,
+    //                    page = 1,
+    //                    totalPages = 0;
+    //
+    //            $.ajax({
+    //                url: "https://www.js-tutorials.com/source_code/api_data/employee_all.php",
+    //                async: true,
+    //                dataType: 'json',
+    //                success: function (data) {
+    //                    records = data;
+    //                    console.log(records);
+    //                    totalRecords = records.length;
+    //                    totalPages = Math.ceil(totalRecords / recPerPage);
+    //                    apply_pagination();
+    //                }
+    //            });
+    //
+    //            function apply_pagination() {
+    //                $pagination.twbsPagination({
+    //                    totalPages: totalPages,
+    //                    visiblePages: 6,
+    //                    onPageClick: function (event, page) {
+    //                        displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
+    //                        endRec = (displayRecordsIndex) + recPerPage;
+    //                        console.log(displayRecordsIndex + 'ssssssssss' + endRec);
+    //                        displayRecords = records.slice(displayRecordsIndex, endRec);
+    //                        generate_table();
+    //                    }
+    //                });
+    //            }
         </script>
 
     </body>

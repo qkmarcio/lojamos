@@ -4,10 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp64/www/LojaMos/view/vProfessor.php</file>
-            <file>file:/C:/wamp64/www/LojaMos/index.php</file>
             <file>file:/C:/wamp64/www/LojaMos/pages/cadastro_professor.php</file>
             <file>file:/C:/wamp64/www/LojaMos/pages/Includes/header.php</file>
+            <file>file:/C:/wamp64/www/LojaMos/assets/js/main.js</file>
+            <file>file:/C:/wamp64/www/LojaMos/assets/js/popper.min.js</file>
             <file>file:/C:/wamp64/www/LojaMos/js/jProfessor.js</file>
+            <file>file:/C:/wamp64/www/lojamos/up.php</file>
+            <file>file:/C:/wamp64/www/LojaMos/pages/principal.php</file>
             <file>file:/C:/wamp64/www/LojaMos/controller/cProfessor.php</file>
         </group>
     </open-files>
