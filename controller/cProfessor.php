@@ -9,8 +9,6 @@
  * Controle de Acesso na tab_professor
  */
 
-use Jaspersoft\Dto\Resource\Query;
-
 class ColProfessor {
 
     private $prof_id;
@@ -60,16 +58,16 @@ class ColProfessor {
             prof_comissao,
             prof_foto
             )VALUES(";
-        $sql .= "'" . addslashes($this->prof_nome) . "',";
-        $sql .= "'" . addslashes($this->prof_sobrenome) . "',";
+        $sql .= "'" . strtoupper(addslashes($this->prof_nome)) . "',";
+        $sql .= "'" . strtoupper(addslashes($this->prof_sobrenome)) . "',";
         $sql .= "'" . $this->prof_nascimento . "',";
         $sql .= "'" . $this->prof_telefone . "',";
         $sql .= "'" . strtoupper(addslashes($this->prof_sexo)) . "',";
         $sql .= "'" . $this->prof_email . "',";
-        $sql .= "'" . addslashes($this->prof_endereco) . "',";
-        $sql .= "'" . addslashes($this->prof_obs) . "',";
+        $sql .= "'" . strtoupper(addslashes($this->prof_endereco)) . "',";
+        $sql .= "'" . strtoupper(addslashes($this->prof_obs)) . "',";
         $sql .= "'" . md5('123') . "',";
-        $sql .= "'" . addslashes($this->prof_ativado) . "',";
+        $sql .= "'" . strtoupper(addslashes($this->prof_ativado)) . "',";
         $sql .= "CURRENT_TIMESTAMP ,";
         $sql .= "" . $this->prof_comissao . ",";
         $sql .= "'" . $this->prof_foto . "'";
@@ -91,14 +89,14 @@ class ColProfessor {
         $con->conectar();
 
         $sql = "UPDATE tab_professores SET ";
-        $sql .= "prof_nome='" . addslashes($this->prof_nome) . "',";
-        $sql .= "prof_sobrenome='" . addslashes($this->prof_sobrenome) . "',";
+        $sql .= "prof_nome='" . strtoupper(addslashes($this->prof_nome)) . "',";
+        $sql .= "prof_sobrenome='" . strtoupper(addslashes($this->prof_sobrenome)) . "',";
         $sql .= "prof_nascimento='" . $this->prof_nascimento . "',";
         $sql .= "prof_telefone='" . $this->prof_telefone . "',";
         $sql .= "prof_sexo='" . strtoupper(addslashes($this->prof_sexo)) . "',";
         $sql .= "prof_email='" . $this->prof_email . "',";
-        $sql .= "prof_endereco='" . addslashes($this->prof_endereco) . "',";
-        $sql .= "prof_obs='" . addslashes($this->prof_obs) . "',";
+        $sql .= "prof_endereco='" . strtoupper(addslashes($this->prof_endereco)) . "',";
+        $sql .= "prof_obs='" . strtoupper(addslashes($this->prof_obs)) . "',";
         $sql .= "prof_senha='" . md5($this->prof_senha) . "',";
         $sql .= "prof_ativado='" . strtoupper(addslashes($this->prof_ativado)) . "',";
         $sql .= "prof_comissao=" . $this->prof_comissao . ",";

@@ -10,7 +10,12 @@
 
     <body>
         <style type="text/css">
-
+            input {
+                text-transform: uppercase;
+            }
+            textarea {
+                text-transform: uppercase;
+            }
             .table-fixed thead tr th {
                 background-color: #f39c12;
                 border-color: #e67e22;
@@ -137,6 +142,7 @@
                             <div class="form-group px-2 col-lg-2">
                                 <label>Codigo</label>
                                 <input class="form-control px-2" id="alu_id" disabled="">
+                                <input id="insert" style="display: none">
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label name="alu_nome">Nome </label>
@@ -152,11 +158,12 @@
                             </div>
                             <div class="form-group px-2 col-lg-2">
                                 <label>Mensalidade</label>
-                                <input class="form-control px-2" id="alu_mensalidade" placeholder="">
+                                <input class="form-control px-2" id="alu_mensalidade" name="alu_mensalidade" >
                             </div>
                             <div class="form-group px-2 col-lg-2">
                                 <label name="alu_mensalidade_venc">Vencimento</label>
                                 <select class="form-control px-2" id="alu_mensalidade_venc" name="alu_mensalidade_venc">
+                                    <option >SELECIONAR</option>
                                     <option value="01">01</option>
                                     <option value="05">05</option>
                                     <option value="10">10</option>
@@ -168,49 +175,42 @@
                                 <input class="form-control px-2" id="alu_endereco" >
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Aniversário</label>
-                                <input type='date' class="form-control px-2" id="alu_nascimento" >
+                                <label name="alu_nascimento">Aniversário</label>
+                                <input type='date' class="form-control px-2" id="alu_nascimento" name="alu_nascimento">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Sexo</label>
-                                <select class="form-control px-2" id="alu_sexo">
-                                    <option value="MASCULINO">Masculino</option>
-                                    <option value="FEMININO">Feminino</option>
+                                <label name="alu_sexo">Sexo</label>
+                                <select class="form-control px-2" id="alu_sexo" name="alu_sexo">
+                                    <option >SELECIONE</option>
+                                    <option value="MASCULINO">MASCULINO</option>
+                                    <option value="FEMININO">FEMININO</option>
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Whathapp</label>
-                                <input class="form-control px-2" id="alu_telefone" alt="phone">
+                                <label name="alu_telefone">Whathapp</label>
+                                <input class="form-control px-2" id="alu_telefone" name="alu_telefone">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Aula</label>
-                                <select class="form-control px-2" id="alu_aul_id">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <label ame="alu_aul_id">Aula</label>
+                                <select class="form-control px-2" id="alu_aul_id" name="alu_aul_id">
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Professor(a)</label>
-                                <select class="form-control px-2" id="alu_prof_id">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <label name="alu_prof_id">Professor(a)</label>
+                                <select class="form-control px-2" id="alu_prof_id" name="alu_prof_id">
+
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-4">
-                                <label>E-mail</label>
-                                <input class="form-control px-2" id="alu_email" >
+                                <label name="alu_email">E-mail</label>
+                                <input class="form-control px-2" id="alu_email" name="alu_email">
                             </div>
                             <div class="form-group px-2 col-lg-2">
-                                <label>Status</label>
-                                <select class="form-control px-2" id="alu_ativado">
-                                    <option>Ativo</option>
-                                    <option>Inativo</option>
+                                <label name="alu_ativado">Status</label>
+                                <select class="form-control px-2" id="alu_ativado" name="alu_ativado">
+                                    <option >SELECIONE</option>
+                                    <option value="ATIVO">ATIVO</option>
+                                    <option value="INATIVO">INATIVO</option>
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-9">

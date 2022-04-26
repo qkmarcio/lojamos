@@ -10,7 +10,12 @@
 
     <body>
         <style type="text/css">
-
+            input {
+                text-transform: uppercase;
+            }
+            textarea {
+                text-transform: uppercase;
+            }
             .table-fixed thead tr th {
                 background-color: #f39c12;
                 border-color: #e67e22;
@@ -96,10 +101,10 @@
                                     <thead>
                                         <tr>
                                             <th class="col-1 text-center">ID</th>
-                                            <th class="col-3 text-left">Nome</th>
-                                            <th class="col-2 text-left">Telefone</th>
-                                            <th class="col-3 text-left">Email</th>
-                                            <th class="col-2 text-center">Status</th>
+                                            <th class="col-2 text-left">Aula</th>
+                                            <th class="col-4 text-left">Professor</th>
+                                            <th class="col-2 text-center">Semanda</th>
+                                            <th class="col-2 text-left">Horario</th>
                                             <th class="col-1 text-center">Actions</th>
                                         </tr>
                                     </thead>
@@ -138,36 +143,34 @@
                             <div class="form-group px-2 col-lg-4">
                                 <label>Codigo</label>
                                 <input class="form-control px-2" id="aul_id" disabled="">
+                                <input id="insert" style="display: none">
                             </div>
                             <div class="form-group px-2 col-lg-8">
-                                <label>Nome </label>
-                                <input class="form-control px-2" id="aul_nome" placeholder="">
+                                <label name="aul_nome">Nome </label>
+                                <input class="form-control px-2" id="aul_nome" name="aul_nome">
                             </div>
                             <div class="form-group px-2 col-lg-5">
-                                <label>Horario</label>
-                                <input type="time" class="form-control px-2" id="aul_horario" placeholder="">
+                                <label name="aul_horario">Horario</label>
+                                <input type="time" class="form-control px-2" id="aul_horario"  name="aul_horario">
                             </div>
 
                             <div class="form-group px-2 col-lg-7">
-                                <label>Dia Semana</label>
-                                <select class="form-control px-2" id="aul_dia">
-                                    <option value="2">Segunda</option>
-                                    <option value="3">Terça</option>
-                                    <option value="4">Quarta</option>
-                                    <option value="5">Quinta</option>
-                                    <option value="6">Sexta</option>
-                                    <option value="7">Sabado</option>
-                                    <option value="1">Domingo</option>
+                                <label name="prof_nome">Dia Semana</label>
+                                <select class="form-control px-2" id="aul_dia" name="aul_dia">
+                                    <option >SELECIONE DIA</option>
+                                    <option value="SEGUNDA">SEGUNDA</option>
+                                    <option value="TERÇA">TERÇA</option>
+                                    <option value="QUARTA">QUARTA</option>
+                                    <option value="QUINTA">QUINTA</option>
+                                    <option value="SEXTA">SEXTA</option>
+                                    <option value="SABADO">SABADO</option>
+                                    <option value="DOMINGO">DOMINGO</option>
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-12">
-                                <label>Professor(a)</label>
-                                <select class="form-control px-2" id="aul_prof_id">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <label name="aul_prof_id">Professor(a)</label>
+                                <select class="form-control px-2" id="aul_prof_id" name="aul_prof_id">
+
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-12">
@@ -187,25 +190,41 @@
         <!-- Large Modal End -->
 
         <!-- Scripts -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/jquery-ui.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/perfect-scrollbar.min.js"></script>
-        <script src="assets/js/jquery.sparkline.min.js"></script>
-        <script src="assets/js/raphael.min.js"></script>
-        <script src="assets/js/morris.min.js"></script>
-        <script src="assets/js/select2.min.js"></script>
-        <script src="assets/js/jquery-jvectormap.min.js"></script>
-        <script src="assets/js/jquery-jvectormap-world-mill.min.js"></script>
-        <script src="assets/js/horizontal-timeline.min.js"></script>
-        <script src="assets/js/jquery.validate.min.js"></script>
-        <script src="assets/js/jquery.steps.min.js"></script>
-        <script src="assets/js/dropzone.min.js"></script>
-        <script src="assets/js/ion.rangeSlider.min.js"></script>
-        <script src="assets/js/datatables.min.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/jquery-ui.min.js"></script>
+        <script src="../assets/js/popper.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/bootstrap-table.min.js"></script>
+        <script src="../assets/js/perfect-scrollbar.min.js"></script>
+        <script src="../assets/js/jquery.sparkline.min.js"></script>
+        <script src="../assets/js/raphael.min.js"></script>
+        <script src="../assets/js/morris.min.js"></script>
+        <script src="../assets/js/select2.min.js"></script>
+        <script src="../assets/js/jquery-jvectormap.min.js"></script>
+        <script src="../assets/js/jquery-jvectormap-world-mill.min.js"></script>
+        <script src="../assets/js/horizontal-timeline.min.js"></script>
+        <script src="../assets/js/jquery.validate.min.js"></script>
+        <script src="../assets/js/jquery.mask.js"></script>
+        <script src="../assets/js/jquery.steps.min.js"></script>
+        <script src="../assets/js/dropzone.min.js"></script>
+        <script src="../assets/js/ion.rangeSlider.min.js"></script>
+        <script src="../assets/js/datatables.min.js"></script>
+        <script src="../assets/js/jquery.twbsPagination.min.js"></script>
+        <script src="../assets/js/main.js"></script>
+
+        <script src="../assets/js/sweetalert.min.js"></script>
+        <script src="../assets/js/sweetalert-init.js"></script>
 
         <script>
+            /*$('document').ready(function() {
+             $("#buscar_professor").focus();
+             //$('#btn_Novo_Professor').click(function () { $("#prof_nome").focus(); });
+             $('#formCadProfessor').on('shown.bs.modal', function () {
+             $("#prof_nome").focus();
+             });
+             
+             });*/
+
             function loadjscssfile(filename, filetype) {
                 var fileref = null;
                 if (filetype === "js") { //if filename is a external JavaScript file
@@ -233,19 +252,7 @@
                 });
             }
 
-
-            loadjscssfile('../js/custom_jquery.js?nocache=' + Math.random(), 'js');
-            loadjscssfile('../js/jUsuario.js?nocache=' + Math.random(), 'js');
-
-            // var usuario = $("#usuarioID").val();
-            if ($("#usuarioID").val() == 5) { // verifica se o usuario tem permissao
-                //javascript:loadContent('#conteudo', 'Utilitario/Expedicao.php');
-                $("#page-wrapper").attr("style", "margin-left:0px;padding-top: 30px;");
-
-            } else {
-                //javascript:loadContent('#conteudo', 'Financeiro/dashboard.php');
-                //setTimeout(function() { console.log("setTimeout: Ja passou 1 segundo!"); }, 1000);
-            }
+            loadjscssfile('../js/jAula.js?nocache=' + Math.random(), 'js');
         </script>
         <!-- Page Level Scripts -->
 

@@ -3,8 +3,8 @@ var jsProfessor = {};
 var formCadastro;
 
 jsProfessor.mask = function () {
-    //$('input:text').setMask();
-    //$("#prof_telefone").masks('(00) 00000-0000');
+    $("#prof_telefone").mask('(99) 99999-9999');
+    $("#prof_comissao").mask('99.999');
 };
 
 $('#image-file').on('change', function () {
@@ -12,10 +12,10 @@ $('#image-file').on('change', function () {
 });
 
 $('#inpBuscar').on('change', function (evet) {
-    
+
     let FData = new FormData();
     FData.set("action", "vBuscaAll");//nome da funcao no PHP
-    FData.set("where", evet.target.value );//passo os campos PHP
+    FData.set("where", evet.target.value);//passo os campos PHP
 
     var json = jsProfessor.ajax(FData);
 
@@ -26,15 +26,14 @@ $('#inpBuscar').on('change', function (evet) {
         $('#ListView').empty();
         $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
     }
-    
+
     console.log(evet.target.value);
 });
 
 jsProfessor.eventos = function () {
     //$('input:text').setMask();
-    $("#prof_telefone").mask('(99) 99999-9999');
-    $("#prof_comissao").mask('99.999');
-    
+    jsProfessor.mask();
+
     jsProfessor.getlista();
 
     $('#inpBuscar').focus();
@@ -78,10 +77,10 @@ jsProfessor.eventos = function () {
     //Quando o Form esta hide modal
     $('#formCadastro').on('hide.bs.modal', function () {
         $("#inpBuscar").focus();
-        $('#formCadastro input,textarea').each(function () {
+        $('#formCadastro input,textarea,select').each(function () {
             $(this).val('');
         });
-            
+
         if (formCadastro.valid() == false) {
             formCadastro.destroy();
         }
@@ -128,6 +127,12 @@ jsProfessor.ValidaForm = function () {
             prof_email: {
                 required: true,
                 email: true
+            },
+            prof_sexo: {
+                required: true
+            },
+            prof_ativado: {
+                required: true
             }
         },
         messages: {
@@ -139,7 +144,15 @@ jsProfessor.ValidaForm = function () {
                 required: "Por favor coloque um Sobrenome",
                 minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
             },
-            prof_email: "Coloque um email valido"
+            prof_email: "Coloque um email valido",
+            prof_sexo: {
+                required: "Selecionar o Sexo",
+
+            },
+            prof_ativado: {
+                required: "Marca Opção",
+
+            }
         },
         submitHandler: function (form) {
             //alert('inside');

@@ -2,20 +2,15 @@ var jsProfessor = {};
 
 var formCadastro;
 
-jsAluno.mask = function () {
-    //$('input:text').setMask();
-    //$("#prof_telefone").masks('(00) 00000-0000');
-};
-
 $('#image-file').on('change', function () {
     console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
 });
-
+$('#inpBuscar').focus();
 $('#inpBuscar').on('change', function (evet) {
-    
+
     let FData = new FormData();
     FData.set("action", "vBuscaAll");//nome da funcao no PHP
-    FData.set("where", evet.target.value );//passo os campos PHP
+    FData.set("where", evet.target.value);//passo os campos PHP
 
     var json = jsAluno.ajax(FData);
 
@@ -24,92 +19,79 @@ $('#inpBuscar').on('change', function (evet) {
 
     } catch (erro) {
         $('#ListView').empty();
-        $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
+
     }
-    
+
     console.log(evet.target.value);
 });
 
-jsAluno.eventos = function () {
-    //$('input:text').setMask();
+//Faz a Chamada para Editar
+$('#thumbnail').on('click', function (e) {
+    $("#alu_foto").click();
+});
+
+$('#alu_foto').change(function (e) {
+    var img = e.target.files
+    if (img.length <= 0) {
+        return;
+    } else {
+        if (img[0].size >= 2306867) {
+            swal('Oops...', 'Imagem muito grande!! Max: 2MB', 'info');
+            e.target.value = '';
+        } else {
+            let reader = new FileReader();
+            reader.onload = function (evt) {
+                $('#thumbnail').attr('src', evt.target.result);
+            }
+            reader.readAsDataURL(img[0]);
+        }
+    }
+
+});
+
+//escuta o click da class .btn-link da lista de professores
+$('table').on('click', '.btn-link', function (e) {
+    var id = $(this).closest('tr').children('td:first').text();
+    jsAula.ListaProfessor();
+    jsAula.ListaAula();
+    jsAluno.editar(id);
+});
+
+//Quando o Form esta show modal
+$('#formCadastro').on('shown.bs.modal', function () {
+    $("#alu_nome").focus();
+    jsAluno.ValidaForm();
+
+    if ($("#insert").val('insert') === 'insert') {
+        jsAula.ListaProfessor();
+        jsAula.ListaAula();
+    }
+});
+
+//Quando o Form esta hide modal
+$('#formCadastro').on('hide.bs.modal', function () {
+    $("#inpBuscar").focus();
+    $('#formCadastro input,textarea,select').each(function () {
+        $(this).val('');
+    });
+
+    if (formCadastro.valid() == false) {
+        formCadastro.destroy();
+    }
+
+    //Deixa o Form padrão para fazer o insert
+    $("#insert").val('insert');
+    $('#thumbnail').attr('src', "../Fotos/semfoto.jpg");
+});
+
+jsAluno.mask = function () {
     $("#alu_telefone").mask('(99) 99999-9999');
     $("#alu_mensalidade").mask('999.999.999.999,99');
-    
-    jsAluno.getlista();
+};
+jsAluno.eventos = function () {
 
-    $('#inpBuscar').focus();
-
-    //Faz a Chamada para Editar
-    $('#thumbnail').on('click', function (e) {
-        $("#alu_foto").click();
-    });
-
-    $('#alu_foto').change(function (e) {
-        var img = e.target.files
-        if (img.length <= 0) {
-            return;
-        } else {
-            if (img[0].size >= 2306867) {
-                swal('Oops...', 'Imagem muito grande!! Max: 2MB', 'info');
-                e.target.value = '';
-            } else {
-                let reader = new FileReader();
-                reader.onload = function (evt) {
-                    $('#thumbnail').attr('src', evt.target.result);
-                }
-                reader.readAsDataURL(img[0]);
-            }
-        }
-
-    });
-
-    //escuta o click da class .btn-link da lista de professores
-    $('table').on('click', '.btn-link', function (e) {
-        var id = $(this).closest('tr').children('td:first').text();
-        jsAluno.editar(id);
-    });
-
-    //Quando o Form esta show modal
-    $('#formCadastro').on('shown.bs.modal', function () {
-        $("#alu_nome").focus();
-        jsAluno.ValidaForm();
-    });
-
-    //Quando o Form esta hide modal
-    $('#formCadastro').on('hide.bs.modal', function () {
-        $("#inpBuscar").focus();
-        $('#formCadastro input,textarea').each(function () {
-            $(this).val('');
-        });
-            
-        if (formCadastro.valid() == false) {
-            formCadastro.destroy();
-        }
-
-        //Deixa o Form padrão para fazer o insert
-        $("#insert").val('insert');
-        $('#thumbnail').attr('src', "../Fotos/semfoto.jpg");
-    });
-
-    //Grava um novo Registro ou Altera if $("#insert").val() esta com update
-//    $('#Gravar').click(function () {
-//    //vai para o js
-//    });
-
-//    $('#formCadastro').on("submit", function (event) {
-//        $form = $(this); //wrap this in jQuery
-//        console.log(formCadastro.validate().form());
-//    });
 };
 
-jsAluno.listarPassageiros = function () {
-    $('#integrantes').val('');
-    for (var i = 0; i < jsAluno.arrayIntegrantes.length; i++) {
-        var obj = jsAluno.arrayIntegrantes[i];
-        var v = $('#integrantes').val();
-        $('#integrantes').val(v + obj.pas_nome + '\n');
-    }
-};
 // O submit do form que chama esta funcao
 jsAluno.ValidaForm = function () {
 
@@ -117,29 +99,62 @@ jsAluno.ValidaForm = function () {
         debug: true,
         ignore: '*:not([name])',
         rules: {
-            prof_nome: {
+            alu_nome: {
                 required: true,
                 minlength: 3
             },
-            prof_sobrenome: {
+            alu_sobrenome: {
                 required: true,
                 minlength: 3
+            },
+            alu_resposavel: {
+                required: true,
+                minlength: 3
+            },
+            alu_mensalidade: {
+                required: true
+            },
+            alu_mensalidade_venc: {
+                required: true
+            },
+            alu_telefone: {
+                required: true
+            },
+            alu_sexo: {
+                required: true
+            },
+            alu_telefone: {
+                required: true
+            },
+            alu_aul_id: {
+                required: true
+            },
+            alu_prof_id: {
+                required: true
             },
             prof_email: {
                 required: true,
                 email: true
+            },
+            prof_ativado: {
+                required: true
             }
         },
         messages: {
-            prof_nome: {
+            alu_nome: {
                 required: "Coloque um nome",
                 minlength: "Seu nome deve consistir em pelo menos 3 caracteres"
             },
-            prof_sobrenome: {
+            alu_sobrenome: {
                 required: "Por favor coloque um Sobrenome",
                 minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
             },
+            alu_resposavel: {
+                required: "Por favor coloque um Reponsavel",
+                minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
+            },
             prof_email: "Coloque um email valido"
+
         },
         submitHandler: function (form) {
             //alert('inside');
@@ -164,19 +179,25 @@ jsAluno.getForm = function () {
 
     let FData = new FormData();
     FData.set('insert', $("#insert").val());
-    FData.set('id', $("#prof_id").val());
-    FData.set('nome', $("#prof_nome").val());
-    FData.set('sobrenome', $("#prof_sobrenome").val());
-    FData.set('nascimento', $("#prof_nascimento").val());
-    FData.set('telefone', $("#prof_telefone").val());
-    FData.set('sexo', $("#prof_sexo").val());
-    FData.set('email', $("#prof_email").val());
-    FData.set('endereco', $("#prof_endereco").val());
-    FData.set('obs', $("#prof_obs").val());
-    FData.set('senha', $("#prof_senha").val());
-    FData.set('ativado', $("#prof_ativado").val());
-    FData.set('comissao', $("#prof_comissao").val());
-    FData.set('foto', $("#prof_foto")[0].files[0]);
+    FData.set('id', $("#alu_id").val());
+    FData.set('nome', $("#alu_nome").val());
+    FData.set('sobrenome', $("#alu_sobrenome").val());
+    FData.set('nascimento', $("#alu_nascimento").val());
+    FData.set('telefone', $("#alu_telefone").val());
+    FData.set('resposavel', $("#alu_resposavel").val());
+    FData.set('sexo', $("#alu_sexo").val());
+    FData.set('email', $("#alu_email").val());
+    FData.set('endereco', $("#alu_endereco").val());
+    FData.set('obs', $("#alu_obs").val());
+    FData.set('senha', $("#alu_senha").val());
+    FData.set('ativado', $("#alu_ativado").val());
+    FData.set('data_cadastro', $("#alu_data_cadastro").val());
+    FData.set('foto', $("#alu_foto")[0].files[0]);
+    FData.set('mensalidade', $("#alu_mensalidade").val());
+    FData.set('mensalidade_venc', $("#alu_mensalidade_venc").val());
+    FData.set('aula_id', $("#alu_aul_id").val());
+    FData.set('prof_id', $("#alu_prof_id").val());
+    //FData.set('cpf', $("#alu_cpf").val());
     FData.set('foto2', $("#thumbnail").attr('src'));
 
     return FData;
@@ -184,20 +205,25 @@ jsAluno.getForm = function () {
 };
 
 jsAluno.setForm = function (obj) {
-    $("#prof_id").val(obj.id);
-    $("#prof_nome").val(obj.nome);
-    $("#prof_sobrenome").val(obj.sobrenome);
-    $("#prof_nascimento").val(obj.nascimento);
-    $("#prof_telefone").val(obj.telefone);
-    $("#prof_sexo").val(obj.sexo);
-    $("#prof_email").val(obj.email);
-    $("#prof_endereco").val(obj.endereco);
-    $("#prof_obs").val(obj.obs);
-    $("#prof_senha").val(obj.senha);
-    $("#prof_ativado").val(obj.ativado);
-    $("#prof_comissao").val(obj.comissao);
+    $("#alu_id").val(obj.id);
+    $("#alu_nome").val(obj.nome);
+    $("#alu_sobrenome").val(obj.sobrenome);
+    $("#alu_nascimento").val(obj.nascimento);
+    $("#alu_telefone").val(obj.telefone);
+    $("#alu_resposavel").val(obj.resposavel);
+    $("#alu_sexo").val(obj.sexo);
+    $("#alu_email").val(obj.email);
+    $("#alu_endereco").val(obj.endereco);
+    $("#alu_obs").val(obj.obs);
+    $("#alu_senha").val(obj.senha);
+    $("#alu_ativado").val(obj.ativado);
+    $("#alu_data_cadastro").val(obj.data_cadastro);
+    $("#alu_mensalidade").val(obj.mensalidade);
+    $("#alu_mensalidade_venc").val(obj.mensalidade_venc);
+    $("#alu_aula_id").val(obj.aul_id);
+    $("#alu_prof_id").val(obj.prof_id);
+    //$("#alu_aul_cpf").val(obj.cpf);
     $('#thumbnail').attr('src', obj.foto);
-    //$("#prof_foto").val(obj.foto);
 };
 
 jsAluno.tableList = function (json) {
@@ -236,12 +262,6 @@ jsAluno.getlista = function () {
     try {
         jsAluno.tableList(json);
 
-//        records = json.dados;
-//        console.log(records);
-//        totalRecords = json.total;
-//        totalPages = Math.ceil(totalRecords / recPerPage);
-//        jsAluno.apply_pagination();
-
     } catch (erro) {
         $('#ListView').empty();
         $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
@@ -277,69 +297,36 @@ jsAluno.editar = function (id) {
     $("#insert").val('update')
     $("#formCadastro").modal("show");
 };
-//
-//jsAluno.eventosDaTable = function () {
-//
-//    $('#ListView tr').each(function () {
-//        var codigo;
-//        $('td', $(this)).each(function (index, item) {
-//            if (index === 0) {
-//                codigo = $(item).text();
-//            }
-//        });
-//        $(this).click(function () {
-//            jsAluno.editar(codigo);
-//        }).css('cursor', 'pointer');
-//    });
-//};
 
-//jsAluno.apply_pagination = function () {
-//    jsAluno.pagination.twbsPagination({
-//        totalPages: totalPages,
-//        visiblePages: 6,
-//        onPageClick: function (event, page) {
-//            displayRecordsIndex = Math.max(page - 1, 0) * recPerPage;
-//            endRec = (displayRecordsIndex) + recPerPage;
-//            //console.log(displayRecordsIndex + 'ssssssssss' + endRec);
-//            displayRecords = records.slice(displayRecordsIndex, endRec);
-//            jsAluno.generate_table();
-//        }
-//    });
-//};
+jsAula.ListaProfessor = function () {
+    $('#alu_prof_id').empty();
 
-//jsAluno.generate_table = function () {
-//    var tr;
-//
-//    $('#ListView').html('');
-//    for (var i = 0; i < displayRecords.length; i++) {
-//
-//        var classe = "label label-danger";
-//
-//        if (displayRecords[i].ativado === "ATIVO") {
-//            classe = "label label-success";
-//        }
-//
-//        tr = $('<tr/>');
-//        tr.append("<td class='col-1'>" + displayRecords[i].id + "</td>");
-//        tr.append("<td class='col-4'>>" + displayRecords[i].nome + " " + displayRecords[i].sobrenome + "</td>");
-//        tr.append("<td class='col-3'>>" + displayRecords[i].telefone + "</td>");
-//        tr.append("<td class='col-2'>>" + displayRecords[i].email + "</td>");
-//        tr.append("<td class='col-1'>><span class='" + classe + "' >" + displayRecords[i].ativado + "</span> </td>");
-//        tr.append("<td class='col-1'>><i class='btn-editar btn-link fa fa-edit fa-lg'></i></td>");
-//        $('#ListView').append(tr);
-//    }
-//
-//};
+    let FData = new FormData();
+    FData.set("action", "vListaAll"); //nome da funcao no PHP
 
-//jsAluno.arrayIntegrantes = new Array();
+    var json = jsAula.ajax(FData, null, '../view/vProfessor.php');
+    var dados = json.dados;
+    for (var i = 0; i < json.total; i++) {
+        $("#alu_prof_id").append(new Option(dados[i].nome + ' ' + dados[i].sobrenome, dados[i].id));
+    }
 
-//Define a paginação da tabela
-//jsAluno.pagination = $('#pagination'),
-//        totalRecords = 0, records = [],
-//        displayRecords = [],
-//        recPerPage = 3,
-//        page = 1,
-//        totalPages = 0;
+};
+
+
+jsAula.ListaAula = function () {
+    $('#alu_aul_id').empty();
+
+    let FData = new FormData();
+    FData.set("action", "vListaAll"); //nome da funcao no PHP
+
+    var json = jsAula.ajax(FData, null, '../view/vAula.php');
+    var dados = json.dados;
+    for (var i = 0; i < json.total; i++) {
+        $("#alu_aul_id").append(new Option(dados[i].horario + ' - ' + dados[i].dia, dados[i].id));
+    }
+
+};
+
 
 jsAluno.ajax = function (FormData, action, v) {
     var view = v == null ? '../view/vProfessor.php' : v;
@@ -364,6 +351,10 @@ jsAluno.ajax = function (FormData, action, v) {
 };
 jsAluno.start = function () {
     jsAluno.eventos();
+
+    jsAluno.mask();
+
+    jsAluno.getlista();
 
 };
 
