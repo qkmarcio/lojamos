@@ -7,36 +7,32 @@ jsProfessor.mask = function () {
     $("#prof_comissao").mask('99.999');
 };
 
-$('#image-file').on('change', function () {
-    console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
-});
-
-$('#inpBuscar').on('change', function (evet) {
-
-    let FData = new FormData();
-    FData.set("action", "vBuscaAll");//nome da funcao no PHP
-    FData.set("where", evet.target.value);//passo os campos PHP
-
-    var json = jsProfessor.ajax(FData);
-
-    try {
-        jsProfessor.tableList(json);
-
-    } catch (erro) {
-        $('#ListView').empty();
-        $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
-    }
-
-    console.log(evet.target.value);
-});
-
 jsProfessor.eventos = function () {
     //$('input:text').setMask();
-    jsProfessor.mask();
 
-    jsProfessor.getlista();
-
+    $('#image-file').on('change', function () {
+        console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
+    });
+    
     $('#inpBuscar').focus();
+    $('#inpBuscar').on('change', function (evet) {
+
+        let FData = new FormData();
+        FData.set("action", "vBuscaAll");//nome da funcao no PHP
+        FData.set("where", evet.target.value);//passo os campos PHP
+
+        var json = jsProfessor.ajax(FData);
+
+        try {
+            jsProfessor.tableList(json);
+
+        } catch (erro) {
+            $('#ListView').empty();
+            $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
+        }
+
+        console.log(evet.target.value);
+    });
 
     //Faz a Chamada para Editar
     $('#thumbnail').on('click', function (e) {
@@ -364,9 +360,9 @@ jsProfessor.ajax = function (FormData, action, v) {
             retorno = php;
         },
         error: function (php) {
-            debugger;
-            var responseText = JSON.parse(php.responseText);
-            jsProfessor.msg = responseText.messages;
+            //debugger;
+            //var responseText = JSON.parse(php.responseText);
+            jsProfessor.msg = php.responseText;
             swal('Oops...', jsProfessor.msg, 'error');
 
             retorno = false;
@@ -377,6 +373,10 @@ jsProfessor.ajax = function (FormData, action, v) {
 };
 jsProfessor.start = function () {
     jsProfessor.eventos();
+
+    jsProfessor.mask();
+
+    jsProfessor.getlista();
 
 };
 

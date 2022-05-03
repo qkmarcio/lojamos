@@ -2,32 +2,28 @@ var jsAula = {};
 
 var formCadastro;
 
-
-$('#inpBuscar').on('change', function (evet) {
-
-    let FData = new FormData();
-    FData.set("action", "vBuscaAll");//nome da funcao no PHP
-    FData.set("where", evet.target.value);//passo os campos PHP
-
-    var json = jsAula.ajax(FData);
-
-    try {
-        jsAula.tableList(json);
-
-    } catch (erro) {
-        $('#ListView').empty();
-        //$('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
-    }
-
-    console.log(evet.target.value);
-});
-
 jsAula.eventos = function () {
 
-    jsAula.getlista();
-
+   //Buscar 
     $('#inpBuscar').focus();
+    $('#inpBuscar').on('change', function (evet) {
 
+        let FData = new FormData();
+        FData.set("action", "vBuscaAll");//nome da funcao no PHP
+        FData.set("where", evet.target.value);//passo os campos PHP
+
+        var json = jsAula.ajax(FData);
+
+        try {
+            jsAula.tableList(json);
+
+        } catch (erro) {
+            $('#ListView').empty();
+            //$('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
+        }
+
+        console.log(evet.target.value);
+    });
 
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
@@ -35,17 +31,15 @@ jsAula.eventos = function () {
         jsAula.ListaProfessor();
 
         jsAula.editar(id);
-
-
     });
 
     //Quando o Form esta show modal
     $('#formCadastro').on('shown.bs.modal', function () {
         $("#aul_nome").focus();
         jsAula.ValidaForm();
-        
-        if($("#insert").val('insert') === 'insert'){
-           jsAula.ListaProfessor(); 
+
+        if ($("#insert").val() === 'insert') {
+            jsAula.ListaProfessor();
         }
 
     });
@@ -268,9 +262,8 @@ jsAula.ajax = function (FormData, action, v) {
 };
 jsAula.start = function () {
     jsAula.eventos();
+    jsAula.getlista();
 
 };
 
 jsAula.start();
-
-

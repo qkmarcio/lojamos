@@ -1,7 +1,7 @@
 <?php
 
 include '../controller/cConexao.php';
-include '../controller/cAluno.php.php';
+include '../controller/cAluno.php';
 include '../lib/Formatador.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action'])) { // aqui é onde vai decorrer a chamada se houver um *request* POST

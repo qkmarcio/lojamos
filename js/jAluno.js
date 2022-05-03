@@ -1,95 +1,98 @@
-var jsProfessor = {};
+var jsAluno = {};
 
 var formCadastro;
 
-$('#image-file').on('change', function () {
-    console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
-});
-$('#inpBuscar').focus();
-$('#inpBuscar').on('change', function (evet) {
-
-    let FData = new FormData();
-    FData.set("action", "vBuscaAll");//nome da funcao no PHP
-    FData.set("where", evet.target.value);//passo os campos PHP
-
-    var json = jsAluno.ajax(FData);
-
-    try {
-        jsAluno.tableList(json);
-
-    } catch (erro) {
-        $('#ListView').empty();
-
-    }
-
-    console.log(evet.target.value);
-});
-
-//Faz a Chamada para Editar
-$('#thumbnail').on('click', function (e) {
-    $("#alu_foto").click();
-});
-
-$('#alu_foto').change(function (e) {
-    var img = e.target.files
-    if (img.length <= 0) {
-        return;
-    } else {
-        if (img[0].size >= 2306867) {
-            swal('Oops...', 'Imagem muito grande!! Max: 2MB', 'info');
-            e.target.value = '';
-        } else {
-            let reader = new FileReader();
-            reader.onload = function (evt) {
-                $('#thumbnail').attr('src', evt.target.result);
-            }
-            reader.readAsDataURL(img[0]);
-        }
-    }
-
-});
-
-//escuta o click da class .btn-link da lista de professores
-$('table').on('click', '.btn-link', function (e) {
-    var id = $(this).closest('tr').children('td:first').text();
-    jsAula.ListaProfessor();
-    jsAula.ListaAula();
-    jsAluno.editar(id);
-});
-
-//Quando o Form esta show modal
-$('#formCadastro').on('shown.bs.modal', function () {
-    $("#alu_nome").focus();
-    jsAluno.ValidaForm();
-
-    if ($("#insert").val('insert') === 'insert') {
-        jsAula.ListaProfessor();
-        jsAula.ListaAula();
-    }
-});
-
-//Quando o Form esta hide modal
-$('#formCadastro').on('hide.bs.modal', function () {
-    $("#inpBuscar").focus();
-    $('#formCadastro input,textarea,select').each(function () {
-        $(this).val('');
-    });
-
-    if (formCadastro.valid() == false) {
-        formCadastro.destroy();
-    }
-
-    //Deixa o Form padrão para fazer o insert
-    $("#insert").val('insert');
-    $('#thumbnail').attr('src', "../Fotos/semfoto.jpg");
-});
-
 jsAluno.mask = function () {
     $("#alu_telefone").mask('(99) 99999-9999');
-    $("#alu_mensalidade").mask('999.999.999.999,99');
+    $("#alu_mensalidade").mask('99,999.999.999.999');
 };
+
 jsAluno.eventos = function () {
 
+    $('#image-file').on('change', function () {
+        console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
+    });
+
+    $('#inpBuscar').focus();
+
+    $('#inpBuscar').on('change', function (evet) {
+
+        let FData = new FormData();
+        FData.set("action", "vBuscaAll");//nome da funcao no PHP
+        FData.set("where", evet.target.value);//passo os campos PHP
+
+        var json = jsAluno.ajax(FData);
+
+        try {
+            jsAluno.tableList(json);
+
+        } catch (erro) {
+            $('#ListView').empty();
+
+        }
+
+    });
+
+    //Faz a Chamada para Editar
+    $('#thumbnail').on('click', function (e) {
+        $("#alu_foto").click();
+    });
+
+    $('#alu_foto').change(function (e) {
+        var img = e.target.files
+        if (img.length <= 0) {
+            return;
+        } else {
+            if (img[0].size >= 2306867) {
+                swal('Oops...', 'Imagem muito grande!! Max: 2MB', 'info');
+                e.target.value = '';
+            } else {
+                let reader = new FileReader();
+                reader.onload = function (evt) {
+                    $('#thumbnail').attr('src', evt.target.result);
+                }
+                reader.readAsDataURL(img[0]);
+            }
+        }
+
+    });
+
+    //escuta o click da class .btn-link da lista de professores
+    $('table').on('click', '.btn-link', function (e) {
+        var id = $(this).closest('tr').children('td:first').text();
+        jsAluno.ListaProfessor();
+        jsAluno.ListaAula();
+        jsAluno.editar(id);
+    });
+
+    //Quando o Form esta show modal
+    $('#formCadastro').on('show.bs.modal', function () {
+        
+        $("#alu_nome").focus();
+        jsAluno.ValidaForm();
+
+debugger;
+        if ($("#insert").val() === 'insert') {
+            jsAluno.ListaProfessor();
+            jsAluno.ListaAula();
+        }
+    });
+
+    //Quando o Form esta hide modal
+    $('#formCadastro').on('hide.bs.modal', function () {
+        $("#inpBuscar").focus();
+        $('#formCadastro input,textarea,select').each(function () {
+            $(this).val('');
+        });
+
+        if (formCadastro.valid() == false) {
+            formCadastro.destroy();
+        }
+
+        //Deixa o Form padrão para fazer o insert
+        $("#insert").val('insert');
+        $('#thumbnail').attr('src', "../Fotos/semfoto.jpg");
+    });
 };
 
 // O submit do form que chama esta funcao
@@ -121,9 +124,6 @@ jsAluno.ValidaForm = function () {
                 required: true
             },
             alu_sexo: {
-                required: true
-            },
-            alu_telefone: {
                 required: true
             },
             alu_aul_id: {
@@ -264,7 +264,7 @@ jsAluno.getlista = function () {
 
     } catch (erro) {
         $('#ListView').empty();
-        $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
+        //$('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
     }
 };
 
@@ -294,17 +294,17 @@ jsAluno.editar = function (id) {
     jsAluno.setForm(json.dados[0]);
 
     $(".modal-title").text('Editar Cadastro');
-    $("#insert").val('update')
+    $("#insert").val('update');
     $("#formCadastro").modal("show");
 };
 
-jsAula.ListaProfessor = function () {
+jsAluno.ListaProfessor = function () {
     $('#alu_prof_id').empty();
 
     let FData = new FormData();
     FData.set("action", "vListaAll"); //nome da funcao no PHP
 
-    var json = jsAula.ajax(FData, null, '../view/vProfessor.php');
+    var json = jsAluno.ajax(FData, null, '../view/vProfessor.php');
     var dados = json.dados;
     for (var i = 0; i < json.total; i++) {
         $("#alu_prof_id").append(new Option(dados[i].nome + ' ' + dados[i].sobrenome, dados[i].id));
@@ -312,14 +312,13 @@ jsAula.ListaProfessor = function () {
 
 };
 
-
-jsAula.ListaAula = function () {
+jsAluno.ListaAula = function () {
     $('#alu_aul_id').empty();
 
     let FData = new FormData();
     FData.set("action", "vListaAll"); //nome da funcao no PHP
 
-    var json = jsAula.ajax(FData, null, '../view/vAula.php');
+    var json = jsAluno.ajax(FData, null, '../view/vAula.php');
     var dados = json.dados;
     for (var i = 0; i < json.total; i++) {
         $("#alu_aul_id").append(new Option(dados[i].horario + ' - ' + dados[i].dia, dados[i].id));
@@ -327,9 +326,8 @@ jsAula.ListaAula = function () {
 
 };
 
-
 jsAluno.ajax = function (FormData, action, v) {
-    var view = v == null ? '../view/vProfessor.php' : v;
+    var view = v == null ? '../view/vAluno.php' : v;
     var retorno;
     $.ajax({
         url: view, type: "POST", data: FormData, dataType: "json", async: false, processData: false, contentType: false,
@@ -338,9 +336,9 @@ jsAluno.ajax = function (FormData, action, v) {
             retorno = php;
         },
         error: function (php) {
-            debugger;
-            var responseText = JSON.parse(php.responseText);
-            jsAluno.msg = responseText.messages;
+            //debugger;
+            //var responseText = JSON.parse(php.responseText);
+            jsAluno.msg = php.responseText;
             swal('Oops...', jsAluno.msg, 'error');
 
             retorno = false;
@@ -349,6 +347,7 @@ jsAluno.ajax = function (FormData, action, v) {
     return retorno;
 
 };
+
 jsAluno.start = function () {
     jsAluno.eventos();
 

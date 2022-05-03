@@ -168,7 +168,7 @@
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>WhatsApp</label>
-                                <input type="text" class="form-control px-2" id="prof_telefone" alt="phone">
+                                <input type="text" class="form-control px-2" id="prof_telefone">
                             </div>
                             <div class="form-group px-2 col-lg-6">
                                 <label>Endereço</label>

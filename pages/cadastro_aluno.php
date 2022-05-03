@@ -188,7 +188,7 @@
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label name="alu_telefone">Whathapp</label>
-                                <input class="form-control px-2" id="alu_telefone" name="alu_telefone">
+                                <input type="text" class="form-control px-2" id="alu_telefone" name="alu_telefone">
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label ame="alu_aul_id">Aula</label>
