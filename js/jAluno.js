@@ -3,15 +3,12 @@ var jsAluno = {};
 var formCadastro;
 
 jsAluno.mask = function () {
-    $("#alu_telefone").mask('(99) 99999-9999');
-    $("#alu_mensalidade").mask('99,999.999.999.999');
+    $("#alu_telefone").mask('(99) 9999-9999');
+    $("#alu_celular").mask('(99) 99999-9999');
+    $("#alu_cep").mask('99999-999');
 };
 
 jsAluno.eventos = function () {
-
-    $('#image-file').on('change', function () {
-        console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
-    });
 
     $('#inpBuscar').focus();
 
@@ -31,6 +28,10 @@ jsAluno.eventos = function () {
 
         }
 
+    });
+
+    $('#image-file').on('change', function () {
+        console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
     });
 
     //Faz a Chamada para Editar
@@ -66,13 +67,12 @@ jsAluno.eventos = function () {
     });
 
     //Quando o Form esta show modal
-    $('#formCadastro').on('show.bs.modal', function () {
-        
+    $('#formCadastro').on('shown.bs.modal', function () {
+
         $("#alu_nome").focus();
         jsAluno.ValidaForm();
 
-debugger;
-        if ($("#insert").val() === 'insert') {
+        if ($("#insert").val() == 'insert') {
             jsAluno.ListaProfessor();
             jsAluno.ListaAula();
         }
@@ -103,55 +103,31 @@ jsAluno.ValidaForm = function () {
         ignore: '*:not([name])',
         rules: {
             alu_nome: {
-                required: true,
-                minlength: 3
-            },
-            alu_sobrenome: {
-                required: true,
-                minlength: 3
+                required: true
             },
             alu_resposavel: {
-                required: true,
-                minlength: 3
-            },
-            alu_mensalidade: {
                 required: true
             },
-            alu_mensalidade_venc: {
-                required: true
-            },
-            alu_telefone: {
+            alu_celular: {
                 required: true
             },
             alu_sexo: {
                 required: true
             },
-            alu_aul_id: {
-                required: true
-            },
-            alu_prof_id: {
-                required: true
-            },
             prof_email: {
                 required: true,
                 email: true
-            },
-            prof_ativado: {
-                required: true
             }
         },
         messages: {
             alu_nome: {
-                required: "Coloque um nome",
-                minlength: "Seu nome deve consistir em pelo menos 3 caracteres"
-            },
-            alu_sobrenome: {
-                required: "Por favor coloque um Sobrenome",
-                minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
+                required: "Coloque Nome Completo"
             },
             alu_resposavel: {
-                required: "Por favor coloque um Reponsavel",
-                minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
+                required: "Coloque um Reponsavel"
+            },
+            alu_sexo: {
+                required: "Selecione o Sexo"
             },
             prof_email: "Coloque um email valido"
 
@@ -181,23 +157,22 @@ jsAluno.getForm = function () {
     FData.set('insert', $("#insert").val());
     FData.set('id', $("#alu_id").val());
     FData.set('nome', $("#alu_nome").val());
-    FData.set('sobrenome', $("#alu_sobrenome").val());
     FData.set('nascimento', $("#alu_nascimento").val());
-    FData.set('telefone', $("#alu_telefone").val());
     FData.set('resposavel', $("#alu_resposavel").val());
+    FData.set('cep', $("#alu_cep").val());
+    FData.set('bairro', $("#alu_bairro").val());
+    FData.set('endereco', $("#alu_endereco").val());
+    FData.set('cidade', $("#alu_cidade").val());
+    FData.set('cpf', $("#alu_cpf").val());
+    FData.set('telefone', $("#alu_telefone").val());
+    FData.set('celular', $("#alu_celular").val());
     FData.set('sexo', $("#alu_sexo").val());
     FData.set('email', $("#alu_email").val());
-    FData.set('endereco', $("#alu_endereco").val());
+    FData.set('email_recibo', $("#alu_email_recibo").val());
     FData.set('obs', $("#alu_obs").val());
     FData.set('senha', $("#alu_senha").val());
     FData.set('ativado', $("#alu_ativado").val());
-    FData.set('data_cadastro', $("#alu_data_cadastro").val());
     FData.set('foto', $("#alu_foto")[0].files[0]);
-    FData.set('mensalidade', $("#alu_mensalidade").val());
-    FData.set('mensalidade_venc', $("#alu_mensalidade_venc").val());
-    FData.set('aula_id', $("#alu_aul_id").val());
-    FData.set('prof_id', $("#alu_prof_id").val());
-    //FData.set('cpf', $("#alu_cpf").val());
     FData.set('foto2', $("#thumbnail").attr('src'));
 
     return FData;
@@ -207,22 +182,21 @@ jsAluno.getForm = function () {
 jsAluno.setForm = function (obj) {
     $("#alu_id").val(obj.id);
     $("#alu_nome").val(obj.nome);
-    $("#alu_sobrenome").val(obj.sobrenome);
     $("#alu_nascimento").val(obj.nascimento);
-    $("#alu_telefone").val(obj.telefone);
     $("#alu_resposavel").val(obj.resposavel);
+    $("#alu_cep").val(obj.cep);
+    $("#alu_bairro").val(obj.bairro);
+    $("#alu_endereco").val(obj.endereco);
+    $("#alu_cidade").val(obj.cidade);
+    $("#alu_cpf").val(obj.cpf);
+    $("#alu_telefone").val(obj.telefone);
+    $("#alu_celular").val(obj.celular);
     $("#alu_sexo").val(obj.sexo);
     $("#alu_email").val(obj.email);
-    $("#alu_endereco").val(obj.endereco);
+    $("#alu_email_recibo").val(obj.email_recibo);
     $("#alu_obs").val(obj.obs);
     $("#alu_senha").val(obj.senha);
     $("#alu_ativado").val(obj.ativado);
-    $("#alu_data_cadastro").val(obj.data_cadastro);
-    $("#alu_mensalidade").val(obj.mensalidade);
-    $("#alu_mensalidade_venc").val(obj.mensalidade_venc);
-    $("#alu_aula_id").val(obj.aul_id);
-    $("#alu_prof_id").val(obj.prof_id);
-    //$("#alu_aul_cpf").val(obj.cpf);
     $('#thumbnail').attr('src', obj.foto);
 };
 
@@ -234,14 +208,14 @@ jsAluno.tableList = function (json) {
 
         var classe = "label label-danger";
 
-        if (dados[i].ativado === "ATIVO") {
+        if (dados[i].ativado === "1") {
             classe = "label label-success";
         }
 
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
-                '<td class="col-3 text-left">' + dados[i].nome + ' ' + dados[i].sobrenome + '</td>' +
-                '<td class="col-2 text-left">' + dados[i].telefone + ' </td>' +
+                '<td class="col-3 text-left">' + dados[i].nome + '</td>' +
+                '<td class="col-2 text-left">' + dados[i].celular + ' </td>' +
                 '<td class="col-3 text-left">' + dados[i].email + ' </td>' +
                 '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].ativado + '</span> </td>' +
                 '<td class="col-1 text-center" ><i class="btn-link fa fa-edit fa-lg"></i></td>' +
@@ -296,20 +270,6 @@ jsAluno.editar = function (id) {
     $(".modal-title").text('Editar Cadastro');
     $("#insert").val('update');
     $("#formCadastro").modal("show");
-};
-
-jsAluno.ListaProfessor = function () {
-    $('#alu_prof_id').empty();
-
-    let FData = new FormData();
-    FData.set("action", "vListaAll"); //nome da funcao no PHP
-
-    var json = jsAluno.ajax(FData, null, '../view/vProfessor.php');
-    var dados = json.dados;
-    for (var i = 0; i < json.total; i++) {
-        $("#alu_prof_id").append(new Option(dados[i].nome + ' ' + dados[i].sobrenome, dados[i].id));
-    }
-
 };
 
 jsAluno.ListaAula = function () {

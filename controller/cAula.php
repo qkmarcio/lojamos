@@ -6,7 +6,7 @@
  * Data: 25/04/2022
  *
  * Descricao: 
- * Controle de Acesso na tab_professor
+ * Controle de Acesso na tab_aulas
  */
 
 class ColAula {
@@ -18,8 +18,8 @@ class ColAula {
     private $aul_obs;
     private $aul_comissao;
     private $aul_ativado;
-    private $aul_data_cadastro;
     private $aul_prof_id;
+    private $aul_data_cadastro;
     private $erro;
     private $sqlCampos;
     private $dica;
@@ -36,22 +36,26 @@ class ColAula {
 
     public function incluir() {
 
-        $con = new cConexao(); // Cria um novo objeto de conexÃ£o com o BD. 
+        $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
         $sql = "INSERT INTO tab_aulas (
             aul_nome,
             aul_horario,
             aul_dia_semana,
             aul_obs,
-            aul_data_cadastro,
-            aul_prof_id
+            aul_comissao,
+            aul_ativado,
+            aul_prof_id,
+            aul_data_cadastro
             )VALUES(";
         $sql .= "'" . strtoupper(addslashes($this->aul_nome)) . "',";
         $sql .= "'" . $this->aul_horario . "',";
         $sql .= "'" . strtoupper(addslashes($this->aul_dia_semana)) . "',";
         $sql .= "'" . strtoupper(addslashes($this->aul_obs)) . "',";
-        $sql .= "CURRENT_TIMESTAMP ,";
-        $sql .= "" . $this->aul_prof_id . "";
+        $sql .= ""  . $this->aul_comissao . ",";
+        $sql .= "'" . $this->aul_ativado . "',";
+        $sql .= ""  . $this->aul_prof_id . ",";
+        $sql .= "CURRENT_TIMESTAMP ";
         $sql .= ")";
 
         $con->set("sql", $sql);
@@ -65,15 +69,19 @@ class ColAula {
     }
 
     public function alterar() {
-        $con = new cConexao(); // Cria um novo objeto de conexao com o BD. 
+        $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
 
         $sql = "UPDATE tab_aulas SET ";
+        
         $sql .= "aul_nome='" . strtoupper(addslashes($this->aul_nome)) . "',";
         $sql .= "aul_horario='" . $this->aul_horario . "',";
         $sql .= "aul_dia_semana='" . strtoupper(addslashes($this->aul_dia_semana)) . "',";
         $sql .= "aul_obs='" . strtoupper(addslashes($this->aul_obs)) . "',";
-        $sql .= "aul_prof_id=" . $this->aul_prof_id . "";
+        $sql .= "aul_comissao="  . $this->aul_comissao . ",";
+        $sql .= "aul_ativado='" . $this->aul_ativado . "',";
+        $sql .= "aul_prof_id="  . $this->aul_prof_id . "";
+        
         $sql .= " WHERE aul_id=" . $this->aul_id;
 
         $con->set("sql", $sql);
@@ -89,7 +97,7 @@ class ColAula {
     #remove o registro
 
     public function remover() {
-        $con = new cConexao(); // Cria um novo objeto de conexÃ£o com o BD.
+        $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
         $sql = "DELETE FROM tab_aulas WHERE aul_id = " . $this->aul_id;
         $con->set("sql", $sql);
@@ -102,10 +110,10 @@ class ColAula {
     }
 
     public function getRegistros() {
-        $con = new cConexao(); // Cria um novo objeto de conexÃ£o com o BD.
+        $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "SELECT aul_id,aul_nome,aul_horario,aul_dia_semana,aul_obs,aul_prof_id, "
-                . " (select CONCAT( prof_nome ,' ', prof_sobrenome) from tab_professores where prof_id=aul_prof_id) aul_prof_nome"
+        $sql = "SELECT *, "
+                . " (select prof_nome from tab_professores where prof_id=aul_prof_id) aul_prof_nome"
                 . " FROM tab_aulas " . $this->sqlCampos;
         $con->set("sql", $sql);
 
@@ -116,10 +124,13 @@ class ColAula {
             $cls->id = $obj->aul_id;
             $cls->nome = $obj->aul_nome;
             $cls->horario = $obj->aul_horario;
-            $cls->dia = $obj->aul_dia_semana;
+            $cls->dia_semana = $obj->aul_dia_semana;
             $cls->obs = $obj->aul_obs;
+            $cls->comissao = $obj->aul_comissao;
+            $cls->ativado = $obj->aul_ativado;
             $cls->prof_id = $obj->aul_prof_id;
             $cls->prof_nome = $obj->aul_prof_nome;
+            $cls->data_cadastro = $obj->aul_data_cadastro;
             
             $conArry[] = $cls;
         }

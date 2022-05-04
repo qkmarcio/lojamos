@@ -40,25 +40,25 @@ class vAluno {
         if (isset($files['foto'])) {
             $pasta = $this->vVerificaFoto($files);
         }
-
+        
         $col->set("alu_id", $dados['id']);
         $col->set("alu_nome", $dados['nome']);
-        $col->set("alu_sobrenome", $dados['sobrenome']);
         $col->set("alu_nascimento", $dados['nascimento']);
-        $col->set("alu_telefone", $dados['telefone']);
         $col->set("alu_resposavel", $dados['resposavel']);
+        $col->set("alu_cep", $dados['cep']);
+        $col->set("alu_bairro", $dados['bairro']);
+        $col->set("alu_endereco", $dados['endereco']);
+        $col->set("alu_cidade", $dados['cidade']);
+        $col->set("alu_cpf", $dados['cpf']);
+        $col->set("alu_telefone", $dados['telefone']);
+        $col->set("alu_celular", $dados['celular']);
         $col->set("alu_sexo", $dados['sexo']);
         $col->set("alu_email", $dados['email']);
-        $col->set("alu_endereco", $dados['endereco']);
+        $col->set("alu_email_recibo", $dados['email_recibo']);
         $col->set("alu_obs", $dados['obs']);
         $col->set("alu_senha", $dados['senha']);
         $col->set("alu_ativado", $dados['ativado']);
         $col->set("alu_foto", $pasta);
-        $col->set("alu_mensalidade", $dados['mensalidade']);
-        $col->set("alu_mensalidade_venc", $dados['mensalidade_venc']);
-        $col->set("alu_aula_id", $dados['aul_id']);
-        $col->set("alu_prof_id", $dados['prof_id']);
-        $col->set("alu_cpf", $dados['cpf']);
 
         if ($dados['insert'] === "insert") {
             $result = $col->incluir();

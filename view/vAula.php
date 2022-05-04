@@ -36,12 +36,12 @@ class vAula {
         $col->set("aul_id", $dados['id']);
         $col->set("aul_nome", $dados['nome']);
         $col->set("aul_horario", $dados['horario']);
-        $col->set("aul_dia_semana", $dados['dia']);
+        $col->set("aul_dia_semana", $dados['dia_semana']);
         $col->set("aul_obs", $dados['obs']);
         $col->set("aul_comissao", $dados['comissao']);
         $col->set("aul_ativado", $dados['ativado']);
         $col->set("aul_prof_id", $dados['prof_id']);
-
+        
         if ($dados['insert'] === "insert") {
             $result = $col->incluir();
 

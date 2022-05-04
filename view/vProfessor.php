@@ -40,15 +40,19 @@ class vProfessor {
         if (isset($files['foto'])) {
             $pasta = $this->vVerificaFoto($files);
         }
-
+        
         $col->set("prof_id", $dados['id']);
         $col->set("prof_nome", $dados['nome']);
-        $col->set("prof_sobrenome", $dados['sobrenome']);
         $col->set("prof_nascimento", $dados['nascimento']);
+        $col->set("prof_cep", $dados['cep']);
+        $col->set("prof_bairro", $dados['bairro']);
+        $col->set("prof_endereco", $dados['endereco']);
+        $col->set("prof_cidade", $dados['cidade']);
+        $col->set("prof_cpf", $dados['cpf']);
         $col->set("prof_telefone", $dados['telefone']);
+        $col->set("prof_celular", $dados['celular']);
         $col->set("prof_sexo", $dados['sexo']);
         $col->set("prof_email", $dados['email']);
-        $col->set("prof_endereco", $dados['endereco']);
         $col->set("prof_obs", $dados['obs']);
         $col->set("prof_senha", $dados['senha']);
         $col->set("prof_ativado", $dados['ativado']);
@@ -130,7 +134,7 @@ class vProfessor {
     function vBuscaAll($dados, $files) {
         global $col;
 
-        $where = " where CONCAT(prof_nome,' ',prof_sobrenome,' ',prof_nascimento ) like '%".$dados['where']."%'";
+        $where = " where CONCAT(prof_nome,' ',prof_nascimento ) like '%".$dados['where']."%'";
       
 
         $col->set("sqlCampos", $where);

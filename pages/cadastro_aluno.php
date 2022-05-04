@@ -139,44 +139,42 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="form-group px-2 col-lg-2">
+                            <div class="form-group px-2 col-lg-2" style="display: none">
                                 <label>Codigo</label>
                                 <input class="form-control px-2" id="alu_id" disabled="">
                                 <input id="insert" style="display: none">
                             </div>
-                            <div class="form-group px-2 col-lg-3">
-                                <label name="alu_nome">Nome </label>
+                            <div class="form-group px-2 col-lg-6">
+                                <label name="alu_nome">Nome Completo</label>
                                 <input class="form-control px-2" id="alu_nome" name="alu_nome">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label name="alu_sobrenome">Sobrenome</label>
-                                <input class="form-control px-2" id="alu_sobrenome" name="alu_sobrenome">
-                            </div>
-                            <div class="form-group px-2 col-lg-4">
-                                <label name="alu_resposavel">Responsavel</label>
-                                <input class="form-control px-2" id="alu_resposavel" name="alu_resposavel">
-                            </div>
-                            <div class="form-group px-2 col-lg-2">
-                                <label>Mensalidade</label>
-                                <input class="form-control px-2" id="alu_mensalidade" name="alu_mensalidade" >
-                            </div>
-                            <div class="form-group px-2 col-lg-2">
-                                <label name="alu_mensalidade_venc">Vencimento</label>
-                                <select class="form-control px-2" id="alu_mensalidade_venc" name="alu_mensalidade_venc">
-                                    <option >SELECIONAR</option>
-                                    <option value="01">01</option>
-                                    <option value="05">05</option>
-                                    <option value="10">10</option>
-                                    <option value="15">15</option>
-                                </select>
-                            </div>
-                            <div class="form-group px-2 col-lg-8">
-                                <label>Endereço</label>
-                                <input class="form-control px-2" id="alu_endereco" >
+                                <label name="alu_cpf">Cpf</label>
+                                <input type="text" class="form-control px-2" id="alu_cpf" name="alu_cpf">
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label name="alu_nascimento">Aniversário</label>
                                 <input type='date' class="form-control px-2" id="alu_nascimento" name="alu_nascimento">
+                            </div>
+                            <div class="form-group px-2 col-lg-6">
+                                <label name="alu_resposavel">Responsavel</label>
+                                <input class="form-control px-2" id="alu_resposavel" name="alu_resposavel">
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Cep</label>
+                                <input class="form-control px-2" id="alu_cep" >
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Bairro</label>
+                                <input class="form-control px-2" id="alu_bairro" >
+                            </div>
+                            <div class="form-group px-2 col-lg-6">
+                                <label>Endereço</label>
+                                <input class="form-control px-2" id="alu_endereco" >
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Cidade</label>
+                                <input class="form-control px-2" id="alu_cidade" >
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label name="alu_sexo">Sexo</label>
@@ -187,30 +185,22 @@
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label name="alu_telefone">Whathapp</label>
-                                <input type="text" class="form-control px-2" id="alu_telefone" name="alu_telefone">
+                                <label name="alu_telefone">Telefone</label>
+                                <input type="text" class="form-control px-2" id="alu_telefone" >
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label ame="alu_aul_id">Aula</label>
-                                <select class="form-control px-2" id="alu_aul_id" name="alu_aul_id">
-                                </select>
-                            </div>
-                            <div class="form-group px-2 col-lg-3">
-                                <label name="alu_prof_id">Professor(a)</label>
-                                <select class="form-control px-2" id="alu_prof_id" name="alu_prof_id">
-
-                                </select>
+                                <label name="alu_celular">Celular</label>
+                                <input type="text" class="form-control px-2" id="alu_celular" name="alu_celular">
                             </div>
                             <div class="form-group px-2 col-lg-4">
                                 <label name="alu_email">E-mail</label>
                                 <input class="form-control px-2" id="alu_email" name="alu_email">
                             </div>
                             <div class="form-group px-2 col-lg-2">
-                                <label name="alu_ativado">Status</label>
-                                <select class="form-control px-2" id="alu_ativado" name="alu_ativado">
-                                    <option >SELECIONE</option>
-                                    <option value="ATIVO">ATIVO</option>
-                                    <option value="INATIVO">INATIVO</option>
+                                <label >Status</label>
+                                <select class="form-control px-2" id="alu_ativado" >
+                                    <option value="1">ATIVO</option>
+                                    <option value="0">INATIVO</option>
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-9">
@@ -224,6 +214,17 @@
                                         <img id="thumbnail" src="../Fotos/semfoto.jpg" alt="" class="rounded-circle">
                                         <input type="file" id="alu_foto" accept="image/*" style="display: none">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group px-2 col-lg-12">
+                                <label >Enviar recibo por E-mail? <l style="font-size: 10px"> (Envia confirmação de pagamento para o e-mail do aluno)</l></label>
+                                <div class="form-group px-2 col-lg-3">
+                                    
+                                    <select class="form-control px-2" id="alu_email_recibo">
+                                        <option value="0">NÃO</option>
+                                        <option value="1">SIM</option>
+                                        
+                                    </select>
                                 </div>
                             </div>
                         </div>
