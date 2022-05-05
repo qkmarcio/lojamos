@@ -215,19 +215,27 @@ jsProfessor.tableList = function (json) {
 
     for (var i = 0; i < dados.length; i++) {
 
-        var classe = "label label-danger";
-
-        if (dados[i].ativado === "ATIVO") {
-            classe = "label label-success";
-        }
+        switch (dados[i].ativado) {
+            case '0':
+                classe = "label label-danger";
+                ativado = "INATIVO";
+                break;
+            case '1':
+                classe = "label label-success";
+                ativado = "ATIVO";
+                break;
+                    }
 
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
-                '<td class="col-3 text-left">' + dados[i].nome + ' ' + dados[i].sobrenome + '</td>' +
+                '<td class="col-3 text-left">' + dados[i].nome + '</td>' +
                 '<td class="col-2 text-left">' + dados[i].telefone + ' </td>' +
                 '<td class="col-3 text-left">' + dados[i].email + ' </td>' +
-                '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].ativado + '</span> </td>' +
-                '<td class="col-1 text-center" ><i class="btn-link fa fa-edit fa-lg"></i></td>' +
+                '<td class="col-2 text-center" ><span class="' + classe + '">' + ativado + '</span> </td>' +
+                '<td class="col-1 text-center" style="min-width: 100px;">\n\
+                    <i class="btn-link fa fa-edit fa-lg" title="Visualizar"></i>\n\
+                    <i class="btn-link fa fa-edit fa-lg" title="Editar"></i>\n\
+                </td>' +
                 '</tr>';
     }
 

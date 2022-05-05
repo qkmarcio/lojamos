@@ -42,7 +42,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="../assets/css/all.css" >
-<link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="../assets/css/fontawesome-all.min">
 <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
 <link rel="stylesheet" href="../assets/css/perfect-scrollbar.min.css">
 <link rel="stylesheet" href="../assets/css/morris.min.css">

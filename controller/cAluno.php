@@ -150,6 +150,7 @@ class ColAluno {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
         $sql = "SELECT * FROM tab_alunos " . $this->sqlCampos;
+        //die($sql);
         $con->set("sql", $sql);
         $result = $con->execute($con->conectar());
 

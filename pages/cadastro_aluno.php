@@ -19,6 +19,7 @@
             .table-fixed thead tr th {
                 background-color: #f39c12;
                 border-color: #e67e22;
+                padding: 4px 2px 4px 2px;
             }
 
             .table-fixed tbody {
@@ -26,13 +27,16 @@
                 height:300px;
                 overflow:auto;
             }
+            .table-fixed tbody tr td {
+                padding: 4px 2px 4px 2px;
+            }
             .table-fixed thead, tbody tr {
                 display:table;
                 width:100%;
                 table-layout:auto;
             }
             .table-fixed thead {
-                width: calc( 100% - 1em )
+                /*width: calc( 100% - 1em )*/
             }
 
             .profile--panel .img{
@@ -102,13 +106,14 @@
                                         <tr>
                                             <th class="col-1 text-center">ID</th>
                                             <th class="col-3 text-left">Nome</th>
-                                            <th class="col-2 text-left">Telefone</th>
-                                            <th class="col-3 text-left">Email</th>
-                                            <th class="col-2 text-center">Status</th>
-                                            <th class="col-1 text-center">Actions</th>
+                                            <th class="col-2 text-left">Responsavel</th>
+                                            <th class="col-1 text-left">Telefone</th>
+                                            <th class="col-2 text-left">Email</th>
+                                            <th class="col-1 text-center">Status</th>
+                                            <th class="col-1 text-center"></i></i>Actions</th>
                                         </tr>
                                     </thead>
-
+                                    
                                     <tbody id="ListView"></tbody>
                                 </table>
 
@@ -123,7 +128,7 @@
                 <!-- Main Content End -->
 
                 <!-- Main Footer Start -->
-                <?php include './Includes/footer.php'; ?>
+<?php include './Includes/footer.php'; ?>
                 <!-- Main Footer End -->
             </main>
             <!-- Main Container End -->
@@ -219,11 +224,11 @@
                             <div class="form-group px-2 col-lg-12">
                                 <label >Enviar recibo por E-mail? <l style="font-size: 10px"> (Envia confirmação de pagamento para o e-mail do aluno)</l></label>
                                 <div class="form-group px-2 col-lg-3">
-                                    
+
                                     <select class="form-control px-2" id="alu_email_recibo">
                                         <option value="0">NÃO</option>
                                         <option value="1">SIM</option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -265,43 +270,43 @@
         <script src="../assets/js/sweetalert-init.js"></script>
 
         <script>
-            /*$('document').ready(function() {
-             $("#buscar_professor").focus();
-             //$('#btn_Novo_Professor').click(function () { $("#prof_nome").focus(); });
-             $('#formCadProfessor').on('shown.bs.modal', function () {
-             $("#prof_nome").focus();
-             });
-             
-             });*/
+                                            /*$('document').ready(function() {
+                                             $("#buscar_professor").focus();
+                                             //$('#btn_Novo_Professor').click(function () { $("#prof_nome").focus(); });
+                                             $('#formCadProfessor').on('shown.bs.modal', function () {
+                                             $("#prof_nome").focus();
+                                             });
+                                             
+                                             });*/
 
-            function loadjscssfile(filename, filetype) {
-                var fileref = null;
-                if (filetype === "js") { //if filename is a external JavaScript file
-                    fileref = document.createElement('script');
-                    fileref.setAttribute("type", "text/javascript");
-                    fileref.setAttribute("src", filename);
-                } else if (filetype === "css") { //if filename is an external CSS file
-                    fileref = document.createElement("link");
-                    fileref.setAttribute("rel", "stylesheet");
-                    fileref.setAttribute("type", "text/css");
-                    fileref.setAttribute("href", filename);
-                }
-                if (typeof fileref !== "undefined") {
-                    document.getElementsByTagName("head")[0].appendChild(fileref);
-                }
-            }
+                                            function loadjscssfile(filename, filetype) {
+                                                var fileref = null;
+                                                if (filetype === "js") { //if filename is a external JavaScript file
+                                                    fileref = document.createElement('script');
+                                                    fileref.setAttribute("type", "text/javascript");
+                                                    fileref.setAttribute("src", filename);
+                                                } else if (filetype === "css") { //if filename is an external CSS file
+                                                    fileref = document.createElement("link");
+                                                    fileref.setAttribute("rel", "stylesheet");
+                                                    fileref.setAttribute("type", "text/css");
+                                                    fileref.setAttribute("href", filename);
+                                                }
+                                                if (typeof fileref !== "undefined") {
+                                                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                                                }
+                                            }
 
-            function loadContent(id, pagina) {
-                $(id).slideUp("slow", function () { //efeito de sobe e desce o footer
-                    //$("#carregando").dialog('open');
-                    $(this).load(pagina, function () {
-                        //$("#carregando").dialog('close');
-                        $(this).slideDown("slow");
-                    });
-                });
-            }
+                                            function loadContent(id, pagina) {
+                                                $(id).slideUp("slow", function () { //efeito de sobe e desce o footer
+                                                    //$("#carregando").dialog('open');
+                                                    $(this).load(pagina, function () {
+                                                        //$("#carregando").dialog('close');
+                                                        $(this).slideDown("slow");
+                                                    });
+                                                });
+                                            }
 
-            loadjscssfile('../js/jAluno.js?nocache=' + Math.random(), 'js');
+                                            loadjscssfile('../js/jAluno.js?nocache=' + Math.random(), 'js');
         </script>
         <!-- Page Level Scripts -->
 

@@ -5,6 +5,7 @@ var formCadastro;
 jsAluno.mask = function () {
     $("#alu_telefone").mask('(99) 9999-9999');
     $("#alu_celular").mask('(99) 99999-9999');
+    $("#alu_cpf").mask('999.999.999-99');
     $("#alu_cep").mask('99999-999');
 };
 
@@ -61,8 +62,8 @@ jsAluno.eventos = function () {
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
         var id = $(this).closest('tr').children('td:first').text();
-        jsAluno.ListaProfessor();
-        jsAluno.ListaAula();
+//        jsAluno.ListaProfessor();
+//        jsAluno.ListaAula();
         jsAluno.editar(id);
     });
 
@@ -212,13 +213,28 @@ jsAluno.tableList = function (json) {
             classe = "label label-success";
         }
 
+        switch (dados[i].ativado) {
+            case '0':
+                classe = "label label-danger";
+                ativado = "INATIVO";
+                break;
+            case '1':
+                classe = "label label-success";
+                ativado = "ATIVO";
+                break;
+                    }
+
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
                 '<td class="col-3 text-left">' + dados[i].nome + '</td>' +
-                '<td class="col-2 text-left">' + dados[i].celular + ' </td>' +
-                '<td class="col-3 text-left">' + dados[i].email + ' </td>' +
-                '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].ativado + '</span> </td>' +
-                '<td class="col-1 text-center" ><i class="btn-link fa fa-edit fa-lg"></i></td>' +
+                '<td class="col-3 text-left">' + dados[i].resposavel + '</td>' +
+                '<td class="col-1 text-left">' + dados[i].celular + ' </td>' +
+                '<td class="col-2 text-left">' + dados[i].email + ' </td>' +
+                '<td class="col-1 text-center" ><span class="' + classe + '">' + ativado + '</span> </td>' +
+                '<td class="col-1 text-center" style="min-width: 100px;">\n\
+                    <i class="btn-link fa fa-edit fa-lg" title="Visualizar"></i>\n\
+                    <i class="btn-link fa fa-edit fa-lg" title="Editar"></i>\n\
+                </td>' +
                 '</tr>';
     }
 
@@ -261,7 +277,7 @@ jsAluno.editar = function (id) {
 
     let FData = new FormData();
     FData.set("action", "vListaAll"); //nome da funcao no PHP
-    FData.set("where", "where prof_id=" + id);//passo os campos PHP
+    FData.set("where", "where alu_id=" + id);//passo os campos PHP
 
     var json = jsAluno.ajax(FData, 'vLocalizar');
 
