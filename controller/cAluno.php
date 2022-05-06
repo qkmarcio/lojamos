@@ -69,7 +69,7 @@ class ColAluno {
             )VALUES(";
         $sql .= "'" . strtoupper(addslashes($this->alu_nome)) . "',";
         $sql .= "'" . $this->alu_nascimento . "',";
-        $sql .= "'" . $this->alu_resposavel . "',";
+        $sql .= "'" . strtoupper(addslashes($this->alu_resposavel)) . "',";
         $sql .= "'" . $this->alu_cep . "',";
         $sql .= "'" . strtoupper(addslashes($this->alu_bairro)) . "',";
         $sql .= "'" . strtoupper(addslashes($this->alu_endereco)) . "',";
@@ -105,7 +105,7 @@ class ColAluno {
         $sql = "UPDATE tab_alunos SET ";
         $sql .= "alu_nome='" . strtoupper(addslashes($this->alu_nome)) . "',";
         $sql .= "alu_nascimento='" . $this->alu_nascimento . "',";
-        $sql .= "alu_resposavel='" . $this->alu_resposavel . "',";
+        $sql .= "alu_resposavel='" . strtoupper(addslashes($this->alu_resposavel)) . "',";
         $sql .= "alu_cep='" . $this->alu_cep . "',";
         $sql .= "alu_bairro='" . strtoupper(addslashes($this->alu_bairro)) . "',";
         $sql .= "alu_endereco='" . strtoupper(addslashes($this->alu_endereco)) . "',";

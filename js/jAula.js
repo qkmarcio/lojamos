@@ -4,7 +4,8 @@ var formCadastro;
 
 jsAula.eventos = function () {
 
-   //Buscar 
+    $("#insert").val('insert');
+    //Buscar 
     $('#inpBuscar').focus();
     $('#inpBuscar').on('change', function (evet) {
 
@@ -28,6 +29,14 @@ jsAula.eventos = function () {
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
         var id = $(this).closest('tr').children('td:first').text();
+
+        if ($(this).attr("title") == 'Visualizar') {
+            $(".modal-body :input").each(function () {
+                $(this).attr("disabled", true);
+            });
+        }
+
+
         jsAula.ListaProfessor();
 
         jsAula.editar(id);
@@ -50,7 +59,11 @@ jsAula.eventos = function () {
         $('#formCadastro input,textarea,select').each(function () {
             $(this).val('');
         });
-
+        
+        $(".modal-body :input").each(function () {
+            $(this).attr("disabled", false);
+        });
+        
         if (formCadastro.valid() == false) {
             formCadastro.destroy();
         }
@@ -121,7 +134,9 @@ jsAula.getForm = function () {
     FData.set('id', $("#aul_id").val());
     FData.set('nome', $("#aul_nome").val());
     FData.set('horario', $("#aul_horario").val());
-    FData.set('dia', $("#aul_dia").val());
+    FData.set('dia_semana', $("#aul_dia").val());
+    FData.set('comissao', 0);
+    FData.set('ativado', '1');
     FData.set('prof_id', $("#aul_prof_id").val());
     FData.set('obs', $("#aul_obs").val());
 
@@ -133,7 +148,7 @@ jsAula.setForm = function (obj) {
     $("#aul_id").val(obj.id);
     $("#aul_nome").val(obj.nome);
     $("#aul_horario").val(obj.horario);
-    $("#aul_dia").val(obj.dia);
+    $("#aul_dia").val(obj.dia_semana);
     $("#aul_prof_id").val(obj.prof_id);
     $("#aul_obs").val(obj.obs);
 };
@@ -145,7 +160,7 @@ jsAula.tableList = function (json) {
 
     for (var i = 0; i < dados.length; i++) {
 
-        switch (dados[i].dia) {
+        switch (dados[i].dia_semana) {
             case 'SEGUNDA':
                 classe = "label label-primary";
                 break;
@@ -168,10 +183,10 @@ jsAula.tableList = function (json) {
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
                 '<td class="col-2 text-left">' + dados[i].nome + '</td>' +
-                '<td class="col-4 text-left">' + dados[i].prof_nome + ' </td>' +
-                '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].dia + '</span> </td>' +
+                '<td class="col-3 text-left">' + dados[i].prof_nome + ' </td>' +
+                '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].dia_semana + '</span> </td>' +
                 '<td class="col-2 text-left">' + dados[i].horario + ' </td>' +
-                '<td class="col-1 text-center" style="min-width: 100px;">\n\
+                '<td class="col-2 text-center" style="min-width: 100px;">\n\
                     <i class="btn-link fa fa-edit fa-lg" title="Visualizar"></i>\n\
                     <i class="btn-link fa fa-edit fa-lg" title="Editar"></i>\n\
                 </td>' +
@@ -237,7 +252,7 @@ jsAula.ListaProfessor = function () {
     var json = jsAula.ajax(FData, null, '../view/vProfessor.php');
     var dados = json.dados;
     for (var i = 0; i < json.total; i++) {
-        $("#aul_prof_id").append(new Option(dados[i].nome + ' ' + dados[i].sobrenome, dados[i].id));
+        $("#aul_prof_id").append(new Option(dados[i].nome , dados[i].id));
     }
     //$('#aul_prof_id').val(id);
 };

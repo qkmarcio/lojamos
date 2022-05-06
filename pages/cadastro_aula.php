@@ -17,8 +17,8 @@
                 text-transform: uppercase;
             }
             .table-fixed thead tr th {
-                background-color: #f39c12;
-                border-color: #e67e22;
+                /* background-color: #f39c12;
+                 border-color: #e67e22;*/
             }
 
             .table-fixed tbody {
@@ -32,7 +32,7 @@
                 table-layout:auto;
             }
             .table-fixed thead {
-                width: calc( 100% - 1em )
+                /* width: calc( 100% - 1em )*/
             }
 
             .profile--panel .img{
@@ -102,16 +102,14 @@
                                         <tr>
                                             <th class="col-1 text-center">ID</th>
                                             <th class="col-2 text-left">Aula</th>
-                                            <th class="col-4 text-left">Professor</th>
+                                            <th class="col-3 text-left">Professor</th>
                                             <th class="col-2 text-center">Semanda</th>
                                             <th class="col-2 text-left">Horario</th>
-                                            <th class="col-1 text-center">Actions</th>
+                                            <th class="col-2 text-center">Actions</th>
                                         </tr>
                                     </thead>
-
                                     <tbody id="ListView"></tbody>
                                 </table>
-
                             </div>
                             <div id="pager">
                                 <ul id="pagination" class="pagination-sm "></ul>
@@ -140,24 +138,29 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="form-group px-2 col-lg-4">
+                            <div class="form-group px-2 col-lg-4" style="display: none">
                                 <label>Codigo</label>
-                                <input class="form-control px-2" id="aul_id" disabled="">
-                                <input id="insert" style="display: none">
+                                <input class="limpar form-control px-2" id="aul_id" disabled="">
+                                <input id="insert" value="insert" style="display: none">
                             </div>
-                            <div class="form-group px-2 col-lg-8">
+                            <div class="form-group px-2 col-lg-5">
                                 <label name="aul_nome">Nome </label>
-                                <input class="form-control px-2" id="aul_nome" name="aul_nome">
+                                <input class="limpar form-control px-2" id="aul_nome" name="aul_nome">
+                            </div>
+                            <div class="form-group px-2 col-lg-7">
+                                <label name="aul_prof_id">Professor(a)</label>
+                                <select class="limpar form-control px-2" id="aul_prof_id" name="aul_prof_id">
+                                </select>
                             </div>
                             <div class="form-group px-2 col-lg-5">
                                 <label name="aul_horario">Horario</label>
-                                <input type="time" class="form-control px-2" id="aul_horario"  name="aul_horario">
+                                <input type="time" class="limpar form-control px-2" id="aul_horario"  name="aul_horario">
                             </div>
 
                             <div class="form-group px-2 col-lg-7">
-                                <label name="prof_nome">Dia Semana</label>
-                                <select class="form-control px-2" id="aul_dia" name="aul_dia">
-                                    <option >SELECIONE DIA</option>
+                                <label name="aul_dia">Dia Semana</label>
+                                <select class="limpar form-control px-2" id="aul_dia" name="aul_dia">
+                                    <option ></option>
                                     <option value="SEGUNDA">SEGUNDA</option>
                                     <option value="TERÇA">TERÇA</option>
                                     <option value="QUARTA">QUARTA</option>
@@ -168,17 +171,10 @@
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-12">
-                                <label name="aul_prof_id">Professor(a)</label>
-                                <select class="form-control px-2" id="aul_prof_id" name="aul_prof_id">
-
-                                </select>
-                            </div>
-                            <div class="form-group px-2 col-lg-12">
                                 <label>Obs</label>
-                                <textarea class="form-control px-2" id="aul_obs" rows="3"></textarea>
+                                <textarea class="limpar form-control px-2" id="aul_obs" rows="3"></textarea>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-sm btn-rounded btn-danger" id="aul_Sair" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="aul_Gravar">Gravar</button>

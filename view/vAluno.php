@@ -40,7 +40,7 @@ class vAluno {
         if (isset($files['foto'])) {
             $pasta = $this->vVerificaFoto($files);
         }
-        
+        //die($pasta);
         $col->set("alu_id", $dados['id']);
         $col->set("alu_nome", $dados['nome']);
         $col->set("alu_nascimento", $dados['nascimento']);
@@ -134,7 +134,7 @@ class vAluno {
     function vBuscaAll($dados, $files) {
         global $col;
 
-        $where = " where CONCAT(alu_nome,' ',alu_sobrenome,' ',alu_nascimento,' ',alu_resposavel,' ',alu_cpf ) like '%" . $dados['where'] . "%'";
+        $where = " where CONCAT(alu_nome,' ',alu_nascimento,' ',alu_resposavel,' ',alu_cpf ) like '%" . $dados['where'] . "%'";
 
         $col->set("sqlCampos", $where);
 

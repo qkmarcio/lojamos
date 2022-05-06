@@ -50,9 +50,9 @@ class ColAula {
             )VALUES(";
         $sql .= "'" . strtoupper(addslashes($this->aul_nome)) . "',";
         $sql .= "'" . $this->aul_horario . "',";
-        $sql .= "'" . strtoupper(addslashes($this->aul_dia_semana)) . "',";
+        $sql .= "'" . strtoupper($this->aul_dia_semana) . "',";
         $sql .= "'" . strtoupper(addslashes($this->aul_obs)) . "',";
-        $sql .= ""  . $this->aul_comissao . ",";
+        $sql .= ""  . Formatador::convertMoedaToFloat($this->aul_comissao) . ",";
         $sql .= "'" . $this->aul_ativado . "',";
         $sql .= ""  . $this->aul_prof_id . ",";
         $sql .= "CURRENT_TIMESTAMP ";
@@ -76,9 +76,9 @@ class ColAula {
         
         $sql .= "aul_nome='" . strtoupper(addslashes($this->aul_nome)) . "',";
         $sql .= "aul_horario='" . $this->aul_horario . "',";
-        $sql .= "aul_dia_semana='" . strtoupper(addslashes($this->aul_dia_semana)) . "',";
+        $sql .= "aul_dia_semana='" . strtoupper($this->aul_dia_semana) . "',";
         $sql .= "aul_obs='" . strtoupper(addslashes($this->aul_obs)) . "',";
-        $sql .= "aul_comissao="  . $this->aul_comissao . ",";
+        $sql .= "aul_comissao="  . Formatador::convertMoedaToFloat($this->aul_comissao) . ",";
         $sql .= "aul_ativado='" . $this->aul_ativado . "',";
         $sql .= "aul_prof_id="  . $this->aul_prof_id . "";
         
@@ -126,7 +126,7 @@ class ColAula {
             $cls->horario = $obj->aul_horario;
             $cls->dia_semana = $obj->aul_dia_semana;
             $cls->obs = $obj->aul_obs;
-            $cls->comissao = $obj->aul_comissao;
+            $cls->comissao = Formatador::convertFloatToMoeda($obj->aul_comissao);
             $cls->ativado = $obj->aul_ativado;
             $cls->prof_id = $obj->aul_prof_id;
             $cls->prof_nome = $obj->aul_prof_nome;

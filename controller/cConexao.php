@@ -25,8 +25,9 @@ class cConexao {
     function conectar() {
         
         @$conn = mysqli_connect($this->host, $this->user, $this->pass, $this->db, $this->port);
+        mysqli_set_charset(@$conn,"utf8");
         if (mysqli_connect_errno()) {
-            echo "Não foi possível conectar ao banco MySQL cConexao.php na linha 27 : " . mysqli_connect_error();
+            echo "Nao foi possivel conectar ao banco MySQL cConexao.php na linha 27 : " . mysqli_connect_error();
             exit();
           }
         return $conn;

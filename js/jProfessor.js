@@ -3,17 +3,19 @@ var jsProfessor = {};
 var formCadastro;
 
 jsProfessor.mask = function () {
-    $("#prof_telefone").mask('(99) 99999-9999');
-    $("#prof_comissao").mask('99.999');
+
+    $("#prof_telefone").mask('(99) 9999-9999');
+    $("#prof_celular").mask('(99) 99999-9999');
+    $("#prof_cpf").mask('999.999.999-99');
+    $("#prof_cep").mask('99999-999');
+    $("#prof_comissao").mask('999,99');
 };
 
 jsProfessor.eventos = function () {
     //$('input:text').setMask();
+    $("#prof_comissao").val('0,00');
+    $("#insert").val('insert');
 
-    $('#image-file').on('change', function () {
-        console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
-    });
-    
     $('#inpBuscar').focus();
     $('#inpBuscar').on('change', function (evet) {
 
@@ -32,6 +34,10 @@ jsProfessor.eventos = function () {
         }
 
         console.log(evet.target.value);
+    });
+    
+    $('#image-file').on('change', function () {
+        console.log('This file size is: ' + this.files[0].size / 1024 / 1024 + "MiB");
     });
 
     //Faz a Chamada para Editar
@@ -61,6 +67,14 @@ jsProfessor.eventos = function () {
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
         var id = $(this).closest('tr').children('td:first').text();
+
+        if ($(this).attr("title") == 'Visualizar') {
+            $(".modal-body :input").each(function () {
+                $(this).attr("disabled", true);
+            });
+        }
+        ;
+
         jsProfessor.editar(id);
     });
 
@@ -73,8 +87,12 @@ jsProfessor.eventos = function () {
     //Quando o Form esta hide modal
     $('#formCadastro').on('hide.bs.modal', function () {
         $("#inpBuscar").focus();
-        $('#formCadastro input,textarea,select').each(function () {
-            $(this).val('');
+        $(".limpar").val(''); //Limpar os tudo com esta class
+//        $('#formCadastro input,textarea,select').each(function () {
+//            $(this).val('');
+//        });
+        $(".modal-body :input").each(function () {
+            $(this).attr("disabled", false);
         });
 
         if (formCadastro.valid() == false) {
@@ -83,6 +101,7 @@ jsProfessor.eventos = function () {
 
         //Deixa o Form padrão para fazer o insert
         $("#insert").val('insert');
+        $("#prof_comissao").val('0,00');
         $('#thumbnail').attr('src', "../Fotos/semfoto.jpg");
     });
 
@@ -113,42 +132,33 @@ jsProfessor.ValidaForm = function () {
         ignore: '*:not([name])',
         rules: {
             prof_nome: {
-                required: true,
-                minlength: 3
+                required: true
             },
-            prof_sobrenome: {
-                required: true,
-                minlength: 3
+            prof_cpf: {
+                required: true
+            },
+            prof_nascimento: {
+                required: true
+            },
+            prof_celular: {
+                required: true
+            },
+            prof_sexo: {
+                required: true
             },
             prof_email: {
                 required: true,
                 email: true
-            },
-            prof_sexo: {
-                required: true
-            },
-            prof_ativado: {
-                required: true
             }
         },
         messages: {
-            prof_nome: {
-                required: "Coloque um nome",
-                minlength: "Seu nome deve consistir em pelo menos 3 caracteres"
-            },
-            prof_sobrenome: {
-                required: "Por favor coloque um Sobrenome",
-                minlength: "Seu Sobrenome deve consistir em pelo menos 3 caracteres"
-            },
+            prof_nome: "Coloque um nome",
+            prof_cpf: "Coloque um Cpf",
+            prof_nascimento: "Data de Nascimento",
+            prof_celular: "Coloque um numero",
+            prof_sexo: "Selecionar o Sexo",
             prof_email: "Coloque um email valido",
-            prof_sexo: {
-                required: "Selecionar o Sexo",
 
-            },
-            prof_ativado: {
-                required: "Marca Opção",
-
-            }
         },
         submitHandler: function (form) {
             //alert('inside');
@@ -175,18 +185,26 @@ jsProfessor.getForm = function () {
     FData.set('insert', $("#insert").val());
     FData.set('id', $("#prof_id").val());
     FData.set('nome', $("#prof_nome").val());
-    FData.set('sobrenome', $("#prof_sobrenome").val());
     FData.set('nascimento', $("#prof_nascimento").val());
+    FData.set('resposavel', $("#prof_resposavel").val());
+    FData.set('cep', $("#prof_cep").val());
+    FData.set('bairro', $("#prof_bairro").val());
+    FData.set('endereco', $("#prof_endereco").val());
+    FData.set('cidade', $("#prof_cidade").val());
+    FData.set('cpf', $("#prof_cpf").val());
     FData.set('telefone', $("#prof_telefone").val());
+    FData.set('celular', $("#prof_celular").val());
     FData.set('sexo', $("#prof_sexo").val());
     FData.set('email', $("#prof_email").val());
-    FData.set('endereco', $("#prof_endereco").val());
     FData.set('obs', $("#prof_obs").val());
     FData.set('senha', $("#prof_senha").val());
-    FData.set('ativado', $("#prof_ativado").val());
     FData.set('comissao', $("#prof_comissao").val());
+    FData.set('ativado', $("#prof_ativado").val());
     FData.set('foto', $("#prof_foto")[0].files[0]);
     FData.set('foto2', $("#thumbnail").attr('src'));
+    
+    
+    
 
     return FData;
 
@@ -195,16 +213,21 @@ jsProfessor.getForm = function () {
 jsProfessor.setForm = function (obj) {
     $("#prof_id").val(obj.id);
     $("#prof_nome").val(obj.nome);
-    $("#prof_sobrenome").val(obj.sobrenome);
     $("#prof_nascimento").val(obj.nascimento);
+    $("#prof_resposavel").val(obj.resposavel);
+    $("#prof_cep").val(obj.cep);
+    $("#prof_bairro").val(obj.bairro);
+    $("#prof_endereco").val(obj.endereco);
+    $("#prof_cidade").val(obj.cidade);
+    $("#prof_cpf").val(obj.cpf);
     $("#prof_telefone").val(obj.telefone);
+    $("#prof_celular").val(obj.celular);
     $("#prof_sexo").val(obj.sexo);
     $("#prof_email").val(obj.email);
-    $("#prof_endereco").val(obj.endereco);
     $("#prof_obs").val(obj.obs);
     $("#prof_senha").val(obj.senha);
-    $("#prof_ativado").val(obj.ativado);
     $("#prof_comissao").val(obj.comissao);
+    $("#prof_ativado").val(obj.ativado);
     $('#thumbnail').attr('src', obj.foto);
     //$("#prof_foto").val(obj.foto);
 };
@@ -224,7 +247,7 @@ jsProfessor.tableList = function (json) {
                 classe = "label label-success";
                 ativado = "ATIVO";
                 break;
-                    }
+        }
 
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
@@ -261,7 +284,7 @@ jsProfessor.getlista = function () {
 
     } catch (erro) {
         $('#ListView').empty();
-        $('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
+        //$('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
     }
 };
 

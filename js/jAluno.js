@@ -10,6 +10,7 @@ jsAluno.mask = function () {
 };
 
 jsAluno.eventos = function () {
+    $("#insert").val('insert');
 
     $('#inpBuscar').focus();
 
@@ -37,6 +38,7 @@ jsAluno.eventos = function () {
 
     //Faz a Chamada para Editar
     $('#thumbnail').on('click', function (e) {
+        debugger;
         $("#alu_foto").click();
     });
 
@@ -62,8 +64,13 @@ jsAluno.eventos = function () {
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
         var id = $(this).closest('tr').children('td:first').text();
-//        jsAluno.ListaProfessor();
-//        jsAluno.ListaAula();
+
+        if ($(this).attr("title") == 'Visualizar') {
+            $(".modal-body :input").each(function () {
+                $(this).attr("disabled", true);
+            });
+        }
+        ;
         jsAluno.editar(id);
     });
 
@@ -82,8 +89,12 @@ jsAluno.eventos = function () {
     //Quando o Form esta hide modal
     $('#formCadastro').on('hide.bs.modal', function () {
         $("#inpBuscar").focus();
-        $('#formCadastro input,textarea,select').each(function () {
-            $(this).val('');
+        $(".limpar").val(''); //Limpar os tudo com esta class
+//        $('#formCadastro input,textarea,select').each(function () {
+//            $(this).val('');
+//        });
+        $(".modal-body :input").each(function () {
+            $(this).attr("disabled", false);
         });
 
         if (formCadastro.valid() == false) {
@@ -222,12 +233,12 @@ jsAluno.tableList = function (json) {
                 classe = "label label-success";
                 ativado = "ATIVO";
                 break;
-                    }
+        }
 
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
                 '<td class="col-3 text-left">' + dados[i].nome + '</td>' +
-                '<td class="col-3 text-left">' + dados[i].resposavel + '</td>' +
+                '<td class="col-2 text-left">' + dados[i].resposavel + '</td>' +
                 '<td class="col-1 text-left">' + dados[i].celular + ' </td>' +
                 '<td class="col-2 text-left">' + dados[i].email + ' </td>' +
                 '<td class="col-1 text-center" ><span class="' + classe + '">' + ativado + '</span> </td>' +

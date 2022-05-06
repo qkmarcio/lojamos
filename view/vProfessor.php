@@ -167,32 +167,8 @@ class vProfessor {
     }
 
     private function vVerificaFoto($files) {
-//        $imagem = $_FILES["foto"];
-//        
-//        if($imagem != NULL) {
-//            
-//            if ($extensao != "jpg" && $extensao != "png") {
-//
-//                die("Tipode arquivo não aceito");
-//            }
-//            $extensao = strtolower(pathinfo($imagem['name'], PATHINFO_EXTENSION));
-//            $nomeFinal = time().'.'.$extensao;
-//	if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
-//		$tamanhoImg = filesize($nomeFinal);
-//
-//		$mysqlImg = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg));
-//
-//		mysql_connect($host,$username,$password) or die("Impossível Conectar");
-//
-//		@mysql_select_db($db) or die("Impossível Conectar");
-//
-//		mysql_query("INSERT INTO PESSOA (PES_IMG) VALUES ('$mysqlImg')") or
-//		die("O sistema não foi capaz de executar a query");
-//
-//		unlink($nomeFinal);
-//        }}
-        //verifica se tem alguma foto
 
+        //verifica se tem alguma foto
         if (isset($files['foto'])) {
             $arquivo = $files['foto'];
 

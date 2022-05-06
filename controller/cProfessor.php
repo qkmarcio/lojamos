@@ -48,7 +48,6 @@ class ColProfessor {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
         $sql = "INSERT INTO tab_professores (
-                prof_id,
                 prof_nome,
                 prof_nascimento,
                 prof_cep,
@@ -80,12 +79,12 @@ class ColProfessor {
         $sql .= "'" . $this->prof_email . "',";
         $sql .= "'" . strtoupper(addslashes($this->prof_obs)) . "',";
         $sql .= "'" . $this->prof_senha . "',";
-        $sql .= "'" . $this->prof_ativado . "'";
-        $sql .= ""  . $this->prof_comissao . ",";
+        $sql .= "'" . $this->prof_ativado . "',";
+        $sql .= ""  . Formatador::convertMoedaToFloat($this->prof_comissao) . ",";
         $sql .= "'" . $this->prof_foto . "',";
         $sql .= "CURRENT_TIMESTAMP";
         $sql .= ")";
-
+//die($sql);
         $con->set("sql", $sql);
 
         if ($con->execute($con->conectar())) {
@@ -115,8 +114,8 @@ class ColProfessor {
         $sql .= "prof_email='" . $this->prof_email . "',";
         $sql .= "prof_obs='" . strtoupper(addslashes($this->prof_obs)) . "',";
         $sql .= "prof_senha='" . $this->prof_senha . "',";
-        $sql .= "prof_ativado='" . $this->prof_ativado . "'";
-        $sql .= "prof_comissao="  . $this->prof_comissao . ",";
+        $sql .= "prof_ativado='" . $this->prof_ativado . "',";
+        $sql .= "prof_comissao="  . Formatador::convertMoedaToFloat($this->prof_comissao) . ",";
         $sql .= "prof_foto='" . $this->prof_foto . "'";
         
         $sql .= "WHERE prof_id=" . $this->prof_id;
@@ -169,7 +168,7 @@ class ColProfessor {
             $cls->obs = $obj->prof_obs;
             $cls->senha = $obj->prof_senha;
             $cls->ativado = $obj->prof_ativado;
-            $cls->comissao = $obj->prof_comissao;
+            $cls->comissao = Formatador::convertFloatToMoeda($obj->prof_comissao);
             $cls->foto = $obj->prof_foto;
             $cls->data_cadastro = $obj->prof_data_cadastro;
             

@@ -17,8 +17,8 @@
                 text-transform: uppercase;
             }
             .table-fixed thead tr th {
-                background-color: #f39c12;
-                border-color: #e67e22;
+                /* background-color: #f39c12;
+                 border-color: #e67e22;*/
             }
 
             .table-fixed tbody {
@@ -32,7 +32,7 @@
                 table-layout:auto;
             }
             .table-fixed thead {
-                width: calc( 100% - 1em )
+                /*width: calc( 100% - 1em )*/
             }
 
             .profile--panel .img{
@@ -137,70 +137,84 @@
                     <div class="modal-header">
                         <h5 class="modal-title">Novo Cadastro</h5>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="form-group px-2 col-lg-2">
+                            <div class="form-group px-2 col-lg-2" style="display: none">
                                 <label>Codigo</label>
-                                <input class="form-control px-2" id="prof_id" disabled="">
-                                <input id="insert" style="display: none">
+                                <input class="limpar form-control px-2" id="prof_id" disabled="">
+                                <input id="insert" value="insert" style="display: none">
+                            </div>
+                            <div class="form-group px-2 col-lg-6">
+                                <label for="prof_nome">Nome Completo </label>
+                                <input class="limpar form-control px-2" id="prof_nome" name="prof_nome" >
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label for="prof_nome">Nome </label>
-                                <input class="form-control px-2" id="prof_nome" name="prof_nome" >
-                            </div>
-                            <div class="form-group px-2 col-lg-4">
-                                <label name="prof_sobrenome">Sobrenome</label>
-                                <input class="form-control px-2" id="prof_sobrenome" name="prof_sobrenome">
+                                <label name="prof_cpf">Cpf</label>
+                                <input type="text" class="limpar form-control px-2" id="prof_cpf" name="prof_cpf">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Aniversário</label>
-                                <input type='date' class="form-control px-2" id="prof_nascimento">
+                                <label name="prof_nascimento">Aniversário</label>
+                                <input type='date' class="limpar form-control px-2" id="prof_nascimento" name="prof_nascimento">
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>Sexo</label>
-                                <select class="form-control px-2" id="prof_sexo">
-                                    <option >SELECIONE</option>
+                                <label>Cep</label>
+                                <input class="limpar form-control px-2" id="prof_cep" >
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Bairro</label>
+                                <input class="limpar form-control px-2" id="prof_bairro" >
+                            </div>
+                            <div class="form-group px-2 col-lg-6">
+                                <label>Endereço</label>
+                                <input class="limpar form-control px-2" id="prof_endereco">
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label>Cidade</label>
+                                <input class="limpar form-control px-2" id="prof_cidade" >
+                            </div>
+                            <div class="form-group px-2 col-lg-3">
+                                <label name="prof_sexo">Sexo</label>
+                                <select class="limpar form-control px-2" id="prof_sexo" name="prof_sexo">
+                                    <option ></option>
                                     <option value="MASCULINO">MASCULINO</option>
                                     <option value="FEMININO">FEMININO</option>
                                 </select>
                             </div>
                             <div class="form-group px-2 col-lg-3">
-                                <label>WhatsApp</label>
-                                <input type="text" class="form-control px-2" id="prof_telefone">
+                                <label>Telefone</label>
+                                <input type="text" class="limpar form-control px-2" id="prof_telefone">
                             </div>
-                            <div class="form-group px-2 col-lg-6">
-                                <label>Endereço</label>
-                                <input class="form-control px-2" id="prof_endereco">
+                            <div class="form-group px-2 col-lg-3">
+                                <label name="prof_celular">WhatsApp</label>
+                                <input type="text" class="limpar form-control px-2" id="prof_celular" name="prof_celular">
                             </div>
                             <div class="form-group px-2 col-lg-6">
                                 <label name="prof_email">E-mail</label>
-                                <input type="email" class="form-control px-2" id="prof_email" name="prof_email">
+                                <input type="email" class="limpar form-control px-2" id="prof_email" name="prof_email">
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>Comissão</label>
-                                <input class="form-control px-2" id="prof_comissao" >
+                                <input class="limpar form-control px-2" id="prof_comissao" >
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label>Status</label>
                                 <select class="form-control px-2" id="prof_ativado">
-                                    <option >SELECIONE</option>
-                                    <option value="ATIVO">ATIVO</option>
-                                    <option value="INATIVO">INATIVO</option>
+                                    <option value="1">ATIVO</option>
+                                    <option value="0">INATIVO</option>
                                 </select>
                             </div>
 
                             <div class="form-group px-2 col-lg-9">
                                 <label>Obs</label>
-                                <textarea class="form-control px-2" id="prof_obs" rows="3"></textarea>
+                                <textarea class="limpar form-control px-2" id="prof_obs" rows="3"></textarea>
                             </div>
                             <div class="form-group px-2 col-lg-3">
                                 <label style="text-align: center;" >Foto</label>
                                 <div class="profile--panel">
                                     <div class="img online">
                                         <img id="thumbnail" src="../Fotos/semfoto.jpg" alt="" class="rounded-circle">
-                                        <input type="file" id="prof_foto" accept="image/*" style="display: none">
+                                        <input type="file" id="prof_foto" class="limpar" accept="image/*" style="display: none">
                                     </div>
                                 </div>
                             </div>

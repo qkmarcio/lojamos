@@ -17,11 +17,10 @@
                 text-transform: uppercase;
             }
             .table-fixed thead tr th {
-                background-color: #f39c12;
-                border-color: #e67e22;
+                /*background-color: #f39c12;
+                border-color: #e67e22;*/
                 padding: 4px 2px 4px 2px;
             }
-
             .table-fixed tbody {
                 display:block;
                 height:300px;
@@ -62,7 +61,6 @@
                                 <!-- Page Title Start -->
                                 <h2 class="page--title h5">Cadastro de Alunos</h2>
                                 <!-- Page Title End -->
-
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                                     <li class="breadcrumb-item"><span>Cadastro</span></li>
@@ -113,10 +111,8 @@
                                             <th class="col-1 text-center"></i></i>Actions</th>
                                         </tr>
                                     </thead>
-                                    
                                     <tbody id="ListView"></tbody>
                                 </table>
-
                             </div>
                             <div id="pager">
                                 <ul id="pagination" class="pagination-sm "></ul>
@@ -128,7 +124,7 @@
                 <!-- Main Content End -->
 
                 <!-- Main Footer Start -->
-<?php include './Includes/footer.php'; ?>
+                <?php include './Includes/footer.php'; ?>
                 <!-- Main Footer End -->
             </main>
             <!-- Main Container End -->
@@ -147,7 +143,7 @@
                             <div class="form-group px-2 col-lg-2" style="display: none">
                                 <label>Codigo</label>
                                 <input class="form-control px-2" id="alu_id" disabled="">
-                                <input id="insert" style="display: none">
+                                <input id="insert" value="insert" style="display: none">
                             </div>
                             <div class="form-group px-2 col-lg-6">
                                 <label name="alu_nome">Nome Completo</label>
@@ -224,16 +220,13 @@
                             <div class="form-group px-2 col-lg-12">
                                 <label >Enviar recibo por E-mail? <l style="font-size: 10px"> (Envia confirmação de pagamento para o e-mail do aluno)</l></label>
                                 <div class="form-group px-2 col-lg-3">
-
                                     <select class="form-control px-2" id="alu_email_recibo">
                                         <option value="0">NÃO</option>
                                         <option value="1">SIM</option>
-
                                     </select>
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-sm btn-rounded btn-danger" id="Sair" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="Gravar">Gravar</button>
@@ -270,43 +263,43 @@
         <script src="../assets/js/sweetalert-init.js"></script>
 
         <script>
-                                            /*$('document').ready(function() {
-                                             $("#buscar_professor").focus();
-                                             //$('#btn_Novo_Professor').click(function () { $("#prof_nome").focus(); });
-                                             $('#formCadProfessor').on('shown.bs.modal', function () {
-                                             $("#prof_nome").focus();
-                                             });
-                                             
-                                             });*/
+            /*$('document').ready(function() {
+             $("#buscar_professor").focus();
+             //$('#btn_Novo_Professor').click(function () { $("#prof_nome").focus(); });
+             $('#formCadProfessor').on('shown.bs.modal', function () {
+             $("#prof_nome").focus();
+             });
+             
+             });*/
 
-                                            function loadjscssfile(filename, filetype) {
-                                                var fileref = null;
-                                                if (filetype === "js") { //if filename is a external JavaScript file
-                                                    fileref = document.createElement('script');
-                                                    fileref.setAttribute("type", "text/javascript");
-                                                    fileref.setAttribute("src", filename);
-                                                } else if (filetype === "css") { //if filename is an external CSS file
-                                                    fileref = document.createElement("link");
-                                                    fileref.setAttribute("rel", "stylesheet");
-                                                    fileref.setAttribute("type", "text/css");
-                                                    fileref.setAttribute("href", filename);
-                                                }
-                                                if (typeof fileref !== "undefined") {
-                                                    document.getElementsByTagName("head")[0].appendChild(fileref);
-                                                }
-                                            }
+            function loadjscssfile(filename, filetype) {
+                var fileref = null;
+                if (filetype === "js") { //if filename is a external JavaScript file
+                    fileref = document.createElement('script');
+                    fileref.setAttribute("type", "text/javascript");
+                    fileref.setAttribute("src", filename);
+                } else if (filetype === "css") { //if filename is an external CSS file
+                    fileref = document.createElement("link");
+                    fileref.setAttribute("rel", "stylesheet");
+                    fileref.setAttribute("type", "text/css");
+                    fileref.setAttribute("href", filename);
+                }
+                if (typeof fileref !== "undefined") {
+                    document.getElementsByTagName("head")[0].appendChild(fileref);
+                }
+            }
 
-                                            function loadContent(id, pagina) {
-                                                $(id).slideUp("slow", function () { //efeito de sobe e desce o footer
-                                                    //$("#carregando").dialog('open');
-                                                    $(this).load(pagina, function () {
-                                                        //$("#carregando").dialog('close');
-                                                        $(this).slideDown("slow");
-                                                    });
-                                                });
-                                            }
+            function loadContent(id, pagina) {
+                $(id).slideUp("slow", function () { //efeito de sobe e desce o footer
+                    //$("#carregando").dialog('open');
+                    $(this).load(pagina, function () {
+                        //$("#carregando").dialog('close');
+                        $(this).slideDown("slow");
+                    });
+                });
+            }
 
-                                            loadjscssfile('../js/jAluno.js?nocache=' + Math.random(), 'js');
+            loadjscssfile('../js/jAluno.js?nocache=' + Math.random(), 'js');
         </script>
         <!-- Page Level Scripts -->
 
