@@ -256,8 +256,8 @@ jsProfessor.tableList = function (json) {
                 '<td class="col-3 text-left">' + dados[i].email + ' </td>' +
                 '<td class="col-2 text-center" ><span class="' + classe + '">' + ativado + '</span> </td>' +
                 '<td class="col-1 text-center" style="min-width: 100px;">\n\
-                    <i class="btn-link fa fa-edit fa-lg" title="Visualizar"></i>\n\
-                    <i class="btn-link fa fa-edit fa-lg" title="Editar"></i>\n\
+                    <i class="btn-link fa bi-eye fa-lg" title="Visualizar"></i>\n\
+                    <i class="btn-link fa bi-pencil-square fa-lg" title="Editar"></i>\n\
                 </td>' +
                 '</tr>';
     }

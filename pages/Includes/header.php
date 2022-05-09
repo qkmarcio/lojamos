@@ -40,6 +40,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 
 <!-- Stylesheets -->
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/bootstrap-icons-1.8.1/bootstrap-icons.css">
 <link rel="stylesheet" href="../assets/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="../assets/css/all.css" >
 <link rel="stylesheet" href="../assets/css/fontawesome-all.min">

@@ -187,8 +187,8 @@ jsAula.tableList = function (json) {
                 '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].dia_semana + '</span> </td>' +
                 '<td class="col-2 text-left">' + dados[i].horario + ' </td>' +
                 '<td class="col-2 text-center" style="min-width: 100px;">\n\
-                    <i class="btn-link fa fa-edit fa-lg" title="Visualizar"></i>\n\
-                    <i class="btn-link fa fa-edit fa-lg" title="Editar"></i>\n\
+                    <i class="btn-link fa bi-eye fa-lg" title="Visualizar"></i>\n\
+                    <i class="btn-link fa bi-pencil-square fa-lg" title="Editar"></i>\n\
                 </td>' +
                 '</tr>';
     }

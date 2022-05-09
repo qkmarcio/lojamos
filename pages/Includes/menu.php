@@ -55,37 +55,70 @@
             <li>
                 <ul>
                     <li class="active">
-                        <a href="http://localhost/lojamos/pages/principal.php">
+                        <a href="principal.php">
                             <i class="fa fa-home"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
+                        <a href="mensalidades.php">
+                            <i class="fa fa-home"></i>
+                            <span>Mensalidades</span>
+                        </a>
+                    </li>
+                    <li id="menuCadastro">
                         <a href="#">
                             <i class="fab fa-wpforms"></i>
                             <span>Cadastro</span>
                         </a>
 
                         <ul>
-                            <li><a href="cadastro_aluno.php">Alunos</a></li>
-                            <li><a href="cadastro_professor.php">Professores</a></li>
-                            <li><a href="cadastro_aula.php">Aulas</a></li>
+                            <li id="menuAlunos"><a href="cadastro_aluno.php">Alunos</a></li>
+                            <li id="menuProfessores"><a href="cadastro_professor.php">Professores</a></li>
+                            <li id="menuAulas"><a href="cadastro_aula.php">Aulas</a></li>
+                            <li id="menuModalidades"><a href="cadastro_modalidade.php">Modalidades</a></li>
+                            <li id="menuContratos"><a href="cadastro_contrato.php">Contratos</a></li>
                         </ul>
-                        <ul>
-                            <li class="active open">
-                                <a href="#">
-                                    <i class="fa fa-th"></i>
-                                    <span>Page Layouts</span>
-                                </a>
+                        
+                    </li>
+                    <li id="menuFinanceiro">
+                        <a href="#">
+                            <i class="fab fa-wpforms"></i>
+                            <span>Financeiro</span>
+                        </a>
 
-                                <ul>
-                                    <li class="active"><a href="blank.html">Blank Page</a></li>
-                                    <li><a href="page-light.html">Page Light</a></li>
-                                    <li><a href="sidebar-light.html">Sidebar Light</a></li>
-                                </ul>
-                            </li>
-                            
+                        <ul>
+                            <li id="menuReceitas"><a href="financeiro_receitas.php">Alunos</a></li>
+                            <li id="menuReceitasTipo"><a href="financeiro_receitas_tipo.php">Professores</a></li>
+                            <li id="menuDespesas"><a href="financeiro_despesas.php">Aulas</a></li>
+                            <li id="menuDespesasTipo"><a href="financeiro_despesas_tipo.php">Alunos</a></li>
                         </ul>
+                        
+                    </li>
+                    <li id="menuRelatorios">
+                        <a href="#">
+                            <i class="fab fa-wpforms"></i>
+                            <span>Relatorios</span>
+                        </a>
+
+                        <ul>
+                            <li id="menuRelReceitas"><a href="relatorio_receitas.php">Alunos</a></li>
+                            <li id="menuRelDespesas"><a href="relatorio_despesas.php">Aulas</a></li>
+                            <li id="menuRelMensalidades"><a href="relatorio_mensalidades.php">Alunos</a></li>
+                        </ul>
+                        
+                    </li>
+                    <li id="menuConfiguracao">
+                        <a href="#">
+                            <i class="fab fa-wpforms"></i>
+                            <span>Configuração</span>
+                        </a>
+
+                        <ul>
+                            <li id="menuUsuarios"><a href="confi_aluno.php">Alunos</a></li>
+                            <li id="menuSistema"><a href="cadastro_professor.php">Professores</a></li>
+                        </ul>
+                        
                     </li>
                 </ul>
             </li>
