@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `mos` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mos`;
 -- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
 --
 -- Host: localhost    Database: mos
@@ -102,7 +100,7 @@ DROP TABLE IF EXISTS `tab_contas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tab_contas` (
   `contas_id` int(11) NOT NULL AUTO_INCREMENT,
-  `contas_nome` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `contas_nome` varchar(50) NOT NULL,
   PRIMARY KEY (`contas_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -127,10 +125,10 @@ CREATE TABLE `tab_contratos` (
   `con_id` int(11) NOT NULL AUTO_INCREMENT,
   `con_vencimento` date DEFAULT NULL,
   `con_valor` float DEFAULT '0',
-  `con_meses` varchar(5) CHARACTER SET latin1 DEFAULT NULL,
-  `con_obs` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  `con_ativado` enum('0','1') CHARACTER SET latin1 DEFAULT '1',
-  `con_email_notificacao` enum('0','1') CHARACTER SET latin1 DEFAULT '1',
+  `con_meses` varchar(5) DEFAULT NULL,
+  `con_obs` varchar(200) DEFAULT NULL,
+  `con_ativado` enum('0','1') DEFAULT '1',
+  `con_email_notificacao` enum('0','1') DEFAULT '1',
   `con_data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`con_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -156,7 +154,7 @@ CREATE TABLE `tab_despesas` (
   `des_id` int(11) NOT NULL AUTO_INCREMENT,
   `des_valor` float DEFAULT NULL,
   `des_data` date DEFAULT NULL,
-  `des_status` enum('0','1') CHARACTER SET latin1 DEFAULT '0',
+  `des_status` enum('0','1') DEFAULT '0',
   `des_data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`des_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -182,12 +180,12 @@ CREATE TABLE `tab_mensalidades` (
   `men_id` int(11) NOT NULL AUTO_INCREMENT,
   `men_vencimento` date DEFAULT NULL,
   `men_data_pago` date DEFAULT NULL,
-  `men_status` enum('0','1') CHARACTER SET latin1 DEFAULT '0',
+  `men_status` enum('0','1') DEFAULT '0',
   `men_valor` float DEFAULT '0',
   `men_valor_pago` float DEFAULT '0',
   `men_saldo` float DEFAULT '0',
   `men_data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
-  `tab_mensalidadescol` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `tab_mensalidadescol` varchar(45) NOT NULL,
   PRIMARY KEY (`men_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -199,6 +197,33 @@ CREATE TABLE `tab_mensalidades` (
 LOCK TABLES `tab_mensalidades` WRITE;
 /*!40000 ALTER TABLE `tab_mensalidades` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tab_mensalidades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tab_modalidade`
+--
+
+DROP TABLE IF EXISTS `tab_modalidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tab_modalidade` (
+  `modalidade_id` int(11) NOT NULL AUTO_INCREMENT,
+  `modalidade_nome` varchar(45) NOT NULL,
+  `modalidade_ativado` enum('0','1') DEFAULT '1',
+  `modalidade_obs` varchar(200) DEFAULT NULL,
+  `modalidade_data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`modalidade_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tab_modalidade`
+--
+
+LOCK TABLES `tab_modalidade` WRITE;
+/*!40000 ALTER TABLE `tab_modalidade` DISABLE KEYS */;
+INSERT INTO `tab_modalidade` VALUES (1,'MENSALIDADE','1','modo de mensalidade','2022-05-09 21:07:04');
+/*!40000 ALTER TABLE `tab_modalidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -237,7 +262,7 @@ CREATE TABLE `tab_professores` (
 
 LOCK TABLES `tab_professores` WRITE;
 /*!40000 ALTER TABLE `tab_professores` DISABLE KEYS */;
-INSERT INTO `tab_professores` VALUES (10,'HENRIQUE','2020-05-12','11111-111','SFSAFDSF','SDFASFASDF','SADFASDF','444.546.454-44','(45) 4545-4566','(45) 45454-5466','MASCULINO','sadfasdf@sfff.com','ASDFSADF','undefined','1',1.6,'../Fotos/imgProfessor/62757fe416a67.jpg','2022-05-06 16:10:15'),(11,'JOAQUIM','2020-05-12','11111-111','SFSAFDSF','SDFASFASDF','SADFASDF','666.688.888-88','(45) 4545-4566','(45) 45454-5466','MASCULINO','sadfasdf@sfff.com','ASDFSADF','undefined','1',1.5,'../Fotos/imgProfessor/627581d614953.jpg','2022-05-06 16:15:18');
+INSERT INTO `tab_professores` VALUES (10,'HENRIQUE','2020-05-12','11111-111','SFSAFDSF','SDFASFASDF','SADFASDF','444.546.454-44','(45) 4545-4566','(45) 45454-5466','MASCULINO','sadfasdf@sfff.com','ASDFSADF','undefined','1',1.6,'../Fotos/imgProfessor/62757fe416a67.jpg','2022-05-06 16:10:15'),(11,'JOAQUIM','2020-05-12','11111-111','SFSAFDSF','SDFASFASDF','SADFASDF','666.688.888-88','(45) 4545-4566','(45) 45454-5466','MASCULINO','sadfasdf@sfff.com','ASDFSADF','undefined','0',1.5,'../Fotos/imgProfessor/627581d614953.jpg','2022-05-06 16:15:18');
 /*!40000 ALTER TABLE `tab_professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,8 +277,8 @@ CREATE TABLE `tab_receitas` (
   `receitas_id` int(11) NOT NULL AUTO_INCREMENT,
   `receitas_valor` float DEFAULT NULL,
   `receitas_data` date DEFAULT NULL,
-  `receitas_obs` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  `receitas_status` enum('0','1') CHARACTER SET latin1 DEFAULT '0',
+  `receitas_obs` varchar(200) DEFAULT NULL,
+  `receitas_status` enum('0','1') DEFAULT '0',
   `receitas_data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`receitas_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -269,6 +294,33 @@ LOCK TABLES `tab_receitas` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tab_tipo_despesa`
+--
+
+DROP TABLE IF EXISTS `tab_tipo_despesa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tab_tipo_despesa` (
+  `tipo_despesa_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_despesa_nome` varchar(45) NOT NULL,
+  `tipo_despesa_ativado` enum('0','1') DEFAULT '1',
+  `tipo_despesa_obs` varchar(200) DEFAULT NULL,
+  `tipo_despesa_data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`tipo_despesa_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tab_tipo_despesa`
+--
+
+LOCK TABLES `tab_tipo_despesa` WRITE;
+/*!40000 ALTER TABLE `tab_tipo_despesa` DISABLE KEYS */;
+INSERT INTO `tab_tipo_despesa` VALUES (1,'LUZ','1','luz mes','2022-05-09 21:50:51');
+/*!40000 ALTER TABLE `tab_tipo_despesa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tab_tipo_receita`
 --
 
@@ -276,10 +328,13 @@ DROP TABLE IF EXISTS `tab_tipo_receita`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tab_tipo_receita` (
-  `tiporeceita_id` int(11) NOT NULL AUTO_INCREMENT,
-  `tiporeceita_nome` varchar(50) CHARACTER SET latin1 NOT NULL,
-  PRIMARY KEY (`tiporeceita_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `tipo_receita_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_receita_nome` varchar(45) NOT NULL,
+  `tipo_receita_ativado` enum('0','1') DEFAULT '1',
+  `tipo_receita_obs` varchar(200) DEFAULT NULL,
+  `tipo_receita_data_cadastro` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`tipo_receita_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,6 +343,7 @@ CREATE TABLE `tab_tipo_receita` (
 
 LOCK TABLES `tab_tipo_receita` WRITE;
 /*!40000 ALTER TABLE `tab_tipo_receita` DISABLE KEYS */;
+INSERT INTO `tab_tipo_receita` VALUES (1,'MENSALIDADE','1','marcio','2022-05-09 21:49:42');
 /*!40000 ALTER TABLE `tab_tipo_receita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-06 16:55:15
+-- Dump completed on 2022-05-11 20:42:57

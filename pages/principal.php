@@ -5,7 +5,7 @@
  * Data: 12/04/2022
  * Arquivo principal do sistema, faz chamadas para todas as interfaces
  */
-//header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=ISO-8859-1');
 /* include "./funcoes/config.php";
 
   session_start(); // Inicia a session
@@ -184,8 +184,8 @@ assets/css/ion.rangeSlider.min.css.map
                                 </a>
 
                                 <ul>
-                                    <li id="menuUsuarios"><a href="javascript:loadContent('#conteudo','Contas/Modalidades.php')confi_aluno.php">Alunos</a></li>
-                                    <li id="menuSistema"><a href="javascript:loadContent('#conteudo','Contas/Modalidades.php')cadastro_professor.php">Professores</a></li>
+                                    <li id="menuUsuarios"><a href="javascript:loadContent('#conteudo','Contas/Modalidades.php')">Alunos</a></li>
+                                    <li id="menuSistema"><a href="javascript:loadContent('#conteudo','Contas/Modalidades.php')">Professores</a></li>
                                 </ul>
 
                             </li>
@@ -199,23 +199,19 @@ assets/css/ion.rangeSlider.min.css.map
         </aside>
         <!-- Sidebar End -->
         <style type="text/css">
-            footer{
+/*            footer{
                 width: 100%;
                 position: absolute;
                 bottom: 0;
                
-            }
+            }*/
         </style>
 
         <!-- Main Container Start -->
-        <main class="main--container">
+        <main id="conteudo" class="main--container">
             <!-- Page Header Start -->
-            <div id="conteudo"></div>
-            <!-- Main Footer Start -->
-            <footer class="main--footer main--footer-dark">
-                <p>Copyright &copy; <a href="#">MOS Plataforma</a>. Marcio Olivira de Souza.</p>
-            </footer>
-            <!-- Main Footer End -->
+            <!--<div id="conteudo"></div>-->
+            
         </main>
         <!-- Main Container End -->
     </div>

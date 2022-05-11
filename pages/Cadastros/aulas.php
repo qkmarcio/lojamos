@@ -1,3 +1,13 @@
+<?php
+/*
+ * Autor: Marcio Souza
+ * Revisao: 0
+ * Data: 12/04/2022
+ * Arquivo principal do sistema, faz chamadas para todas as interfaces
+ */
+header('Content-type: text/html; charset=ISO-8859-1');
+
+?>
 <style type="text/css">
     input {
         text-transform: uppercase;
@@ -102,6 +112,11 @@
     </div>
 
 </section>
+<!-- Main Footer Start -->
+<footer class="main--footer main--footer-dark">
+    <p>Copyright &copy; <a href="#">MOS Plataforma</a>. Marcio Olivira de Souza.</p>
+</footer>
+<!-- Main Footer End -->
 <!-- Large Modal Start -->
 <form id="formCadastro" class="modal fade">
     <div class="modal-dialog">
@@ -150,8 +165,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-sm btn-rounded btn-danger" id="aul_Sair" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="aul_Gravar">Gravar</button>
+                    <button type="reset" class="btn btn-sm btn-rounded btn-danger" id="Sair" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="Gravar">Gravar</button>
                 </div>
             </div>
         </div>
