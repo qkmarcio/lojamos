@@ -11,6 +11,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 <style type="text/css">
     input {
         text-transform: uppercase;
+		
     }
     textarea {
         text-transform: uppercase;
