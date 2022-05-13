@@ -347,12 +347,17 @@ class Formatador {
      * @param string
      * @return string
      */
-    public static function dateTimeEmPortugues($dateSql) {
+    public static function dateTimeEmPortugues($dateSql,$time = false) {
         $ano = substr($dateSql, 0, -15);
         $mes = substr($dateSql, 5, -12);
         $dia = substr($dateSql, 8, -9);
         $hora = substr($dateSql, 11);
-        return $dia . "/" . $mes . "/" . $ano . " " . $hora;
+        if($time){
+            return $dia . "/" . $mes . "/" . $ano . " " . $hora;
+        } else {
+            return $dia . "/" . $mes . "/" . $ano;
+        }
+        
     }
 
     /**

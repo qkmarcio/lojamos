@@ -6,7 +6,7 @@
  * Data: 13/04/2022
  *
  * Descricao: 
- * Controle de Acesso na tab_tipo_despesa
+ * Controle de Acesso na tab_tipo_despesas
  */
 
 class ColTipoDespesa {
@@ -33,7 +33,7 @@ class ColTipoDespesa {
 
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
-        $sql = "INSERT INTO tab_tipo_despesa (
+        $sql = "INSERT INTO tab_tipo_despesas (
             tipo_despesa_nome,
             tipo_despesa_obs,
             tipo_despesa_ativado,
@@ -60,7 +60,7 @@ class ColTipoDespesa {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
 
-        $sql = "UPDATE tab_tipo_despesa SET ";
+        $sql = "UPDATE tab_tipo_despesas SET ";
         $sql .= "tipo_despesa_nome='" . strtoupper(addslashes($this->tipo_despesa_nome)) . "',";
         $sql .= "tipo_despesa_obs='" . $this->tipo_despesa_obs . "',";
         $sql .= "tipo_despesa_ativado='" . $this->tipo_despesa_ativado . "',";
@@ -80,7 +80,7 @@ class ColTipoDespesa {
     public function remover() {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "DELETE FROM tab_tipo_despesa WHERE tipo_despesa_id = " . $this->tipo_despesa_id;
+        $sql = "DELETE FROM tab_tipo_despesas WHERE tipo_despesa_id = " . $this->tipo_despesa_id;
         $con->set("sql", $sql);
         $resultado = $con->execute($con->conectar());
         if ($resultado) {
@@ -93,7 +93,7 @@ class ColTipoDespesa {
     public function getRegistros() {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "SELECT * FROM tab_tipo_despesa " . $this->sqlCampos;
+        $sql = "SELECT * FROM tab_tipo_despesas " . $this->sqlCampos;
         //die($sql);
         $con->set("sql", $sql);
         $result = $con->execute($con->conectar());

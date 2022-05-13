@@ -6,7 +6,7 @@
  * Data: 13/04/2022
  *
  * Descricao: 
- * Controle de Acesso na tab_tipo_receita
+ * Controle de Acesso na tab_tipo_receitas
  */
 
 class ColTipoReceita {
@@ -33,7 +33,7 @@ class ColTipoReceita {
 
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
-        $sql = "INSERT INTO tab_tipo_receita (
+        $sql = "INSERT INTO tab_tipo_receitas (
             tipo_receita_nome,
             tipo_receita_obs,
             tipo_receita_ativado,
@@ -60,7 +60,7 @@ class ColTipoReceita {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
 
-        $sql = "UPDATE tab_tipo_receita SET ";
+        $sql = "UPDATE tab_tipo_receitas SET ";
         $sql .= "tipo_receita_nome='" . strtoupper(addslashes($this->tipo_receita_nome)) . "',";
         $sql .= "tipo_receita_obs='" . $this->tipo_receita_obs . "',";
         $sql .= "tipo_receita_ativado='" . $this->tipo_receita_ativado . "',";
@@ -80,7 +80,7 @@ class ColTipoReceita {
     public function remover() {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "DELETE FROM tab_tipo_receita WHERE tipo_receita_id = " . $this->tipo_receita_id;
+        $sql = "DELETE FROM tab_tipo_receitas WHERE tipo_receita_id = " . $this->tipo_receita_id;
         $con->set("sql", $sql);
         $resultado = $con->execute($con->conectar());
         if ($resultado) {
@@ -93,7 +93,7 @@ class ColTipoReceita {
     public function getRegistros() {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "SELECT * FROM tab_tipo_receita " . $this->sqlCampos;
+        $sql = "SELECT * FROM tab_tipo_receitas " . $this->sqlCampos;
         //die($sql);
         $con->set("sql", $sql);
         $result = $con->execute($con->conectar());

@@ -8,7 +8,7 @@ jsProfessor.mask = function () {
     $("#prof_celular").mask('(99) 99999-9999');
     $("#prof_cpf").mask('999.999.999-99');
     $("#prof_cep").mask('99999-999');
-    $("#prof_comissao").mask('999,99');
+    $("#prof_comissao").mask('999,99',{reverse: true, maxlength: false});
 };
 
 jsProfessor.eventos = function () {

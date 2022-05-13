@@ -2,8 +2,13 @@ var jsContrato = {};
 
 var formCadastro;
 
+jsContrato.mask = function () {
+    $("#con_meses").mask('99');
+    $("#con_valor").mask('999.999.999,99', {reverse: true, maxlength: false});
+};
 jsContrato.eventos = function () {
 
+    $("#con_valor").val('000');
     $("#insert").val('insert');
     //Buscar 
     $('#inpBuscar').focus();
@@ -20,35 +25,89 @@ jsContrato.eventos = function () {
 
         } catch (erro) {
             $('#ListView').empty();
-            //$('#ListView').append("<tr>PROFESSORES NÃO LOCALIZADO !</tr>");
         }
 
-        console.log(evet.target.value);
     });
-
+ 
     //escuta o click da class .btn-link da lista de professores
     $('table').on('click', '.btn-link', function (e) {
         var id = $(this).closest('tr').children('td:first').text();
 
-        if ($(this).attr("title") == 'Visualizar') {
-            $(".modal-body :input").each(function () {
-                $(this).attr("disabled", true);
-            });
+        switch ($(this).attr("title")) {
+            case 'Visualizar':
+                $('.Contratos').hide("slow") //esconde a lista de contratos
+
+                jsContrato.contrato(id);
+                jsContrato.mensalida(id);
+
+                $('.Contrato_Mesalidade').show("slow");
+
+                break;
+            case 'Editar':
+
+                jsContrato.ListaModalidade();
+                jsContrato.ListaAluno();
+                jsContrato.editar(id);
+
+                break;
+            case 'Pagar':
+
+                alert('Pagar');
+
+                break;
+            case 'Solicitar':
+
+                alert('Solicitar');
+
+                break;
+            case 'Editar_data':
+
+                alert('Editar_data');
+
+                break;
+            case 'Anular':
+
+                alert('Anular');
+
+                break;
+            case 'Excluir':
+
+                alert('Excluir');
+
+                break;
         }
 
 
-        jsContrato.ListaModalidade();
+        /* if ($(this).attr("title") == 'Visualizar') {
+         $('.Contratos').hide("slow") //esconde a lista de contratos
+         
+         jsContrato.contrato(id);
+         jsContrato.mensalida(id);
+         $('.Contrato_Mesalidade').show("slow");
+         
+         /*$(".modal-body :input").each(function () {
+         $(this).attr("disabled", true);
+         });
+         } else {
+         jsContrato.ListaModalidade();
+         jsContrato.ListaAluno();
+         jsContrato.editar(id);
+         }*/
 
-        jsContrato.editar(id);
+
+
+
     });
 
     //Quando o Form esta show modal
     $('#formCadastro').on('shown.bs.modal', function () {
-        $("#aul_nome").focus();
+        $("#con_vencimento").focus();
         jsContrato.ValidaForm();
 
         if ($("#insert").val() === 'insert') {
-            jsContrato.ListaProfessor();
+
+            jsContrato.ListaModalidade();
+            jsContrato.ListaAluno();
         }
 
     });
@@ -59,11 +118,11 @@ jsContrato.eventos = function () {
         $('#formCadastro input,textarea,select').each(function () {
             $(this).val('');
         });
-        
+
         $(".modal-body :input").each(function () {
             $(this).attr("disabled", false);
         });
-        
+
         if (formCadastro.valid() == false) {
             formCadastro.destroy();
         }
@@ -79,34 +138,28 @@ jsContrato.ValidaForm = function () {
         debug: true,
         ignore: '*:not([name])',
         rules: {
-            aul_nome: {
+            con_vencimento: {
                 required: true,
-                minlength: 3
             },
-            aul_horario: {
+            con_valor: {
                 required: true
             },
-            aul_dia: {
+            con_meses: {
                 required: true
             },
-            aul_prof_id: {
+            alunos_id: {
                 required: true
             },
+            modalidades_id: {
+                required: true
+            }
         },
         messages: {
-            aul_nome: {
-                required: "Coloque um nome",
-                minlength: "Seu nome deve consistir em pelo menos 3 caracteres"
-            },
-            aul_horario: {
-                required: "Marque um Horario"
-            },
-            aul_dia: {
-                required: "Selecione um Dia"
-            },
-            aul_prof_id: {
-                required: "Selecione um Professor"
-            }
+            con_vencimento: "Ex 08/12/2000",
+            con_valor: "Ex 250,00",
+            con_meses: "2",
+            alunos_id: "Luiz",
+            modalidades_id: "*",
         },
         submitHandler: function (form) {
             //alert('inside');
@@ -131,26 +184,33 @@ jsContrato.getForm = function () {
 
     let FData = new FormData();
     FData.set('insert', $("#insert").val());
-    FData.set('id', $("#aul_id").val());
-    FData.set('nome', $("#aul_nome").val());
-    FData.set('horario', $("#aul_horario").val());
-    FData.set('dia_semana', $("#aul_dia").val());
-    FData.set('comissao', 0);
-    FData.set('ativado', '1');
-    FData.set('prof_id', $("#aul_prof_id").val());
-    FData.set('obs', $("#aul_obs").val());
+    FData.set('id', $("#con_id").val());
+    FData.set('vencimento', $("#con_vencimento").val());
+    FData.set('valor', $("#con_valor").val());
+    FData.set('meses', $("#con_meses").val());
+    FData.set('obs', $("#con_obs").val());
+    FData.set('ativado', $("#con_ativado").val());
+    FData.set('email_notificacao', $("#con_email_notificacao").val());
+    FData.set('data_cadastro', $("#con_data_cadastro").val());
+    FData.set('alunos_id', $("#alunos_id").val());
+    FData.set('modalidades_id', $("#modalidades_id").val());
 
     return FData;
 
 };
 
 jsContrato.setForm = function (obj) {
-    $("#aul_id").val(obj.id);
-    $("#aul_nome").val(obj.nome);
-    $("#aul_horario").val(obj.horario);
-    $("#aul_dia").val(obj.dia_semana);
-    $("#aul_prof_id").val(obj.prof_id);
-    $("#aul_obs").val(obj.obs);
+
+    $("#con_id").val(obj.id);
+    $("#con_vencimento").val(obj.vencimento);
+    $("#con_valor").val(obj.valor);
+    $("#con_meses").val(obj.meses);
+    $("#con_obs").val(obj.obs);
+    $("#con_ativado").val(obj.ativado);
+    $("#con_email_notificacao").val(obj.email_notificacao);
+    $("#con_data_cadastro").val(obj.data_cadastro);
+    $("#alunos_id").val(obj.alunos_id);
+    $("#modalidades_id").val(obj.modalidades_id);
 };
 
 jsContrato.tableList = function (json) {
@@ -160,33 +220,27 @@ jsContrato.tableList = function (json) {
 
     for (var i = 0; i < dados.length; i++) {
 
-        switch (dados[i].dia_semana) {
-            case 'SEGUNDA':
-                classe = "label label-primary";
-                break;
-            case 'TERÇA':
-                classe = "label label-info";
-                break;
-            case 'QUARTA':
+        switch (dados[i].ativado) {
+            case '0':
                 classe = "label label-danger";
+                ativado = "INATIVO";
                 break;
-            case 'QUINTA':
+            case '1':
                 classe = "label label-success";
+                ativado = "ATIVO";
                 break;
-            case 'SEXTA':
-                classe = "label label-warning";
-                break;
-            default:
-                classe = "label label-default";
         }
 
         linha += '<tr class="visualiar">' +
                 '<td class="col-1 text-center">' + dados[i].id + '</td>' +
-                '<td class="col-2 text-left">' + dados[i].nome + '</td>' +
-                '<td class="col-3 text-left">' + dados[i].prof_nome + ' </td>' +
-                '<td class="col-2 text-center" ><span class="' + classe + '">' + dados[i].dia_semana + '</span> </td>' +
-                '<td class="col-2 text-left">' + dados[i].horario + ' </td>' +
-                '<td class="col-2 text-center" style="min-width: 100px;">\n\
+                '<td class="col-1 text-center">' + dados[i].vencimentoPT + '</td>' +
+                '<td class="col-1 text-center" ><span class="' + classe + '">' + ativado + '</span> </td>' +
+                '<td class="col-1 text-center">' + dados[i].data_cadastro + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].valor + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].meses + ' </td>' +
+                '<td class="col-3 text-left">' + dados[i].alunos_nome + ' </td>' +
+                '<td class="col-2 text-left">' + dados[i].modalidades_nome + ' </td>' +
+                '<td class="col-1 text-center" style="min-width: 100px;">\n\
                     <i class="btn-link fa bi-eye fa-lg" title="Visualizar"></i>\n\
                     <i class="btn-link fa bi-pencil-square fa-lg" title="Editar"></i>\n\
                 </td>' +
@@ -195,6 +249,87 @@ jsContrato.tableList = function (json) {
 
     $('#ListView').empty();
     $('#ListView').append(linha);
+};
+
+jsContrato.tableList_Contrato = function (json) {
+    var linha = '';
+    var dados = json.dados;
+    var classe = '';
+
+    for (var i = 0; i < dados.length; i++) {
+
+        switch (dados[i].ativado) {
+            case '0':
+                classe = "label label-danger";
+                ativado = "INATIVO";
+                break;
+            case '1':
+                classe = "label label-success";
+                ativado = "ATIVO";
+                break;
+        }
+
+        linha += '<tr class="visualiar">' +
+                '<td class="col-1 text-center">' + dados[i].id + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].vencimentoPT + '</td>' +
+                '<td class="col-1 text-center" ><span class="' + classe + '">' + ativado + '</span> </td>' +
+                '<td class="col-1 text-center">' + dados[i].data_cadastro + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].valor + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].meses + ' </td>' +
+                '<td class="col-3 text-left">' + dados[i].alunos_nome + ' </td>' +
+                '<td class="col-2 text-left">' + dados[i].modalidades_nome + ' </td>' +
+                '<td class="col-1 text-center" style="min-width: 100px;">\n\
+                    <i class="btn-link fa bi-pencil-square fa-lg" title="Editar"></i>\n\
+                </td>' +
+                '</tr>';
+    }
+
+    $('#Contrato_ListView').empty();
+    $('#Contrato_ListView').append(linha);
+};
+
+jsContrato.tableList_Mensalidade = function (json) {
+    var linha = '';
+    var dados = json.dados;
+    var classe = '';
+
+    for (var i = 0; i < dados.length; i++) {
+
+        switch (dados[i].status) {
+            case '0':
+                classe = "text-danger";
+                ativado = "Pendente";
+                break;
+            case '1':
+                classe = "text-primary";
+                ativado = " Pago Parcial";
+                break;
+            case '3':
+                classe = "text-green";
+                ativado = " Pago Concluido";
+                break;
+        }
+
+        linha += '<tr class="visualiar">' +
+                '<td class="col-1 text-center">' + dados[i].id + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].vencimento + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].data_pago + '</td>' +
+                '<td class="col-2 text-center" ><p class="' + classe + '">' + ativado + '</p> </td>' +
+                '<td class="col-1 text-center">' + dados[i].valor + '</td>' +
+                '<td class="col-1 text-center">' + dados[i].valor_pago + '</td>' +
+                '<td class="col-2 text-center">' + dados[i].modalidade_nome + ' </td>' +
+                '<td class="col-2 text-center" style="min-width: 100px;">\n\
+                    <i class="btn-link fa bi-eye fa-lg" title="Pagar"></i>\n\
+                    <i class="btn-link fa bi-eye fa-lg" title="Solicitar"></i>\n\
+                    <i class="btn-link fa bi-eye fa-lg" title="Editar_data"></i>\n\
+                    <i class="btn-link fa bi-eye fa-lg" title="Anular"></i>\n\
+                    <i class="btn-link fa bi-pencil-square fa-lg" title="Excluir"></i>\n\
+                </td>' +
+                '</tr>';
+    }
+
+    $('#Mesalidade_ListView').empty();
+    $('#Mesalidade_ListView').append(linha);
 };
 
 jsContrato.getlista = function () {
@@ -232,7 +367,7 @@ jsContrato.editar = function (id) {
 
     let FData = new FormData();
     FData.set("action", "vListaAll"); //nome da funcao no PHP
-    FData.set("where", "where aul_id=" + id);//passo os campos PHP
+    FData.set("where", "where con_id=" + id);//passo os campos PHP
 
     var json = jsContrato.ajax(FData, 'vLocalizar');
 
@@ -243,8 +378,31 @@ jsContrato.editar = function (id) {
     $("#formCadastro").modal("show");
 };
 
+jsContrato.contrato = function (id) {
+
+    let FData = new FormData();
+    FData.set("action", "vListaAll");//nome da funcao no PHP
+    FData.set("where", "where con_id=" + id);//passo os campos PHP
+
+    let json = jsContrato.ajax(FData);
+    jsContrato.tableList_Contrato(json);
+
+};
+
+jsContrato.mensalida = function (id) {
+
+    let FData = new FormData();
+    FData.set("action", "vListaAll");//nome da funcao no PHP
+    FData.set("where", "where contratos_id=" + id);//passo os campos PHP
+
+    let json = jsContrato.ajax(FData, null, '../view/vMensalidade.php');
+    jsContrato.tableList_Mensalidade(json);
+
+};
+
 jsContrato.ListaModalidade = function () {
-    $('#modalidade_id').empty();
+    $('#modalidades_id').empty();
+    $("#modalidades_id").append(new Option('', ''));
 
     let FData = new FormData();
     FData.set("action", "vListaAll"); //nome da funcao no PHP
@@ -252,7 +410,21 @@ jsContrato.ListaModalidade = function () {
     var json = jsContrato.ajax(FData, null, '../view/vModalidade.php');
     var dados = json.dados;
     for (var i = 0; i < json.total; i++) {
-        $("#modalidade_id").append(new Option(dados[i].nome , dados[i].id));
+        $("#modalidades_id").append(new Option(dados[i].nome, dados[i].id));
+    }
+    //$('#aul_prof_id').val(id);
+};
+
+jsContrato.ListaAluno = function () {
+    $('#alunos_id').empty();
+    $("#alunos_id").append(new Option('', ''));
+    let FData = new FormData();
+    FData.set("action", "vListaAll"); //nome da funcao no PHP
+
+    var json = jsContrato.ajax(FData, null, '../view/vAluno.php');
+    var dados = json.dados;
+    for (var i = 0; i < json.total; i++) {
+        $("#alunos_id").append(new Option(dados[i].nome, dados[i].id));
     }
     //$('#aul_prof_id').val(id);
 };
@@ -280,6 +452,7 @@ jsContrato.ajax = function (FormData, action, v) {
 };
 jsContrato.start = function () {
     jsContrato.eventos();
+    jsContrato.mask();
     jsContrato.getlista();
 
 };

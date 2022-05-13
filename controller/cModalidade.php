@@ -6,7 +6,7 @@
  * Data: 13/04/2022
  *
  * Descricao: 
- * Controle de Acesso na tab_modalidade
+ * Controle de Acesso na tab_modalidades
  */
 
 class ColModalidade {
@@ -33,7 +33,7 @@ class ColModalidade {
 
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
-        $sql = "INSERT INTO tab_modalidade (
+        $sql = "INSERT INTO tab_modalidades (
             modalidade_nome,
             modalidade_obs,
             modalidade_ativado,
@@ -60,7 +60,7 @@ class ColModalidade {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD. 
         $con->conectar();
 
-        $sql = "UPDATE tab_modalidade SET ";
+        $sql = "UPDATE tab_modalidades SET ";
         $sql .= "modalidade_nome='" . strtoupper(addslashes($this->modalidade_nome)) . "',";
         $sql .= "modalidade_obs='" . $this->modalidade_obs . "',";
         $sql .= "modalidade_ativado='" . $this->modalidade_ativado . "',";
@@ -80,7 +80,7 @@ class ColModalidade {
     public function remover() {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "DELETE FROM tab_modalidade WHERE modalidade_id = " . $this->modalidade_id;
+        $sql = "DELETE FROM tab_modalidades WHERE modalidade_id = " . $this->modalidade_id;
         $con->set("sql", $sql);
         $resultado = $con->execute($con->conectar());
         if ($resultado) {
@@ -93,7 +93,7 @@ class ColModalidade {
     public function getRegistros() {
         $con = new cConexao(); // Cria um novo objeto de conexão com o BD.
         $con->conectar();
-        $sql = "SELECT * FROM tab_modalidade " . $this->sqlCampos;
+        $sql = "SELECT * FROM tab_modalidades " . $this->sqlCampos;
         //die($sql);
         $con->set("sql", $sql);
         $result = $con->execute($con->conectar());
