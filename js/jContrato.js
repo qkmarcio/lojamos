@@ -62,6 +62,18 @@ jsContrato.eventos = function () {
                 break;
             case 'Editar_data':
 
+                let FData = new FormData();
+                    FData.set("action", "vListaAll"); //nome da funcao no PHP
+                    FData.set("where", "where con_id=" + id);//passo os campos PHP
+
+                    var json = jsContrato.ajax(FData, 'vLocalizar');
+$("#insert").val()
+                    jsContrato.setForm(json.dados[0]);
+
+                    //$(".modal-title").text('Editar Cadastro');
+                    $("#insert").val('update')
+                    $("#formCadastro").modal("show");
+                
                 alert('Editar_data');
 
                 break;
