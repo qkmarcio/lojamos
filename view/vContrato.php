@@ -46,6 +46,7 @@ class vContrato {
 
         if ($dados['insert'] === "insert") {
             $result = $col->incluir();
+            if($result){}
 
             $msg = $result ? 'Registro(s) inserido(s) com sucesso' : 'Erro ao inserir o registro, tente novamente.';
         } else {
@@ -144,6 +145,54 @@ class vContrato {
                 "messages" => $msg,
                 "dados" => $result,
                 "total" => count($result)
+            ));
+        }
+    }
+    
+    function vInsertMensalidade($dados, $files) {
+
+        
+
+        $col->set("men_id", $dados['id']);
+        $col->set("men_vencimento", $dados['vencimento']);
+        $col->set("men_data_pago", $dados['data_pago']);
+        $col->set("men_status", $dados['status']);
+        $col->set("men_valor", $dados['valor']);
+        $col->set("men_valor_pago", $dados['valor_pago']);
+        $col->set("men_saldo", $dados['saldo']);
+        $col->set("men_data_cadastro", $dados['data_cadastro']);
+        $col->set("contratos_id", $dados['contratos_id']);
+        
+             
+        if ($dados['insert'] === "insert") {
+            $result = $col->incluir();
+
+            $msg = $result ? 'Registro(s) inserido(s) com sucesso' : 'Erro ao inserir o registro, tente novamente.';
+        } else {
+            $result = $col->alterar();
+
+            $msg = $result ? 'Registro(s) atualizado(s) com sucesso' : 'Erro ao atualizar, tente novamente.';
+        }
+
+//se houver um erro, retornar um cabeçalho especial, seguido por outro objeto JSON
+        if ($result == false) {
+
+            header('HTTP/1.1 500 Internal Server vMensalidade.php');
+            header('Content-Type: application/json; charset=UTF-8');
+
+            echo json_encode(array(
+                "success" => false,
+                "messages" => $msg,
+                "dados" => $result
+            ));
+        } else {
+
+//header('Content-Type: application/json; charset=UTF-8');
+
+            echo json_encode(array(
+                "success" => true,
+                "messages" => $msg,
+                "dados" => $result
             ));
         }
     }

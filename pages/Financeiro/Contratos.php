@@ -186,7 +186,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 </footer>
 <!-- Main Footer End -->
 
-<!-- Large Modal Start -->
+<!-- Large Modal Start Cadastro Contratos -->
 <form id="formCadastro" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -227,15 +227,16 @@ header('Content-type: text/html; charset=ISO-8859-1');
                         <label>Obs</label>
                         <textarea class="form-control px-2" id="con_obs" rows="3"></textarea>
                     </div>
-                    <div class="form-group px-2 col-sm-3">
-                        <div class="form-group px-2">
+                    <div class="form-group px-2 col-sm-12">
+                        <label>Status</label>
+                        <div class="form-group px-2 col-sm-3">
                             <select class="form-control px-2" id="con_ativado">
                                 <option value="1">ATIVO</option>
                                 <option value="0">INATIVO</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group px-2 col-sm-9">
+                    <div class="form-group px-2 col-sm-12">
                         <label >Enviar lembrete de fatura em atraso? <l style="font-size: 10px">  (Após o vencimento da mensalidade será enviado um lembrete)</l></label>
                         <div class="form-group px-2 col-sm-3">
                             <select class="form-control px-2" id="con_email_notificacao">
@@ -246,8 +247,8 @@ header('Content-type: text/html; charset=ISO-8859-1');
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-sm btn-rounded btn-danger" id="Sair" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="Gravar">Gravar</button>
+                    <button type="reset" class="btn btn-sm btn-rounded btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" >Gravar</button>
                 </div>
             </div>
         </div>
@@ -256,8 +257,8 @@ header('Content-type: text/html; charset=ISO-8859-1');
 <!-- Large Modal End -->
 
 
-<!-- Large Modal Start -->
-<form id="formMensalidadeData" class="modal fade">
+<!--  Modal Start Mudar data Mensaidade -->
+<div id="formMensalidadeData" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -268,8 +269,9 @@ header('Content-type: text/html; charset=ISO-8859-1');
                 <div class="row">
                     <div class="form-group px-2 col-lg-2" style="display: none">
                         <label>Codigo</label>
-                        <input class="form-control px-2" id="men_id" disabled="">
-                        <input id="insert" value="update" style="display: none">
+                        <input class="form-control px-2" id="data_men_id" disabled="">
+                        <input class="form-control px-2" id="data_men_contrato" disabled="">
+                        
                     </div>
                     <div class="form-group px-2 col-sm-4">
                         <label name="men_vencimento">Vencimento</label>
@@ -279,15 +281,15 @@ header('Content-type: text/html; charset=ISO-8859-1');
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-sm btn-rounded btn-danger"  data-dismiss="modal" >Cancelar</button>
-                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" >Gravar</button>
+                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="gravar_men_data" >Gravar</button>
                 </div>
             </div>
         </div>
     </div>
-</form>
-
-
-<form id="formMensalidadePagar" class="modal fade">
+</div>
+<!-- Modal End -->
+<!--  Modal Start Pagar Mensaidade -->
+<div id="formMensalidadePagar" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -298,8 +300,8 @@ header('Content-type: text/html; charset=ISO-8859-1');
                 <div class="row">
                     <div class="form-group px-2 col-lg-2" style="display: none">
                         <label>Codigo</label>
-                        <input class="form-control px-2" id="men_id" disabled="">
-                        <input id="insert" value="update" style="display: none">
+                        <input class="form-control px-2" id="pago_men_id" disabled="">
+                        <input class="form-control px-2" id="pago_men_contrato" disabled="">
                     </div>
                     <div class="form-group px-2 col-sm-4">
                         <label name="men_data_pago">Data Pago</label>
@@ -326,13 +328,13 @@ header('Content-type: text/html; charset=ISO-8859-1');
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-sm btn-rounded btn-danger"  data-dismiss="modal" >Cancelar</button>
-                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" >Gravar</button>
+                    <button type="submit" class="btn btn-sm btn-rounded btn-primary" id="gravar_men_pago" >Gravar</button>
                 </div>
             </div>
         </div>
     </div>
-</form>
-<!-- Large Modal End -->
+</div>
+<!-- Modal End -->
 
 
 <script type="text/javascript">

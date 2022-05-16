@@ -43,7 +43,7 @@ header('Content-type: text/html; charset=ISO-8859-1');
 <link rel="stylesheet" href="../assets/bootstrap-icons-1.8.1/bootstrap-icons.css">
 <link rel="stylesheet" href="../assets/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="../assets/css/all.css" >
-<link rel="stylesheet" href="../assets/css/fontawesome-all.min">
+<link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
 <link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
 <link rel="stylesheet" href="../assets/css/perfect-scrollbar.min.css">
 <link rel="stylesheet" href="../assets/css/morris.min.css">
@@ -71,8 +71,8 @@ assets/css/ion.rangeSlider.min.css.map
         <header class="navbar navbar-fixed">
             <!-- Navbar Header Start -->
             <div class="navbar--header">
-                <!-- Logo Start -->
-                <a href="index.html" class="logo">
+                <!-- Logo Start 
+                <a href="index.php" class="logo" >
                     <img src="../assets/img/logo.png" alt="">
                 </a>
                 <!-- Logo End -->
@@ -91,9 +91,9 @@ assets/css/ion.rangeSlider.min.css.map
             </a>
             <!-- Sidebar Toggle Button End -->
 
-            <div class="navbar--nav ml-auto">
+            <div class="navbar--nav ml-auto" >
                 <ul class="nav">
-                    <!-- Nav User Start -->
+                    <!-- Nav User Start
                     <li class="nav-item dropdown nav--user online">
                         <a href="#" class="nav-link" data-toggle="dropdown">
                             <img src="../assets/img/avatars/01_80x80.png" alt="" class="rounded-circle">
@@ -123,13 +123,13 @@ assets/css/ion.rangeSlider.min.css.map
                 <ul>
                     <li>
                         <ul>
-                            <li class="active">
-                                <a href="javascript:loadContent('#conteudo','Principal.php')">
+                            <li class="active" >
+                                <a href="javascript:loadContent('#conteudo','index.php')">
                                     <i class="fa fa-home"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li>
+                            <li style="display: none">
                                 <a href="javascript:loadContent('#conteudo','Financeiro/Mensalidades.php')">
                                     <i class="fa fa-home"></i>
                                     <span>Mensalidades</span>
@@ -142,25 +142,25 @@ assets/css/ion.rangeSlider.min.css.map
                                 </a>
 
                                 <ul>
-                                    <li id="menuAlunos"><a href="javascript:loadContent('#conteudo','Cadastros/Alunos.php')">Alunos</a></li>
-                                    <li id="menuProfessores"><a href="javascript:loadContent('#conteudo','Cadastros/Professores.php')">Professores</a></li>
-                                    <li id="menuAulas"><a href="javascript:loadContent('#conteudo','Cadastros/Aulas.php')">Aulas</a></li>
-                                    <li id="menuModalidades"><a href="javascript:loadContent('#conteudo','Financeiro/Modalidades.php')">Modalidades</a></li>
-                                    <li id="menuContratos"><a href="javascript:loadContent('#conteudo','Financeiro/Contratos.php')">Contratos</a></li>
+                                    <li id="menuAlunos"><a href="javascript:loadContent('#conteudo','Cadastros/alunos.php')">Alunos</a></li>
+                                    <li id="menuProfessores"><a href="javascript:loadContent('#conteudo','Cadastros/professores.php')">Professores</a></li>
+                                    <li id="menuAulas"><a href="javascript:loadContent('#conteudo','Cadastros/aulas.php')">Aulas</a></li>
+                                    <li id="menuModalidades"><a href="javascript:loadContent('#conteudo','Financeiro/modalidades.php')">Modalidades</a></li>
+                                    <li id="menuContratos"><a href="javascript:loadContent('#conteudo','Financeiro/contratos.php')">Contratos</a></li>
                                 </ul>
 
                             </li>
-                            <li id="menuFinanceiro">
+                            <!--<li id="menuFinanceiro">
                                 <a href="#">
                                     <i class="fab fa-wpforms"></i>
                                     <span>Financeiro</span>
                                 </a>
 
                                 <ul>
-                                    <li id="menuReceitas"><a href="javascript:loadContent('#conteudo','Financeiro/Receitas.php')">Receitas</a></li>
-                                    <li id="menuReceitasTipo"><a href="javascript:loadContent('#conteudo','Financeiro/TipoReceitas.php')">Tipo Receitas</a></li>
-                                    <li id="menuDespesas"><a href="javascript:loadContent('#conteudo','Financeiro/Despesas.php')">Despesas</a></li>
-                                    <li id="menuDespesasTipo"><a href="javascript:loadContent('#conteudo','Financeiro/TipoDespesas.php')">Tipo Despesas</a></li>
+                                    <li id="menuReceitas"><a href="javascript:loadContent('#conteudo','Financeiro/receitas.php')">Receitas</a></li>
+                                    <li id="menuReceitasTipo"><a href="javascript:loadContent('#conteudo','Financeiro/tipo_receitas.php')">Tipo Receitas</a></li>
+                                    <li id="menuDespesas"><a href="javascript:loadContent('#conteudo','Financeiro/despesas.php')">Despesas</a></li>
+                                    <li id="menuDespesasTipo"><a href="javascript:loadContent('#conteudo','Financeiro/tipo_despesas.php')">Tipo Despesas</a></li>
                                 </ul>
 
                             </li>
@@ -171,9 +171,9 @@ assets/css/ion.rangeSlider.min.css.map
                                 </a>
 
                                 <ul>
-                                    <li id="menuRelReceitas"><a href="javascript:loadContent('#conteudo','Financeiro/RelReceitas.php')">Receitas</a></li>
-                                    <li id="menuRelDespesas"><a href="javascript:loadContent('#conteudo','Financeiro/RelDespesas.php')">Despesas</a></li>
-                                    <li id="menuRelMensalidades"><a href="javascript:loadContent('#conteudo','Financeiro/RelMensalidades.php')">Mensalidades</a></li>
+                                    <li id="menuRelReceitas"><a href="javascript:loadContent('#conteudo','Financeiro/rel_receitas.php')">Receitas</a></li>
+                                    <li id="menuRelDespesas"><a href="javascript:loadContent('#conteudo','Financeiro/rel_despesas.php')">Despesas</a></li>
+                                    <li id="menuRelMensalidades"><a href="javascript:loadContent('#conteudo','Financeiro/rel_mensalidades.php')">Mensalidades</a></li>
                                 </ul>
 
                             </li>
@@ -184,11 +184,11 @@ assets/css/ion.rangeSlider.min.css.map
                                 </a>
 
                                 <ul>
-                                    <li id="menuUsuarios"><a href="javascript:loadContent('#conteudo','Contas/Modalidades.php')">Alunos</a></li>
-                                    <li id="menuSistema"><a href="javascript:loadContent('#conteudo','Contas/Modalidades.php')">Professores</a></li>
+                                    <li id="menuUsuarios"><a href="javascript:loadContent('#conteudo','Contas/modalidades.php')">Alunos</a></li>
+                                    <li id="menuSistema"><a href="javascript:loadContent('#conteudo','Contas/modalidades.php')">Professores</a></li>
                                 </ul>
 
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
 

@@ -146,5 +146,103 @@ class vMensalidade {
             ));
         }
     }
+    
+    function vMensalidadeID($dados, $files) {
+        global $col;
+
+        $col->set("men_id", $dados['id']);
+
+        $result = $col->getMensalidadesId();
+
+        $msg = $result ? 'Registro(s) localizado(s) com sucesso' : 'Erro ao localizar registro, tente novamente.';
+
+        //se houver um erro, retornar um cabeçalho especial, seguido por outro objeto JSON
+        if ($result == false) {
+
+            header('HTTP/1.1 500 Internal Server vMensalidade.php');
+            header('Content-Type: application/json; charset=UTF-8');
+
+            echo json_encode(array(
+                "success" => false,
+                "messages" => $msg,
+                "dados" => $result
+            ));
+        } else {
+
+            echo json_encode(array(
+                "success" => true,
+                "messages" => $msg,
+                "dados" => $result,
+                "total" => count($result)
+            ));
+        }
+    }
+    
+    function vMensalidadeAlterar($dados, $files) {
+        global $col;
+
+        $col->set("sqlCampos", $dados['sqlCampos']);
+        $col->set("men_id", $dados['id']);
+
+        $result = $col->alterarGenerico();
+
+        $msg = $result ? 'Registro(s) atualizado(s) com sucesso' : 'Erro ao atualizar, tente novamente.';
+
+        //se houver um erro, retornar um cabeçalho especial, seguido por outro objeto JSON
+        if ($result == false) {
+
+            header('HTTP/1.1 500 Internal Server vMensalidade.php');
+            header('Content-Type: application/json; charset=UTF-8');
+
+            echo json_encode(array(
+                "success" => false,
+                "messages" => $msg,
+                "dados" => $result
+            ));
+        } else {
+
+            echo json_encode(array(
+                "success" => true,
+                "messages" => $msg,
+                "dados" => $result
+            ));
+        }
+    }
+    
+    function vMensalidadePagamento($dados, $files) {
+        global $col;
+
+        //$col->set("sqlCampos", $dados['sqlCampos']);
+        $col->set("men_id", $dados['id']);
+        $col->set("men_status", $dados['men_status']);
+        $col->set("men_data_pago", $dados['men_data_pago']);
+        $col->set("men_valor_pago", $dados['men_valor_pago']);
+        $col->set("men_pago_tipo", $dados['men_pago_tipo']);
+        $col->set("men_pago_obs", $dados['men_pago_obs']);
+
+        $result = $col->alterarPagamento();
+
+        $msg = $result ? 'Registro(s) atualizado(s) com sucesso' : 'Erro ao atualizar, tente novamente.';
+
+        //se houver um erro, retornar um cabeçalho especial, seguido por outro objeto JSON
+        if ($result == false) {
+
+            header('HTTP/1.1 500 Internal Server vMensalidade.php');
+            header('Content-Type: application/json; charset=UTF-8');
+
+            echo json_encode(array(
+                "success" => false,
+                "messages" => $msg,
+                "dados" => $result
+            ));
+        } else {
+
+            echo json_encode(array(
+                "success" => true,
+                "messages" => $msg,
+                "dados" => $result
+            ));
+        }
+    }
 
 }

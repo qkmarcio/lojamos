@@ -28,86 +28,55 @@ jsContrato.eventos = function () {
         }
 
     });
- 
-    //escuta o click da class .btn-link da lista de professores
+
+    //escuta o click da class .btn-link da lista das tables
     $('table').on('click', '.btn-link', function (e) {
         var id = $(this).closest('tr').children('td:first').text();
+        var title = $(this).attr("title");
 
-        switch ($(this).attr("title")) {
-            case 'Visualizar':
-                $('.Contratos').hide("slow") //esconde a lista de contratos
+        jsContrato.click_table(id, title);
 
-                jsContrato.contrato(id);
-                jsContrato.mensalida(id);
+    });
 
-                $('.Contrato_Mesalidade').show("slow");
 
-                break;
-            case 'Editar':
+    //escuta o click 
+    $('#gravar_men_data').on('click', function (e) {
+        var idContrato = $("#data_men_contrato").val();
 
-                jsContrato.ListaModalidade();
-                jsContrato.ListaAluno();
-                jsContrato.editar(id);
+        let FData = new FormData();
+        FData.set("id", $("#data_men_id").val());
+        FData.set("sqlCampos", "men_vencimento='" + $("#men_vencimento").val() + "'");
+        FData.set("action", "vMensalidadeAlterar"); //nome da funcao no PHP
 
-                break;
-            case 'Pagar':
+        if (jsContrato.ajax(FData, null, '../view/vMensalidade.php')) {
+            $("#formMensalidadeData").modal('hide');
 
-                alert('Pagar');
+            jsContrato.mensalida(idContrato);
 
-                break;
-            case 'Solicitar':
-
-                alert('Solicitar');
-
-                break;
-            case 'Editar_data':
-
-                let FData = new FormData();
-                    FData.set("action", "vListaAll"); //nome da funcao no PHP
-                    FData.set("where", "where con_id=" + id);//passo os campos PHP
-
-                    var json = jsContrato.ajax(FData, 'vLocalizar');
-$("#insert").val()
-                    jsContrato.setForm(json.dados[0]);
-
-                    //$(".modal-title").text('Editar Cadastro');
-                    $("#insert").val('update')
-                    $("#formCadastro").modal("show");
-                
-                alert('Editar_data');
-
-                break;
-            case 'Anular':
-
-                alert('Anular');
-
-                break;
-            case 'Excluir':
-
-                alert('Excluir');
-
-                break;
+            swal('Registo...', jsContrato.msg, 'success');
         }
 
+    });
+    //escuta o click 
+    $('#gravar_men_pago').on('click', function (e) {
+        var idContrato = $("#pago_men_contrato").val();
 
-        /* if ($(this).attr("title") == 'Visualizar') {
-         $('.Contratos').hide("slow") //esconde a lista de contratos
-         
-         jsContrato.contrato(id);
-         jsContrato.mensalida(id);
-         $('.Contrato_Mesalidade').show("slow");
-         
-         /*$(".modal-body :input").each(function () {
-         $(this).attr("disabled", true);
-         });
-         } else {
-         jsContrato.ListaModalidade();
-         jsContrato.ListaAluno();
-         jsContrato.editar(id);
-         }*/
+        let FData = new FormData();
+        FData.set('id', $("#pago_men_id").val());
+        FData.set('men_status', '3');
+        FData.set('men_data_pago', $("#men_data_pago").val());
+        FData.set('men_valor_pago', $("#men_valor_pago").val());
+        FData.set('men_pago_tipo', $("#men_pago_tipo").val());
+        FData.set('men_pago_obs', $("#men_pago_obs").val());
+        FData.set("action", "vMensalidadePagamento"); //nome da funcao no PHP
 
+        if (jsContrato.ajax(FData, null, '../view/vMensalidade.php')) {
+            $("#formMensalidadePagar").modal('hide');
 
+            jsContrato.mensalida(idContrato);
 
+            swal('Registo...', jsContrato.msg, 'success');
+        }
 
     });
 
@@ -142,6 +111,46 @@ $("#insert").val()
         //Deixa o Form padrão para fazer o insert
         $("#insert").val('insert');
     });
+
+
+    //Quando o Form esta show modal
+    $('#formMensalidadeData').on('shown.bs.modal', function () {
+        $("#men_vencimento").focus();
+
+    });
+    //Quando o Form esta show modal
+    $('#formMensalidadePagar').on('shown.bs.modal', function () {
+        $("#men_data_pago").focus();
+
+    });
+
+    //Quando o Form esta hide modal
+    $('#formMensalidadeData').on('hide.bs.modal', function () {
+        $('#formMensalidadeData input,textarea,select').each(function () {
+            $(this).val('');
+        });
+
+        $(".modal-body :input").each(function () {
+            $(this).attr("disabled", false);
+        });
+
+
+    });
+
+    //Quando o Form esta hide modal
+    $('#formMensalidadePagar').on('hide.bs.modal', function () {
+        $('#formMensalidadePagar input,textarea,select').each(function () {
+            $(this).val('');
+        });
+
+        $(".modal-body :input").each(function () {
+            $(this).attr("disabled", false);
+        });
+
+
+    });
+
+
 };
 // O submit do form que chama esta funcao
 jsContrato.ValidaForm = function () {
@@ -331,11 +340,10 @@ jsContrato.tableList_Mensalidade = function (json) {
                 '<td class="col-1 text-center">' + dados[i].valor_pago + '</td>' +
                 '<td class="col-2 text-center">' + dados[i].modalidade_nome + ' </td>' +
                 '<td class="col-2 text-center" style="min-width: 100px;">\n\
-                    <i class="btn-link fa bi-eye fa-lg" title="Pagar"></i>\n\
-                    <i class="btn-link fa bi-eye fa-lg" title="Solicitar"></i>\n\
-                    <i class="btn-link fa bi-eye fa-lg" title="Editar_data"></i>\n\
-                    <i class="btn-link fa bi-eye fa-lg" title="Anular"></i>\n\
-                    <i class="btn-link fa bi-pencil-square fa-lg" title="Excluir"></i>\n\
+                    <i class="btn-link fa bi-cash-coin fa-lg" title="Pagar"></i>\n\
+                    <i class="btn-link fa bi-whatsapp fa-lg" title="Solicitar"></i>\n\
+                    <i class="btn-link fa bi-pencil-square fa-lg" title="Editar_data"></i>\n\
+                    <i class="btn-link fa bi-file-earmark-x fa-lg" title="Excluir"></i>\n\
                 </td>' +
                 '</tr>';
     }
@@ -388,6 +396,77 @@ jsContrato.editar = function (id) {
     $(".modal-title").text('Editar Cadastro');
     $("#insert").val('update')
     $("#formCadastro").modal("show");
+};
+
+jsContrato.click_table = function (id, title) {
+
+    var FData = new FormData();
+
+    switch (title) {
+        case 'Visualizar':
+            $('.Contratos').hide("slow") //esconde a lista de contratos
+
+            jsContrato.contrato(id);
+            jsContrato.mensalida(id);
+
+            $('.Contrato_Mesalidade').show("slow");
+
+            break;
+        case 'Editar':
+
+            jsContrato.ListaModalidade();
+            jsContrato.ListaAluno();
+            jsContrato.editar(id);
+
+            break;
+        case 'Pagar':
+
+            FData.set("action", "vMensalidadeID"); //nome da funcao no PHP
+            FData.set('id', id);//passo os campos PHP
+
+            var json = jsContrato.ajax(FData, null, '../view/vMensalidade.php');
+
+            $("#pago_men_id").val(json.dados[0].id);
+            $("#pago_men_contrato").val(json.dados[0].contratos_id);
+            $("#men_data_pago").val(json.dados[0].vencimento);
+            $("#men_valor_pago").val(json.dados[0].valor);
+
+
+            $("#formMensalidadePagar").modal("show");
+
+            break;
+        case 'Solicitar':
+
+            alert('Solicitar');
+
+            break;
+        case 'Editar_data':
+
+            FData.set("action", "vMensalidadeID"); //nome da funcao no PHP
+            FData.set('id', id);//passo os campos PHP
+
+            var json = jsContrato.ajax(FData, null, '../view/vMensalidade.php');
+
+            $("#data_men_id").val(json.dados[0].id);
+            $("#data_men_contrato").val(json.dados[0].contratos_id);
+            $("#men_vencimento").val(json.dados[0].vencimento);
+
+
+            $("#formMensalidadeData").modal("show");
+
+            break;
+        case 'Anular':
+
+            alert('Anular');
+
+            break;
+        case 'Excluir':
+
+            alert('Excluir');
+
+            break;
+    }
+
 };
 
 jsContrato.contrato = function (id) {
