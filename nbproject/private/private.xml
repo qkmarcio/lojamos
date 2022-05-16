@@ -5,6 +5,7 @@
         <group>
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<< .mine
             <file>file:/C:/wamp64/www/lojamos/view/vMensalidade.php</file>
             <file>file:/C:/wamp64/www/lojamos/pages/index.php</file>
@@ -17,12 +18,15 @@
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
             <file>file:/C:/wamp64/www/lojamos/controller/cAula.php</file>
             <file>file:/C:/wamp64/www/lojamos/view/vMensalidade.php</file>
             <file>file:/C:/wamp64/www/lojamos/view/vAula.php</file>
             <file>file:/C:/wamp64/www/lojamos/controller/cConexao.php</file>
             <file>file:/C:/wamp64/www/lojamos/controller/cMensalidade.php</file>
             <file>file:/C:/wamp64/www/lojamos/controller/cContrato.php</file>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 >>>>>>> .theirs
@@ -33,6 +37,9 @@
             <file>file:/C:/wamp64/www/lojamos/pages/Financeiro/contratos.php</file>
 
 =======
+=======
+            <file>file:/C:/wamp64/www/lojamos/js/jContrato.js</file>
+>>>>>>> Stashed changes
 =======
             <file>file:/C:/wamp64/www/lojamos/js/jContrato.js</file>
 >>>>>>> Stashed changes
